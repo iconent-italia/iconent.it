@@ -109,7 +109,7 @@
     transparent 100%
   );
   mix-blend-mode: screen;
-  animation: holoSweepDown var(--holo-sweep-speed) cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: holoSweepUp var(--holo-sweep-speed) cubic-bezier(0.45, 0, 0.55, 1) infinite;
   pointer-events: none;
 }
 
@@ -194,11 +194,13 @@
   0%   { background-position: 0 0; }
   100% { background-position: 0 -120px; }
 }
-@keyframes holoSweepDown {
-  0%   { transform: translateY(-100%); opacity: 0; }
+/* Sweep ascendente: parte da sotto e sale verso l'alto.
+   Visivamente suggerisce di scrollare giu (le luci che "scorrono via" verso l'alto). */
+@keyframes holoSweepUp {
+  0%   { transform: translateY(100%); opacity: 0; }
   8%   { opacity: 1; }
   92%  { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(-100%); opacity: 0; }
 }
 /* Lamp-flicker irregular pulse: keep ~±20% opacity range, sudden brief dips
    like a faulty bulb, smooth slow breath in between. */
