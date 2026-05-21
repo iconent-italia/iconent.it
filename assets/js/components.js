@@ -1,6 +1,22 @@
 (function () {
   const WHATSAPP_URL = 'https://wa.me/message/32WMNGGU4HGTB1';
 
+  /* Carica dinamicamente cookie banner (CSS + JS) su tutte le pagine senza
+     dover modificare i singoli HTML. */
+  (function loadCookieBanner() {
+    if (document.getElementById('ic-cookie-banner-css')) return;
+    var link = document.createElement('link');
+    link.id = 'ic-cookie-banner-css';
+    link.rel = 'stylesheet';
+    link.href = '/assets/css/cookie-banner.css';
+    document.head.appendChild(link);
+
+    var script = document.createElement('script');
+    script.src = '/assets/js/cookie-banner.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  })();
+
   /* Menu mobile messo come SIBLING di <header>, non come figlio.
      Cosi non viene clippato dal containing block creato dal backdrop-filter
      dell'header quando l'utente scrolla. */
@@ -67,7 +83,8 @@
           <p class="ic-ftr-block-copyright">© 2026 @iconent. Tutti i diritti riservati.</p>
           <p class="ic-ftr-block-legal" style="font-size:0.75rem; color:#888; margin-top:0.5rem;">
             <a href="/privacy/" style="color:#888;">Privacy Policy</a> ·
-            <a href="/cookie/" style="color:#888;">Cookie Policy</a>
+            <a href="/cookie/" style="color:#888;">Cookie Policy</a> ·
+            <a href="#" style="color:#888;" onclick="event.preventDefault(); window.icCookies && window.icCookies.reopen();">Gestisci cookie</a>
           </p>
         </div>
       </footer>

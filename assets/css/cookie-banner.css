@@ -1,0 +1,265 @@
+/* ============================================================
+   COOKIE BANNER — conforme Garante Privacy 10/06/2021 + GDPR
+   Implementazione custom (zero dipendenze)
+   ============================================================ */
+
+#ic-cookie-banner {
+  position: fixed;
+  z-index: 99998;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem;
+  display: none;
+  pointer-events: none;
+}
+#ic-cookie-banner.is-visible {
+  display: block;
+}
+#ic-cookie-banner .ccb-card {
+  pointer-events: auto;
+  max-width: 720px;
+  margin: 0 auto;
+  background: rgba(15, 15, 15, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 136, 0.1);
+  animation: ccb-slide-up 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #e8e8e8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+@keyframes ccb-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+#ic-cookie-banner h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+#ic-cookie-banner p {
+  margin: 0 0 1rem;
+  color: #b8b8b8;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+#ic-cookie-banner a {
+  color: var(--ic-green, #00ff88);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+#ic-cookie-banner .ccb-actions {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#ic-cookie-banner button {
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  border: 1px solid transparent;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+#ic-cookie-banner .ccb-btn-accept {
+  background: var(--ic-green, #00ff88);
+  color: #0a0a0a;
+  border-color: var(--ic-green, #00ff88);
+}
+#ic-cookie-banner .ccb-btn-accept:hover {
+  transform: translateY(-1px);
+}
+/* Garante 2021: il pulsante "Rifiuta" deve avere stesso peso visivo
+   del pulsante "Accetta" — non puo essere meno prominente. */
+#ic-cookie-banner .ccb-btn-reject {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+#ic-cookie-banner .ccb-btn-reject:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+#ic-cookie-banner .ccb-btn-customize {
+  background: transparent;
+  color: #b8b8b8;
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+#ic-cookie-banner .ccb-btn-customize:hover {
+  color: #fff;
+}
+
+/* === MODAL PERSONALIZZA === */
+#ic-cookie-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+#ic-cookie-modal.is-visible {
+  display: flex;
+}
+#ic-cookie-modal .ccm-card {
+  background: #0f0f0f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 2rem;
+  color: #e8e8e8;
+  animation: ccb-slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#ic-cookie-modal h2 {
+  font-size: 1.3rem;
+  margin: 0 0 0.75rem;
+  color: #fff;
+}
+#ic-cookie-modal > .ccm-card > p {
+  font-size: 0.9rem;
+  color: #b8b8b8;
+  line-height: 1.55;
+  margin: 0 0 1.5rem;
+}
+#ic-cookie-modal .ccm-category {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+#ic-cookie-modal .ccm-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#ic-cookie-modal .ccm-category-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+#ic-cookie-modal .ccm-category-desc {
+  font-size: 0.86rem;
+  color: #999;
+  line-height: 1.5;
+  margin: 0;
+}
+#ic-cookie-modal .ccm-always {
+  font-size: 0.8rem;
+  color: var(--ic-green, #00ff88);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Toggle switch (no JS framework) */
+#ic-cookie-modal .ccm-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+#ic-cookie-modal .ccm-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+#ic-cookie-modal .ccm-switch .ccm-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+#ic-cookie-modal .ccm-switch .ccm-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+#ic-cookie-modal .ccm-switch input:checked + .ccm-slider {
+  background: var(--ic-green, #00ff88);
+}
+#ic-cookie-modal .ccm-switch input:checked + .ccm-slider::before {
+  transform: translateX(20px);
+  background: #0a0a0a;
+}
+
+#ic-cookie-modal .ccm-actions {
+  display: flex;
+  gap: 0.625rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+#ic-cookie-modal button {
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  border: 1px solid transparent;
+  flex: 1;
+  min-width: 130px;
+}
+#ic-cookie-modal .ccm-btn-save {
+  background: var(--ic-green, #00ff88);
+  color: #0a0a0a;
+}
+#ic-cookie-modal .ccm-btn-accept-all {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* === MOBILE === */
+@media (max-width: 640px) {
+  #ic-cookie-banner {
+    padding: 0.75rem;
+  }
+  #ic-cookie-banner .ccb-card {
+    padding: 1.2rem;
+  }
+  #ic-cookie-banner .ccb-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #ic-cookie-banner .ccb-actions button {
+    width: 100%;
+  }
+  #ic-cookie-banner .ccb-btn-customize {
+    order: 3;
+  }
+  #ic-cookie-modal .ccm-card {
+    padding: 1.5rem 1.2rem;
+  }
+}
