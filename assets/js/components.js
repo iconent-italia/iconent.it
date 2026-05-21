@@ -6,29 +6,29 @@
       <a class="ic-hdr-logo" href="/">ICONENT AGENCY</a>
       <nav class="ic-hdr-nav" aria-label="Primary">
         <div class="ic-hdr-services">
-          <a href="/servizi-project-management.html" data-path="/servizi-project-management">Servizi</a>
+          <a href="/management/" data-path="/management">Servizi</a>
           <div class="ic-hdr-services-menu" role="menu">
-            <a class="featured" href="/servizi-project-management.html" data-path="/servizi-project-management" role="menuitem">Project Management</a>
-            <a href="/servizi-spotify.html"    data-path="/servizi-spotify"    role="menuitem">Servizi Spotify</a>
-            <a href="/servizi-youtube.html"    data-path="/servizi-youtube"    role="menuitem">Servizi YouTube</a>
-            <a href="/servizi-instagram.html"  data-path="/servizi-instagram"  role="menuitem">Servizi Instagram</a>
-            <a href="/servizi-tiktok.html"     data-path="/servizi-tiktok"     role="menuitem">Servizi TikTok</a>
+            <a class="featured" href="/management/" data-path="/management" role="menuitem">Project Management</a>
+            <a href="/spotify/"    data-path="/spotify"    role="menuitem">Servizi Spotify</a>
+            <a href="/youtube/"    data-path="/youtube"    role="menuitem">Servizi YouTube</a>
+            <a href="/instagram/"  data-path="/instagram"  role="menuitem">Servizi Instagram</a>
+            <a href="/tiktok/"     data-path="/tiktok"     role="menuitem">Servizi TikTok</a>
           </div>
         </div>
         <a href="/" data-path="/">Home</a>
-        <a class="ic-hdr-cta" href="/contatti.html" data-path="/contatti">Contatti</a>
+        <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
       </nav>
       <button class="ic-hdr-burger" type="button" aria-label="Apri menu" aria-expanded="false"></button>
       <div class="ic-hdr-mobile" role="menu">
         <p class="ic-hdr-mobile-label">Servizi</p>
-        <a class="featured" href="/servizi-project-management.html" data-path="/servizi-project-management">Project Management</a>
-        <a href="/servizi-spotify.html"    data-path="/servizi-spotify">Servizi Spotify</a>
-        <a href="/servizi-youtube.html"    data-path="/servizi-youtube">Servizi YouTube</a>
-        <a href="/servizi-instagram.html"  data-path="/servizi-instagram">Servizi Instagram</a>
-        <a href="/servizi-tiktok.html"     data-path="/servizi-tiktok">Servizi TikTok</a>
+        <a class="featured" href="/management/" data-path="/management">Project Management</a>
+        <a href="/spotify/"    data-path="/spotify">Servizi Spotify</a>
+        <a href="/youtube/"    data-path="/youtube">Servizi YouTube</a>
+        <a href="/instagram/"  data-path="/instagram">Servizi Instagram</a>
+        <a href="/tiktok/"     data-path="/tiktok">Servizi TikTok</a>
         <p class="ic-hdr-mobile-label">Menu</p>
         <a href="/" data-path="/">Home</a>
-        <a class="ic-hdr-cta" href="/contatti.html" data-path="/contatti">Contatti</a>
+        <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
       </div>
     </header>`;
 
@@ -63,8 +63,8 @@
           </p>
           <p class="ic-ftr-block-copyright">© 2026 @iconent. Tutti i diritti riservati.</p>
           <p class="ic-ftr-block-legal" style="font-size:0.75rem; color:#888; margin-top:0.5rem;">
-            <a href="/privacy.html" style="color:#888;">Privacy Policy</a> ·
-            <a href="/cookie.html" style="color:#888;">Cookie Policy</a>
+            <a href="/privacy/" style="color:#888;">Privacy Policy</a> ·
+            <a href="/cookie/" style="color:#888;">Cookie Policy</a>
           </p>
         </div>
       </footer>

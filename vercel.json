@@ -1,0 +1,152 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/servizio-spotify",
+      "destination": "/spotify/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi",
+      "destination": "/management/",
+      "permanent": true
+    },
+    {
+      "source": "/produzione-video",
+      "destination": "/management/",
+      "permanent": true
+    },
+    {
+      "source": "/distribuzione-major",
+      "destination": "/form-prenotazione/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/linkedin-just-relaunched-company-pages",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/six-cover-letter-greetings-for-every-situation",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/a-comprehensive-guide-to-local-seo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/how-to-become-a-best-sale-marketer-in-a-year",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/how-to-make-your-product-stand-out",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/choose-from-meeting-speak-client-feedback",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/how-to-be-more-productive-usgin-sticky-notes",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/how-to-drive-your-customer-experience",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/01/28/winning-tactics-for-a-new-digital-agency",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2020/09/05/hello-world",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2019/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/2020/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us.html",
+      "destination": "/chi-siamo/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us.html",
+      "destination": "/contatti/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi-spotify.html",
+      "destination": "/spotify/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi-youtube.html",
+      "destination": "/youtube/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi-instagram.html",
+      "destination": "/instagram/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi-tiktok.html",
+      "destination": "/tiktok/",
+      "permanent": true
+    },
+    {
+      "source": "/servizi-project-management.html",
+      "destination": "/management/",
+      "permanent": true
+    },
+    {
+      "source": "/chi-siamo.html",
+      "destination": "/chi-siamo/",
+      "permanent": true
+    },
+    {
+      "source": "/contatti.html",
+      "destination": "/contatti/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/cookie.html",
+      "destination": "/cookie/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/cookie/",
+      "permanent": true
+    }
+  ]
+}
