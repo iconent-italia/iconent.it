@@ -1,6 +1,12 @@
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
+/* Anti-CLS / anchor-jump: anchor links (#booking, #faq, ecc.) non finiscono
+   sotto l'header fisso. 88px = altezza header + un po' di breathing room. */
+html { scroll-padding-top: 88px; }
+:target { scroll-margin-top: 88px; }
+
 body {
   font-family: var(--font-sans);
   background: var(--ic-bg);

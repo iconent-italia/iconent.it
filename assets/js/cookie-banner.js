@@ -152,6 +152,10 @@
     //  if (consent.marketing)  loadMetaPixel();)
     document.documentElement.dataset.consentStatistics = consent.statistics ? '1' : '0';
     document.documentElement.dataset.consentMarketing = consent.marketing ? '1' : '0';
+    // Notifica componenti gated (es. Calendly) che lo state è cambiato
+    try {
+      document.dispatchEvent(new CustomEvent('ic:consent-changed', { detail: consent }));
+    } catch (e) {}
   }
 
   function acceptAll() {

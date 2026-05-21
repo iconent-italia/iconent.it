@@ -37,17 +37,16 @@
         <a href="/" data-path="/">Home</a>
         <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
       </nav>
-      <button class="ic-hdr-burger" type="button" aria-label="Apri menu" aria-expanded="false"></button>
+      <button class="ic-hdr-burger" type="button" aria-label="Apri menu" aria-expanded="false" aria-controls="ic-hdr-mobile-menu"></button>
     </header>
-    <div class="ic-hdr-mobile" role="menu">
+    <div class="ic-hdr-mobile" id="ic-hdr-mobile-menu" role="menu">
+      <a class="ic-hdr-mobile-home" href="/" data-path="/">Home</a>
       <p class="ic-hdr-mobile-label">Servizi</p>
       <a class="featured" href="/management/" data-path="/management">Project Management</a>
       <a href="/spotify/"    data-path="/spotify">Servizi Spotify</a>
       <a href="/youtube/"    data-path="/youtube">Servizi YouTube</a>
       <a href="/instagram/"  data-path="/instagram">Servizi Instagram</a>
       <a href="/tiktok/"     data-path="/tiktok">Servizi TikTok</a>
-      <p class="ic-hdr-mobile-label">Menu</p>
-      <a href="/" data-path="/">Home</a>
       <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
     </div>`;
 
@@ -115,15 +114,26 @@
         burger.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
         document.body.classList.toggle('no-scroll', open);
       });
+      // Helper: chiude il menu mobile
+      const closeMobile = () => {
+        hdr.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Apri menu');
+        document.body.classList.remove('no-scroll');
+      };
       // Close mobile on link click
       this.querySelectorAll('.ic-hdr-mobile a').forEach((a) => {
-        a.addEventListener('click', () => {
-          hdr.classList.remove('is-open');
-          burger.setAttribute('aria-expanded', 'false');
-          burger.setAttribute('aria-label', 'Apri menu');
-          document.body.classList.remove('no-scroll');
-        });
+        a.addEventListener('click', closeMobile);
       });
+      // Close mobile on tap fuori dai link (sull'area vuota del container)
+      // Il menu copre tutta la viewport, quindi qualunque tap che non sia su
+      // un link/etichetta dei servizi chiude il menu.
+      const mobileMenu = document.getElementById('ic-hdr-mobile-menu');
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+          if (e.target === mobileMenu) closeMobile();
+        });
+      }
       // Scroll → .scrolled
       let ticking = false;
       const onScroll = () => {
@@ -137,12 +147,7 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       // ESC closes mobile
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && hdr.classList.contains('is-open')) {
-          hdr.classList.remove('is-open');
-          burger.setAttribute('aria-expanded', 'false');
-          burger.setAttribute('aria-label', 'Apri menu');
-          document.body.classList.remove('no-scroll');
-        }
+        if (e.key === 'Escape' && hdr.classList.contains('is-open')) closeMobile();
       });
 
       // Desktop services dropdown: click toggles open/closed state.
