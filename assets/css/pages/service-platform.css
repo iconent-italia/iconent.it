@@ -1,0 +1,584 @@
+/* Variables set per-page via body[data-platform] selector */
+body[data-platform="spotify"]   { --plat-accent: var(--plat-spotify);  --plat-glow: 29,185,84; }
+body[data-platform="youtube"]   { --plat-accent: var(--plat-youtube);  --plat-glow: 255,59,48; }
+body[data-platform="instagram"] { --plat-accent: var(--plat-instagram);--plat-glow: 0,178,255; }
+body[data-platform="tiktok"]    { --plat-accent: var(--plat-tiktok-pink); --plat-glow: 255,0,80; }
+
+/* TikTok needs dual-color glow */
+body[data-platform="tiktok"] .hero-compact::before {
+  background: radial-gradient(circle, rgba(255,0,80,0.10) 0%, transparent 50%),
+              radial-gradient(circle, rgba(0,230,255,0.06) 0%, transparent 60%);
+}
+/* (TikTok accent shadow removed — was making "PROMOTION" look lit-up
+   relative to the other platform pages. Now consistent across all four.) */
+
+/* Platform-tinted hero glow */
+.platform-page .hero-compact::before {
+  background: radial-gradient(circle, rgba(var(--plat-glow), 0.10) 0%, transparent 60%);
+}
+
+/* Animated flicker top-right — recolored per platform */
+.platform-page .hero-compact::after {
+  background: radial-gradient(circle,
+    rgba(var(--plat-glow), 0.65) 0%,
+    rgba(var(--plat-glow), 0.22) 30%,
+    transparent 70%);
+}
+body[data-platform="tiktok"] .hero-compact::after {
+  background:
+    radial-gradient(circle at 40% 50%, rgba(255,0,80,0.55) 0%, transparent 60%),
+    radial-gradient(circle at 60% 50%, rgba(0,230,255,0.45) 0%, transparent 60%);
+}
+
+/* ============================================================
+   Platform H1 — PIXAR SPOTLIGHT REVEAL
+   A warm light beam sweeps across the title from left to right.
+   Color of the "revealed" state matches each platform's brand accent.
+   TikTok uses a pink → cyan dual-tone reveal.
+   ============================================================ */
+.platform-page .hero-compact h1 {
+  position: relative;
+  background-image: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 28%,
+    rgba(255, 255, 255, 0.55) 38%,
+    #FFFFFF 50%,
+    rgba(255, 255, 255, 0.8) 58%,
+    var(--plat-accent) 72%,
+    var(--plat-accent) 100%
+  );
+  background-size: 400% 100%;
+  background-position: 0% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: plat-h1-spotlight 2s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+}
+
+.platform-page .hero-compact h1 .accent {
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+}
+
+@keyframes plat-h1-spotlight {
+  from { background-position: 0% 0; }
+  to   { background-position: 100% 0; }
+}
+
+/* TikTok: solid pink reveal — matches the rest of the page accent (DISCOVERY, bullets, button). */
+body[data-platform="tiktok"] .hero-compact h1 {
+  background-image: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 28%,
+    rgba(255, 255, 255, 0.55) 38%,
+    #FFFFFF 50%,
+    rgba(255, 255, 255, 0.8) 58%,
+    var(--plat-tiktok-pink) 72%,
+    var(--plat-tiktok-pink) 100%
+  );
+}
+
+/* Spotlight halo (the "lamp") traversing behind the h1 — colored per platform */
+.platform-page .hero-compact h1::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  transform: translateY(-50%);
+  width: 35%;
+  height: 240%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(var(--plat-glow), 0.2) 35%,
+    transparent 65%
+  );
+  filter: blur(40px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  animation: plat-h1-spotlight-halo 2s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+}
+
+@keyframes plat-h1-spotlight-halo {
+  0%   { opacity: 0; left: -25%; }
+  18%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; left: 115%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-page .hero-compact h1,
+  .platform-page .hero-compact h1::before {
+    animation: none !important;
+    background-position: 100% 0 !important;
+    opacity: 1;
+    left: auto;
+  }
+}
+
+/* Platform-tinted accents on this page only */
+.platform-page .section-label { color: var(--plat-accent); }
+.platform-page .section-label::before {
+  background: var(--plat-accent);
+  box-shadow: 0 0 16px var(--plat-accent);
+}
+.platform-page .section h2 .accent { color: var(--plat-accent); }
+.platform-page .accent { color: var(--plat-accent); }
+
+/* ============================================================
+   PLATFORM STATS — 2x2 grid of count-up metrics + detail block
+   ============================================================ */
+.platform-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 36px;
+  margin: 36px 0 0;
+}
+.platform-stat {
+  padding: 22px 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.005));
+  border: 1px solid var(--ic-rule);
+  border-radius: 8px;
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.platform-stat:hover {
+  border-color: rgba(var(--plat-glow), 0.5);
+  transform: translateY(-2px);
+}
+.platform-stat-value {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--plat-accent);
+  margin: 0 0 10px;
+  text-shadow: 0 0 28px rgba(var(--plat-glow), 0.35);
+}
+.platform-stat-label {
+  font-size: 13px;
+  color: var(--ic-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+.platform-stats-detail {
+  margin: 44px 0 0;
+  padding: 32px 32px;
+  background: var(--ic-bg-soft);
+  border: 1px solid var(--ic-rule);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.platform-stats-detail::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(var(--plat-glow), 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.platform-stats-detail > * { position: relative; z-index: 1; }
+.platform-stats-detail h3 {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  color: var(--ic-text);
+}
+.platform-stats-detail p {
+  font-size: 14.5px;
+  color: var(--ic-muted);
+  line-height: 1.6;
+  margin: 0 0 12px;
+  max-width: 760px;
+}
+.platform-stats-detail p:last-child { margin-bottom: 0; }
+
+@media (max-width: 900px) {
+  .platform-stats {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .platform-stat { padding: 18px 20px; }
+  .platform-stats-detail { padding: 24px 22px; }
+}
+
+/* Compact method (1-liner per step) */
+.platform-method-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 36px 0 0;
+}
+.platform-method-compact .method-step::before { background: var(--plat-accent); }
+.platform-method-compact .method-step:nth-child(2)::before {
+  background: linear-gradient(
+    to right,
+    var(--plat-accent) 0 32px,
+    transparent  32px 38px,
+    var(--plat-accent) 38px 70px
+  );
+}
+.platform-method-compact .method-step:nth-child(3)::before {
+  background: linear-gradient(
+    to right,
+    var(--plat-accent) 0 32px,
+    transparent  32px 38px,
+    var(--plat-accent) 38px 70px,
+    transparent  70px 76px,
+    var(--plat-accent) 76px 108px
+  );
+}
+.platform-method-compact .method-step-num { color: var(--plat-accent); }
+
+/* Deliverables list */
+.platform-deliverables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  margin: 36px 0 0;
+}
+.platform-deliverables li {
+  padding: 14px 0 14px 24px;
+  border-bottom: 1px solid var(--ic-rule);
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
+}
+.platform-deliverables li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--plat-accent);
+  font-weight: 700;
+}
+
+/* Proof grid (variable count: 1, 2, or 3 cards) */
+.platform-proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 36px;
+  margin: 54px 0 0;
+  padding: 18px 0;
+}
+.platform-proof .proof-card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+/* Landscape screenshots: show full image, no crop */
+.platform-proof .proof-card-img {
+  aspect-ratio: auto;
+  height: auto;
+  background: #000;
+}
+.platform-proof .proof-card-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.platform-proof .proof-card::before {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at center,
+      rgba(var(--plat-glow), 0.55) 0%,
+      rgba(var(--plat-glow), 0.22) 35%,
+      transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.35s ease, inset 0.35s ease;
+}
+.platform-proof .proof-card:hover::before {
+  inset: -36px;
+  opacity: 1;
+}
+body[data-platform="tiktok"] .platform-proof .proof-card::before {
+  background:
+    radial-gradient(circle at 35% 40%, rgba(255, 0, 80, 0.55) 0%, transparent 65%),
+    radial-gradient(circle at 65% 60%, rgba(0, 230, 255, 0.45) 0%, transparent 65%);
+}
+.platform-proof .proof-card:hover {
+  border-color: rgba(var(--plat-glow), 0.5);
+}
+.platform-proof .proof-card-value { color: var(--plat-accent); }
+
+/* Platform-colored primary CTA (only on this page — header CTA stays green) */
+.platform-page .btn-primary {
+  background: var(--plat-accent);
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 0 1px rgba(0,0,0,0.5);
+  box-shadow:
+    0 0 0 1px rgba(var(--plat-glow), 0.3),
+    0 0 40px -10px rgba(var(--plat-glow), 0.5);
+}
+@media (hover: hover) {
+  .platform-page .btn-primary:hover {
+    box-shadow:
+      0 0 0 1px rgba(var(--plat-glow), 0.5),
+      0 0 60px -10px rgba(var(--plat-glow), 0.7);
+  }
+}
+/* TikTok primary CTA: solid cyan, matches the title accent (handled by --plat-accent). */
+
+/* TODO placeholder for missing screenshots */
+.proof-todo {
+  background: var(--ic-bg-soft);
+  border: 1px dashed var(--ic-rule);
+  border-radius: 6px;
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ic-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* YouTube only: 2 cards on top, 3rd centered below (bigger landscape screens) */
+@media (min-width: 901px) {
+  body[data-platform="youtube"] .platform-proof {
+    grid-template-columns: 1fr 1fr;
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body[data-platform="youtube"] .platform-proof .proof-card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .platform-method-compact, .platform-deliverables { grid-template-columns: 1fr; }
+  /* Halve list line-spacing on mobile */
+  .platform-deliverables { gap: 0; }
+  .platform-deliverables li { padding: 8px 0 8px 22px; font-size: 13px; }
+  .platform-proof { gap: 28px; padding: 12px 0; }
+  .platform-proof .proof-card::before {
+    inset: -16px;
+    filter: blur(18px);
+    opacity: 0.7;
+  }
+}
+@media (max-width: 480px) {
+  .platform-proof .proof-card::before {
+    inset: -12px;
+    filter: blur(14px);
+  }
+}
+
+/* ============================================================
+   ICONE DECORATIVE NEI CARD PRICING
+   - Visibili su desktop in alto-destra del .platform-stat
+   - Nascoste su mobile per evitare ingombro
+   ============================================================ */
+.platform-stat > img[aria-hidden="true"] {
+  transition: opacity 0.25s ease;
+}
+@media (max-width: 768px) {
+  .platform-stat > img[aria-hidden="true"] {
+    display: none !important;
+  }
+}
+
+/* Hero sub: bilancia le 2 righe in modo intelligente */
+.hero-compact .hero-sub {
+  text-wrap: balance;
+}
+
+/* Box impaginato per liste densità info (network pagine IG, playlist Spotify) */
+.info-box {
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+  border: 1px solid var(--ic-rule);
+  border-radius: 10px;
+}
+.info-box-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ic-muted);
+  font-weight: 600;
+  margin-bottom: 0.875rem;
+}
+.info-box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.info-box-grid > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+.info-box-grid > span:last-child,
+.info-box-grid > span:nth-last-child(2),
+.info-box-grid > span:nth-last-child(3) {
+  border-bottom: none;
+}
+.info-box-grid .ib-handle { color: var(--white-soft, #e8f4ff); font-weight: 500; }
+.info-box-grid .ib-meta { color: var(--ic-muted); font-size: 0.85em; }
+.info-box-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.875rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.info-box-list > span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.875rem;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 999px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   GRID PROGETTI CURATI (album covers)
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.project-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  border: 1px solid var(--ic-rule);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,255,136,0.4);
+}
+.project-card-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.875rem;
+}
+.project-card-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+.project-card-artist {
+  font-size: 0.85rem;
+  color: var(--ic-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+  .project-card { padding: 0.625rem; }
+  .project-card-title { font-size: 0.9rem; }
+  .project-card-artist { font-size: 0.75rem; }
+}
+
+/* ============================================================
+   OVERRIDE: icone platform pricing card
+   - SVG ufficiali brand-colorate, dimensione responsive con clamp
+   - Riserva spazio col padding-right per evitare overlap col testo
+     (importante sui card singoli che si espandono a tutta larghezza)
+   - Drop-shadow del colore brand per dare luminosita al logo monocromo
+   ============================================================ */
+.platform-stat:has(> img[aria-hidden="true"]) {
+  padding-right: calc(clamp(48px, 8vw, 88px) + 2rem);
+}
+.platform-stat > img[aria-hidden="true"] {
+  width: clamp(48px, 8vw, 88px) !important;
+  height: clamp(48px, 8vw, 88px) !important;
+  top: 50% !important;
+  right: 1.25rem !important;
+  transform: translateY(-50%);
+  opacity: 0.95 !important;
+}
+.platform-stat > img[src*="spotify.svg"] {
+  filter: drop-shadow(0 0 16px rgba(30, 215, 96, 0.45));
+}
+.platform-stat > img[src*="youtube.svg"] {
+  filter: drop-shadow(0 0 16px rgba(255, 0, 0, 0.4));
+}
+.platform-stat > img[src*="instagram.svg"] {
+  filter: drop-shadow(0 0 16px rgba(0, 178, 255, 0.45));
+}
+.platform-stat > img[src*="tiktok.svg"] {
+  filter: drop-shadow(0 0 12px rgba(0, 242, 234, 0.5))
+          drop-shadow(0 0 12px rgba(255, 0, 80, 0.25));
+}
+@media (max-width: 768px) {
+  .platform-stat:has(> img[aria-hidden="true"]) {
+    padding-right: 1.5rem; /* reset al default su mobile */
+  }
+  .platform-stat > img[aria-hidden="true"] {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   PROGETTI CURATI — desktop layout fisso (4 col) + ultimi 2 centrati
+   Layout: 4 col × 2 righe (8) + 2 orfani centrati sulla terza riga
+   ============================================================ */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .projects-grid > .project-card:nth-child(9) { grid-column: 2 / 3; }
+  .projects-grid > .project-card:nth-child(10) { grid-column: 3 / 4; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .projects-grid { grid-template-columns: repeat(3, 1fr); }
+  /* 3 col × 3 righe (9) + 1 orfano centrato */
+  .projects-grid > .project-card:nth-child(10) { grid-column: 2 / 3; }
+}
+
+/* ============================================================
+   Spotify proof-card — forza aspect-ratio uniforme tra le 3 card
+   (eliminate differenze di rendering dovute a bordi bianchi interni
+   delle immagini sorgenti)
+   ============================================================ */
+body[data-platform="spotify"] .platform-proof .proof-card-img {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  overflow: hidden;
+}
+body[data-platform="spotify"] .platform-proof .proof-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

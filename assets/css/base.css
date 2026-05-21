@@ -1,0 +1,186 @@
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--ic-bg);
+  color: var(--ic-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  padding-top: 64px; /* room for fixed header */
+}
+body.no-scroll { overflow: hidden; }
+
+/* Prevent FOUC before web components are upgraded. Holds the layout space
+   for the fixed header (so content doesn't jump) and hides the empty
+   custom-element tags until components.js registers them. */
+ic-header:not(:defined) {
+  display: block;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(10,10,10,0.92);
+  z-index: var(--z-header);
+}
+ic-footer:not(:defined) {
+  display: block;
+  min-height: 200px;
+  background: var(--ic-bg);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+ul, ol { list-style: none; padding: 0; margin: 0; }
+h1, h2, h3, h4, h5, h6 { margin: 0; color: inherit; font-weight: 900; }
+p { margin: 0; }
+
+/* Body grid pattern overlay (from original homepage) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main is the document content layer */
+main { position: relative; z-index: 1; }
+
+/* Section primitives shared across pages */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 99px 28px;
+  position: relative;
+  z-index: 2;
+}
+.section-label {
+  font-size: 17px;
+  color: var(--ic-green);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 0 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  background: var(--ic-green);
+  border-radius: 50%;
+  box-shadow: 0 0 16px var(--ic-green);
+}
+.section h2 {
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+}
+.section h2 .accent { color: var(--ic-green); }
+.section .lead {
+  font-size: clamp(17px, 1.6vw, 19px);
+  line-height: 1.55;
+  margin: 0 0 24px;
+  max-width: 720px;
+}
+.text-highlight { color: var(--ic-green); font-weight: 600; }
+
+/* Desktop only: halve vertical breathing room across the layout.
+   Sections + non-section flow containers (cta-block, partners marquee,
+   strategy-call bands) all get tightened by ~50% to remove the dead air
+   that was showing up between blocks. */
+@media (min-width: 901px) {
+  /* --- Adjacent .section blocks --- */
+  .section + .section { padding-top: 45px; }
+  .section:has(+ .section) { padding-bottom: 45px; }
+
+  /* --- .section bordering a non-section flow container (banner image,
+       partners marquee, cta-block, sc-bands) --- */
+  .partners + .section,
+  .banner-image + .section,
+  .marquee + .section,
+  .cta-block + .section,
+  .sc-stats-band + .section,
+  .sc-booking + .section { padding-top: 45px; }
+  .section:has(+ .partners),
+  .section:has(+ .banner-image),
+  .section:has(+ .marquee),
+  .section:has(+ .cta-block),
+  .section:has(+ .sc-stats-band),
+  .section:has(+ .sc-booking) { padding-bottom: 45px; }
+
+  /* --- Non-section flow containers themselves --- */
+  /* Final CTA strip — was 90px, now 45px */
+  .cta-block { padding-top: 45px; padding-bottom: 45px; }
+  .cta-block > p { margin-bottom: 32px; }
+  /* Partners marquee strip — was 72px, now 36px */
+  .partners { padding: 36px 0; }
+  .partners-label { margin-bottom: 18px; }
+  /* Strategy-call booking section — was 56px, now 32px */
+  .sc-booking { padding-top: 32px; padding-bottom: 32px; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .section { padding: 65px 20px; }
+  .section h2 { font-size: clamp(32px, 8vw, 48px); }
+  .section-label { font-size: 12px; margin-bottom: 14px; gap: 8px; }
+  .section-label::before { width: 7px; height: 7px; }
+}
+@media (max-width: 480px) {
+  .section { padding: 50px 16px; }
+  .section h2 { font-size: clamp(28px, 9vw, 42px); }
+}
+
+/* A11y — skip link (WCAG 2.4.1 Bypass Blocks) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 8px;
+  z-index: 10000;
+  background: var(--ic-green);
+  color: #000;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: top 0.18s ease;
+}
+.skip-link:focus { top: 8px; outline: none; }
+
+/* A11y — high-contrast focus ring on dark theme (WCAG 2.4.7) */
+*:focus-visible {
+  outline: 2px solid var(--ic-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.btn:focus-visible { outline-offset: 4px; }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
