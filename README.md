@@ -1,9 +1,20 @@
 # iconent.it — ICONENT AGENCY (Italia)
 
+🟢 **LIVE su <https://iconent.it>** — go-live: 22 maggio 2026
+
 Sito statico ufficiale di ICONENT AGENCY. Plain HTML / CSS / vanilla JS. No build step.
 
 > Sister site di [iconent-group.com](https://iconent-group.com/) (entità US).
 > Questa codebase è l'adattamento italiano per ICONENT AGENCY (P.IVA 03930860360).
+
+## Hosting
+
+- **Dominio**: `iconent.it` (registrar Aruba, DNS gestiti su Aruba)
+- **Hosting**: Vercel (account team ICONENT GROUP - PROJECTS, progetto `iconent-it`)
+- **SSL**: Let's Encrypt auto-rinnovo (gestito da Vercel)
+- **Auto-deploy**: ogni `git push` su `main` → deploy in ~30s
+- **Email**: rimangono su Aruba (record MX intatti, `info@iconent.it` funziona normalmente)
+- **Deploy script locale**: `./deploy.sh "messaggio commit"`
 
 ## Stack
 
