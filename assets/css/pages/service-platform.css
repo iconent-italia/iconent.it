@@ -584,10 +584,10 @@ body[data-platform="spotify"] .platform-proof .proof-card-img img {
 }
 
 /* ============================================================
-   HERO-COMPACT — sfondo glitch ghiaccio/verde sfumato verso il basso
-   Versione molto piu discreta della home: niente sweep, niente glitch
-   trigger. Solo glow + griglia statica + noise + vignette.
-   Si applica a tutte le hero-compact (PM + 4 platform pages).
+   HERO-COMPACT — sfondo glitch brand-colored sfumato verso il body
+   Colore ereditato dalla variabile --plat-glow del body data-platform.
+   Default (PM page, contatti, chi-siamo): verde brand.
+   Si dissolve gradualmente nel nero del body con multi-stop gradient.
    ============================================================ */
 .hero-compact:has(.scene) {
   position: relative;
@@ -599,50 +599,79 @@ body[data-platform="spotify"] .platform-proof .proof-card-img img {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.55;
-  /* Fade-to-black: visibile in alto, si dissolve nel nero del body verso il basso */
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, rgba(0,0,0,0.4) 70%, transparent 100%);
-          mask-image: linear-gradient(to bottom, black 0%, black 35%, rgba(0,0,0,0.4) 70%, transparent 100%);
+  opacity: 0.6;
+  /* Default platform glow (verde brand) — sovrascritto da body[data-platform] */
+  --plat-glow: 0, 255, 136;
+  /* Multi-stop fade-to-black molto graduale: pieno in alto, smaterializzazione
+     progressiva nel corpo della pagina */
+  -webkit-mask-image: linear-gradient(to bottom,
+    black 0%,
+    black 20%,
+    rgba(0,0,0,0.85) 40%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.25) 80%,
+    transparent 100%);
+          mask-image: linear-gradient(to bottom,
+    black 0%,
+    black 20%,
+    rgba(0,0,0,0.85) 40%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.25) 80%,
+    transparent 100%);
 }
 .hero-compact > *:not(.scene) {
   position: relative;
   z-index: 1;
 }
 
-/* --- Glow ambient (luci ai bordi che pulsano leggermente) --- */
+/* Override glow color sulle platform pages — eredita --plat-glow dal body */
+body[data-platform="spotify"]   .hero-compact .scene { --plat-glow: 29, 185, 84; }
+body[data-platform="youtube"]   .hero-compact .scene { --plat-glow: 255, 59, 48; }
+body[data-platform="instagram"] .hero-compact .scene { --plat-glow: 0, 178, 255; }
+body[data-platform="tiktok"]    .hero-compact .scene { --plat-glow: 255, 0, 80; }
+
+/* --- Glow ambient (colore brand del servizio) --- */
 .hero-compact .scene .layer-glow {
   position: absolute;
   inset: -10%;
   background:
-    radial-gradient(circle at 0% 50%,   rgba(0, 255, 136, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 100% 50%, rgba(0, 255, 136, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 50% 0%,   rgba(102, 255, 170, 0.12) 0%, transparent 55%);
+    radial-gradient(circle at 0% 50%,   rgba(var(--plat-glow), 0.20) 0%, transparent 45%),
+    radial-gradient(circle at 100% 50%, rgba(var(--plat-glow), 0.20) 0%, transparent 45%),
+    radial-gradient(circle at 50% 0%,   rgba(var(--plat-glow), 0.14) 0%, transparent 55%);
   mix-blend-mode: screen;
   animation: hcGlowPulse 9s ease-in-out infinite;
 }
 
-/* --- Griglia statica (solo background image, no animazione di shift) --- */
+/* TikTok ha doppio tono (rosa + cyan) per coerenza con il resto della pagina */
+body[data-platform="tiktok"] .hero-compact .scene .layer-glow {
+  background:
+    radial-gradient(circle at 0% 50%,   rgba(255, 0, 80, 0.20) 0%, transparent 45%),
+    radial-gradient(circle at 100% 50%, rgba(0, 242, 234, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 50% 0%,   rgba(255, 0, 80, 0.12) 0%, transparent 55%);
+}
+
+/* --- Griglia statica brand-colored --- */
 .hero-compact .scene .layer-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right,  rgba(0, 255, 136, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 255, 136, 0.06) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(var(--plat-glow), 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--plat-glow), 0.07) 1px, transparent 1px);
   background-size: 48px 48px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at center, transparent 25%, black 95%);
           mask-image: radial-gradient(ellipse 80% 60% at center, transparent 25%, black 95%);
   mix-blend-mode: screen;
 }
 
-/* --- Scanlines molto leggere --- */
+/* --- Scanlines brand-colored, molto leggere --- */
 .hero-compact .scene .layer-scanlines {
   position: absolute;
   inset: 0;
   background-image: repeating-linear-gradient(0deg,
-    rgba(0, 255, 136, 0) 0px,
-    rgba(0, 255, 136, 0) 3px,
-    rgba(0, 255, 136, 0.03) 4px,
-    rgba(0, 255, 136, 0.03) 5px);
+    rgba(var(--plat-glow), 0) 0px,
+    rgba(var(--plat-glow), 0) 3px,
+    rgba(var(--plat-glow), 0.035) 4px,
+    rgba(var(--plat-glow), 0.035) 5px);
   mix-blend-mode: screen;
 }
 
