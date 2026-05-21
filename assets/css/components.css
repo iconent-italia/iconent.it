@@ -192,20 +192,26 @@
 .ic-hdr-mobile {
   display: none;
   position: fixed;
-  top: 64px;
-  left: 0; right: 0; bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /* Padding-top equal to header height so content non si sovrappone alla barra */
+  padding: 88px 24px 32px;
   background: var(--ic-bg);
-  padding: 32px 24px;
   overflow-y: auto;
   flex-direction: column;
   gap: 8px;
+  /* Z-index esplicito sopra .ic-hdr (--z-header = 1000) per essere sicuri
+     che il menu non venga clippato dal containing block creato dal
+     backdrop-filter del parent header. */
+  z-index: calc(var(--z-header) + 1);
+  /* Crea un nuovo stacking context indipendente: previene il bug del
+     containing block transferito dall'ancestor con backdrop-filter. */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 .ic-hdr.is-open .ic-hdr-mobile { display: flex; }
 
-/* When the mobile menu is open, drop the .scrolled backdrop-filter on the
-   header. backdrop-filter creates a containing block for fixed-positioned
-   descendants — without this override, .ic-hdr-mobile gets clipped inside
-   the header box (52px tall) when the user opens the menu mid-scroll. */
+/* Quando il mobile menu e aperto, mettiamo comunque uno sfondo opaco
+   sull'header (la barra in alto resta visibile sopra il menu). */
 .ic-hdr.is-open,
 .ic-hdr.is-open.scrolled {
   backdrop-filter: none;
