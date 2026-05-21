@@ -1,6 +1,9 @@
 (function () {
   const WHATSAPP_URL = 'https://wa.me/message/32WMNGGU4HGTB1';
 
+  /* Menu mobile messo come SIBLING di <header>, non come figlio.
+     Cosi non viene clippato dal containing block creato dal backdrop-filter
+     dell'header quando l'utente scrolla. */
   const HEADER_HTML = `
     <header class="ic-hdr" role="banner">
       <a class="ic-hdr-logo" href="/">ICONENT AGENCY</a>
@@ -19,18 +22,18 @@
         <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
       </nav>
       <button class="ic-hdr-burger" type="button" aria-label="Apri menu" aria-expanded="false"></button>
-      <div class="ic-hdr-mobile" role="menu">
-        <p class="ic-hdr-mobile-label">Servizi</p>
-        <a class="featured" href="/management/" data-path="/management">Project Management</a>
-        <a href="/spotify/"    data-path="/spotify">Servizi Spotify</a>
-        <a href="/youtube/"    data-path="/youtube">Servizi YouTube</a>
-        <a href="/instagram/"  data-path="/instagram">Servizi Instagram</a>
-        <a href="/tiktok/"     data-path="/tiktok">Servizi TikTok</a>
-        <p class="ic-hdr-mobile-label">Menu</p>
-        <a href="/" data-path="/">Home</a>
-        <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
-      </div>
-    </header>`;
+    </header>
+    <div class="ic-hdr-mobile" role="menu">
+      <p class="ic-hdr-mobile-label">Servizi</p>
+      <a class="featured" href="/management/" data-path="/management">Project Management</a>
+      <a href="/spotify/"    data-path="/spotify">Servizi Spotify</a>
+      <a href="/youtube/"    data-path="/youtube">Servizi YouTube</a>
+      <a href="/instagram/"  data-path="/instagram">Servizi Instagram</a>
+      <a href="/tiktok/"     data-path="/tiktok">Servizi TikTok</a>
+      <p class="ic-hdr-mobile-label">Menu</p>
+      <a href="/" data-path="/">Home</a>
+      <a class="ic-hdr-cta" href="/contatti/" data-path="/contatti">Contatti</a>
+    </div>`;
 
   const FOOTER_HTML = `
     <div class="ic-ftr-root">
