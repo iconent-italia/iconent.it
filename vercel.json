@@ -24,6 +24,16 @@
       "permanent": true
     },
     {
+      "source": "/form-valutazione-team/",
+      "destination": "/form-prenotazione/",
+      "permanent": true
+    },
+    {
+      "source": "/strategy-call/",
+      "destination": "/form-prenotazione/",
+      "permanent": true
+    },
+    {
       "source": "/2019/01/28/linkedin-just-relaunched-company-pages/",
       "destination": "/",
       "permanent": true
