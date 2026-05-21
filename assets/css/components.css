@@ -164,6 +164,15 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  /* Rimuove il 300ms delay del tap su iOS Safari + Android browser */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  /* Z-index sopra eventuali elementi grafici della header */
+  z-index: 2;
 }
 .ic-hdr-burger::before, .ic-hdr-burger::after {
   content: '';
@@ -172,6 +181,8 @@
   height: 2px;
   background: var(--ic-text);
   transition: transform 0.2s ease;
+  /* I pseudo-elementi non devono catturare il tap (passa al button parent) */
+  pointer-events: none;
 }
 .ic-hdr-burger::before { transform: translateY(-5px); }
 .ic-hdr-burger::after  { transform: translateY(5px); }
@@ -271,8 +282,10 @@
   /* Keep header height constant on mobile so the burger doesn't shift
      during the scrolled transition — fixes the "tap misses after scroll" bug */
   .ic-hdr, .ic-hdr.scrolled { height: 64px; padding: 0 20px; }
-  /* Bigger touch target for burger */
-  .ic-hdr-burger { width: 44px; height: 44px; }
+  /* Bigger touch target for burger (>= 44px Apple HIG minimum) */
+  .ic-hdr-burger { width: 48px; height: 48px; }
+  /* Tap area visibile per debug — feedback al tap su Android/iOS */
+  .ic-hdr-burger:active { background: rgba(255,255,255,0.06); border-radius: 50%; }
 }
 
 /* ============ FOOTER ============ */
