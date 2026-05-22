@@ -438,7 +438,7 @@
   max-width: 1400px;
 }
 .hero h1 {
-  font-size: clamp(40px, 11vw, 180px);
+  font-size: clamp(28px, 11vw, 180px);
   line-height: 1;
   letter-spacing: -0.05em;
   text-transform: uppercase;
@@ -449,12 +449,11 @@
     0 0 80px rgba(100,220,255,0.18);
   white-space: nowrap;
 }
-/* Mobile molto stretto (<420px): consenti wrap per evitare overflow orizzontale */
-@media (max-width: 419px) {
+/* Mobile: ICONENT AGENCY SEMPRE su una riga, font scalato + tracking compresso */
+@media (max-width: 480px) {
   .hero h1 {
-    white-space: normal;
-    font-size: clamp(36px, 14vw, 64px);
-    letter-spacing: -0.03em;
+    font-size: clamp(24px, 7.5vw, 44px);
+    letter-spacing: -0.04em;
   }
 }
 /* Mobile: alza il contenuto hero del ~15% per dare più spazio sopra */
@@ -488,10 +487,16 @@
   .hero-tagline { white-space: nowrap; }
 }
 
-/* Mobile (<=900px): 3 voci impilate, NIENTE pipes */
+/* Mobile (<=900px): Project Management da solo in alto, sotto Music Marketing · Distribuzione */
 @media (max-width: 900px) {
-  .hero-tagline .ht-item { display: block; }
-  .hero-tagline .ht-sep { display: none; }
+  /* 1° item ("Project Management") su riga propria */
+  .hero-tagline .ht-item:first-of-type { display: block; margin-bottom: 4px; }
+  /* 1° separatore (tra 1° e 2° item) nascosto */
+  .hero-tagline .ht-sep:first-of-type { display: none; }
+  /* 2° + 3° item inline con separatore visibile */
+  .hero-tagline .ht-item:nth-of-type(2),
+  .hero-tagline .ht-item:nth-of-type(3),
+  .hero-tagline .ht-sep:nth-of-type(2) { display: inline; }
 }
 @media (max-width: 480px) {
   .hero-tagline { letter-spacing: 0.15em; }
