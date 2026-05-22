@@ -492,7 +492,8 @@
 @media (max-width: 900px) {
   .hero-tagline {
     position: relative;
-    height: 34px;          /* +6px per dare più altezza alle scritte */
+    height: 34px;
+    margin-top: -12px;      /* alza un po' tutto il blocco tagline */
     font-size: clamp(12px, 3.4vw, 14px);
     letter-spacing: 0.14em;
     white-space: nowrap;
