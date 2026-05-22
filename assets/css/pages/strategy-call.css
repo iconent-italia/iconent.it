@@ -51,7 +51,7 @@ body.strategy-call-page main { overflow-x: clip; max-width: 100vw; }
 .sc-vsl-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/img/copertina%20vsl.png');
+  background-image: url('/assets/img/copertina-vsl.webp');
   background-size: cover;
   background-position: center -10%;
   background-repeat: no-repeat;
