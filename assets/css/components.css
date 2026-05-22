@@ -457,6 +457,10 @@
     letter-spacing: -0.03em;
   }
 }
+/* Mobile: alza il contenuto hero del ~15% per dare più spazio sopra */
+@media (max-width: 768px) {
+  .hero-content { transform: translateY(-15vh); }
+}
 .hero-tagline {
   font-size: clamp(14px, 1.4vw, 16px);
   color: #B8B8B8;
@@ -524,6 +528,10 @@
   background: var(--ic-muted);
   margin: 12px auto 0;
   opacity: 0.4;
+}
+/* Mobile: scroll hint 20% più in alto */
+@media (max-width: 768px) {
+  .hero-scroll-hint { bottom: calc(72px + 20vh); }
 }
 @keyframes ic-scroll-pulse {
   0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
@@ -994,6 +1002,9 @@
 }
 .partner-logo--warner { height: 200px; max-width: 280px; }
 .partner-logo--ingrooves { height: 161px; max-width: 230px; }
+/* ADA: logo quadrato → dimensione ridotta per bilanciare visivamente i
+   loghi rettangolari (Sony/Universal alti 140px ma "larghi") */
+.partner-logo--ada { height: 100px; max-width: 100px; }
 .partner-logo:hover { opacity: 1; }
 .partner-text {
   font-size: 36px;
@@ -1013,6 +1024,7 @@
   .partner-logo { height: 64px; max-width: 100px; }
   .partner-logo--warner { height: 100px; max-width: 140px; }
   .partner-logo--ingrooves { height: 74px; max-width: 115px; }
+  .partner-logo--ada { height: 50px; max-width: 50px; }
   .partner-text { font-size: 20px; }
   .partner-divider { font-size: 7px; }
 }

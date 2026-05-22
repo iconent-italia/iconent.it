@@ -6,7 +6,14 @@
    ================================================================= */
 
 /* No fixed header on this page → remove the header offset from base.css */
-body.strategy-call-page { padding-top: 0; }
+body.strategy-call-page {
+  padding-top: 0;
+  /* Difesa contro overflow orizzontale: alcuni gradient + transform su mobile
+     sforavano la viewport (swipe destra). clip > hidden per nested positioned. */
+  overflow-x: clip;
+  max-width: 100vw;
+}
+body.strategy-call-page main { overflow-x: clip; max-width: 100vw; }
 
 /* Page-wide accent: base.css only colors .section h2 .accent — extend it
    so .sc-booking h2 and .sc-cta-block h2 inherit the same treatment. */
@@ -574,6 +581,10 @@ body.strategy-call-page { padding-top: 0; }
   .sc-stats-grid { grid-template-columns: 1fr; gap: 32px; }
   .sc-stat-value { font-size: clamp(48px, 14vw, 72px); }
   .sc-booking { padding: 56px 20px; }
+  .sc-booking h2 {
+    font-size: clamp(24px, 7vw, 32px);
+    text-wrap: balance;
+  }
   .sc-calendar-wrap { min-height: 720px; }
   .sc-calendar-wrap .calendly-inline-widget { min-height: 720px; }
   .sc-copy { padding: 40px 20px; }
