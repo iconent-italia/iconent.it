@@ -509,10 +509,11 @@
     will-change: opacity, text-shadow;
   }
   /* Cascade: delay negativi così tutto parte già a regime.
-     Slot per parola = 1.2s (500ms visibili + 700ms pausa nera) */
-  .hero-tagline .ht-item:nth-of-type(1) { animation-delay:  0s; }
-  .hero-tagline .ht-item:nth-of-type(2) { animation-delay: -2.4s; }
-  .hero-tagline .ht-item:nth-of-type(3) { animation-delay: -1.2s; }
+     Slot per parola = 1.2s (500ms visibili + 700ms pausa nera).
+     Uso nth-child con indici reali (1,3,5) perchè i separatori .ht-sep sono span tra gli item. */
+  .hero-tagline .ht-item:nth-child(1) { animation-delay:  0s; }   /* Project Management */
+  .hero-tagline .ht-item:nth-child(3) { animation-delay: -2.4s; } /* Music Marketing */
+  .hero-tagline .ht-item:nth-child(5) { animation-delay: -1.2s; } /* Distribuzione */
 }
 /* Per ogni parola (3.6s cycle): 100ms fade-in + 300ms hold + 100ms fade-out + 700ms PAUSA nera */
 @keyframes ic-tagline-cycle {
