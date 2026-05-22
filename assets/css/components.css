@@ -489,6 +489,14 @@
 
 /* Mobile (<=900px): Project Management da solo in alto, sotto Music Marketing · Distribuzione */
 @media (max-width: 900px) {
+  /* Font ridotto + tracking compresso per far stare "Music Marketing · Distribuzione" su una riga */
+  .hero-tagline {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  /* Ogni item resta un'unita unica (no break mid-frase) */
+  .hero-tagline .ht-item { white-space: nowrap; }
   /* 1° item ("Project Management") su riga propria */
   .hero-tagline .ht-item:first-of-type { display: block; margin-bottom: 4px; }
   /* 1° separatore (tra 1° e 2° item) nascosto */
