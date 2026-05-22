@@ -449,8 +449,16 @@
     0 0 80px rgba(100,220,255,0.18);
   white-space: nowrap;
 }
+/* Mobile molto stretto (<420px): consenti wrap per evitare overflow orizzontale */
+@media (max-width: 419px) {
+  .hero h1 {
+    white-space: normal;
+    font-size: clamp(36px, 14vw, 64px);
+    letter-spacing: -0.03em;
+  }
+}
 .hero-tagline {
-  font-size: clamp(11px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.4vw, 16px);
   color: #B8B8B8;
   letter-spacing: 0.22em;
   text-transform: uppercase;

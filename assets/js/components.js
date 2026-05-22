@@ -97,7 +97,10 @@
   function markActive(root) {
     const current = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
     root.querySelectorAll('[data-path]').forEach((a) => {
-      if (pathMatches(a.dataset.path, current)) a.classList.add('is-active');
+      if (pathMatches(a.dataset.path, current)) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'page');
+      }
     });
   }
 
