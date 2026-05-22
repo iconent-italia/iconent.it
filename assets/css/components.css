@@ -487,24 +487,48 @@
   .hero-tagline { white-space: nowrap; }
 }
 
-/* Mobile (<=900px): Project Management da solo in alto, sotto Music Marketing · Distribuzione */
+/* Mobile (<=900px): animazione cascade — 3 voci in stack, una visibile alla volta.
+   Loop 3s totali (1s per parola: 200ms fade-in + 600ms hold + 200ms fade-out). */
 @media (max-width: 900px) {
-  /* Font ridotto + tracking compresso per far stare "Music Marketing · Distribuzione" su una riga */
   .hero-tagline {
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    position: relative;
+    height: 28px;          /* container fisso, no layout shift */
+    font-size: clamp(11px, 3vw, 13px);
+    letter-spacing: 0.14em;
     white-space: nowrap;
   }
-  /* Ogni item resta un'unita unica (no break mid-frase) */
-  .hero-tagline .ht-item { white-space: nowrap; }
-  /* 1° item ("Project Management") su riga propria */
-  .hero-tagline .ht-item:first-of-type { display: block; margin-bottom: 4px; }
-  /* 1° separatore (tra 1° e 2° item) nascosto */
-  .hero-tagline .ht-sep:first-of-type { display: none; }
-  /* 2° + 3° item inline con separatore visibile */
-  .hero-tagline .ht-item:nth-of-type(2),
-  .hero-tagline .ht-item:nth-of-type(3),
-  .hero-tagline .ht-sep:nth-of-type(2) { display: inline; }
+  .hero-tagline .ht-sep { display: none; }
+  .hero-tagline .ht-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    white-space: nowrap;
+    animation: ic-tagline-cycle 3s ease-in-out infinite;
+    will-change: opacity, text-shadow;
+  }
+  /* Cascade: delay negativi così tutto parte già a regime, senza buco iniziale */
+  .hero-tagline .ht-item:nth-of-type(1) { animation-delay:  0s; }
+  .hero-tagline .ht-item:nth-of-type(2) { animation-delay: -2s; }
+  .hero-tagline .ht-item:nth-of-type(3) { animation-delay: -1s; }
+}
+@keyframes ic-tagline-cycle {
+  0%, 33.34%, 100% { opacity: 0; text-shadow: none; }
+  7%               { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
+  27%              { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
+}
+/* prefers-reduced-motion: tutte visibili, statiche, impilate verticalmente */
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .hero-tagline { height: auto; }
+  .hero-tagline .ht-item {
+    position: static;
+    transform: none;
+    opacity: 1;
+    display: block;
+    animation: none;
+    text-shadow: none;
+  }
 }
 @media (max-width: 480px) {
   .hero-tagline { letter-spacing: 0.15em; }
