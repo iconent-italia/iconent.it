@@ -513,10 +513,11 @@
   .hero-tagline .ht-item:nth-of-type(2) { animation-delay: -2s; }
   .hero-tagline .ht-item:nth-of-type(3) { animation-delay: -1s; }
 }
+/* Per ogni parola (3s cycle): 150ms fade-in + 400ms hold + 150ms fade-out + 300ms PAUSA nera */
 @keyframes ic-tagline-cycle {
-  0%, 33.34%, 100% { opacity: 0; text-shadow: none; }
-  7%               { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
-  27%              { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
+  0%, 23.34%, 100% { opacity: 0; text-shadow: none; }
+  5%               { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
+  18.33%           { opacity: 1; text-shadow: 0 0 14px rgba(100, 220, 255, 0.4); }
 }
 /* prefers-reduced-motion: tutte visibili, statiche, impilate verticalmente */
 @media (max-width: 900px) and (prefers-reduced-motion: reduce) {
