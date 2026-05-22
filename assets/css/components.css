@@ -438,7 +438,7 @@
   max-width: 1400px;
 }
 .hero h1 {
-  font-size: clamp(33px, 13vw, 210px); /* +17% rispetto a 11vw/180px/28px */
+  font-size: clamp(36px, 14vw, 230px); /* +10% ulteriore */
   line-height: 1;
   letter-spacing: -0.05em;
   text-transform: uppercase;
@@ -452,7 +452,7 @@
 /* Mobile: ICONENT AGENCY SEMPRE su una riga, font scalato + tracking compresso */
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: clamp(28px, 9vw, 52px); /* +17% rispetto a 7.5vw/44px/24px */
+    font-size: clamp(31px, 10vw, 58px); /* +10% ulteriore */
     letter-spacing: -0.04em;
   }
 }
