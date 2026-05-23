@@ -438,7 +438,7 @@
   max-width: 1400px;
 }
 .hero h1 {
-  font-size: clamp(36px, 14vw, 230px); /* +10% ulteriore */
+  font-size: clamp(36px, 9.5vw, 195px); /* dialed back da 230 a 195: ICONENT AGENCY a 230px overflows viewport <2240px */
   line-height: 1;
   letter-spacing: -0.05em;
   text-transform: uppercase;
