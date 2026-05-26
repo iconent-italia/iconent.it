@@ -292,3 +292,29 @@
   .team-brief { grid-template-columns: 1fr; }
 }
 
+/* ============ HERO SPACING OVERRIDES (loaded after components.css) ============ */
+/* Compact hero (service pages): tighten vertical space above/below */
+.hero-compact {
+  padding: 80px 24px 24px;
+}
+.hero-compact + .section {
+  padding-top: 28px;
+}
+@media (max-width: 640px) {
+  .hero-compact {
+    padding: 72px 20px 18px;
+  }
+  .hero-compact + .section {
+    padding-top: 24px;
+  }
+}
+
+/* Home hero: shorten ~25% so the next section peeks above the fold */
+.hero {
+  height: 75vh;
+}
+@media (max-width: 768px) {
+  .hero-content { transform: translateY(-8vh); }
+  .hero-scroll-hint { bottom: 40px; }
+}
+
