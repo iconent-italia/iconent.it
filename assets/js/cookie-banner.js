@@ -61,8 +61,8 @@
       '<div class="ccb-card">' +
         '<h2 id="ccb-title">Cookie e privacy</h2>' +
         '<p id="ccb-desc">' +
-          'Questo sito usa <strong>cookie tecnici</strong> necessari al funzionamento e — solo con il tuo consenso — <strong>cookie di terze parti</strong> (Calendly per la prenotazione call, Vimeo per video) per offrirti i servizi che richiedi. ' +
-          'Puoi accettare, rifiutare o personalizzare il tuo consenso. ' +
+          'Questo sito utilizza <strong>cookie tecnici</strong> necessari al funzionamento e <strong>cookie di terze parti</strong> che si attivano all\'apertura delle pagine: <strong>Meta (Facebook) Pixel</strong> per analisi e advertising, <strong>Calendly</strong> per la prenotazione delle call e <strong>Vimeo</strong> per la riproduzione dei video. ' +
+          'Continuando a navigare ne prendi atto. Puoi gestire le tue preferenze e trovare i dettagli nella nostra cookie policy. ' +
           '<a href="/cookie/" target="_blank" rel="noopener">Cookie policy</a> · <a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a>' +
         '</p>' +
         '<div class="ccb-actions">' +
@@ -114,7 +114,7 @@
               '<span class="ccm-slider"></span>' +
             '</label>' +
           '</div>' +
-          '<p class="ccm-category-desc">Calendly (widget di prenotazione call) e Vimeo (player video). Senza consenso, questi widget non vengono caricati e devi contattarci via WhatsApp o email.</p>' +
+          '<p class="ccm-category-desc">Meta (Facebook) Pixel per analisi e advertising, Calendly per la prenotazione delle call e Vimeo per i video. Questi strumenti si attivano all\'apertura delle pagine; puoi opporti tramite le impostazioni del browser o gli strumenti di opt-out dei rispettivi fornitori.</p>' +
         '</div>' +
         '<div class="ccm-actions">' +
           '<button type="button" class="ccm-btn-save" data-action="save">Salva preferenze</button>' +
