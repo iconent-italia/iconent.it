@@ -2,6 +2,8 @@
 
 > Agenzia musicale italiana per artisti urban. Gestiamo le parti del lavoro che la maggior parte degli artisti finisce per affrontare da sola — posizionamento, planning, contenuti, rollout, coordinamento team e crescita a lungo termine.
 
+_Ultimo aggiornamento: 2026-05-31_
+
 ## Chi siamo
 
 ICONENT AGENCY è un'agenzia musicale italiana (P.IVA 03930860360). Sister company del gruppo internazionale ICONENT (entità US: ICONENT GROUP, dominio iconent-group.com). Audience target: artisti urban italiani, 16–30 anni, prevalentemente maschili, con catalogo esistente e impegno reale a costruire una carriera sostenibile.
@@ -94,10 +96,10 @@ A: Consulenza gratuita su WhatsApp (https://wa.me/message/32WMNGGU4HGTB1) o via 
 ## Pages
 
 - / — Home
-- /about-us — Chi siamo, metodo, FAQ
-- /services-project-management — Project Management (servizio featured)
-- /services-spotify — Promozione Spotify (con listino)
-- /services-youtube — Promozione YouTube (con listino)
-- /services-instagram — Promozione Instagram & Ufficio Stampa (con listino)
-- /services-tiktok — Promozione TikTok (con listino)
-- /contact-us — Contatti, consulenza gratuita
+- /chi-siamo/ — Chi siamo, metodo, FAQ
+- /management/ — Project Management (servizio featured)
+- /spotify/ — Promozione Spotify (con listino)
+- /youtube/ — Promozione YouTube (con listino)
+- /instagram/ — Promozione Instagram & Ufficio Stampa (con listino)
+- /tiktok/ — Promozione TikTok (con listino)
+- /contatti/ — Contatti, consulenza gratuita
