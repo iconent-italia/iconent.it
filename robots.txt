@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /form-prenotazione/
 
 Sitemap: https://iconent.it/sitemap.xml
