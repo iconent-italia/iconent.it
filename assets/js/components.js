@@ -1,6 +1,16 @@
 (function () {
   const WHATSAPP_URL = 'https://wa.me/message/32WMNGGU4HGTB1';
 
+  /* Meta Pixel — caricato per PRIMO e in modo INDIPENDENTE dal consenso.
+     PageView spara su tutte le pagine. Vedi assets/js/meta-pixel.js. */
+  (function loadMetaPixel() {
+    if (document.getElementById('ic-meta-pixel')) return;
+    var px = document.createElement('script');
+    px.id = 'ic-meta-pixel';
+    px.src = '/assets/js/meta-pixel.js';
+    document.head.appendChild(px);
+  })();
+
   /* Carica dinamicamente cookie banner (CSS + JS) su tutte le pagine senza
      dover modificare i singoli HTML. */
   (function loadCookieBanner() {
