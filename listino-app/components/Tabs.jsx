@@ -1,43 +1,58 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Tabs({ platforms, activeId, onChange, reduce }) {
   const scroller = useRef(null);
-  // serie duplicata per il loop continuo; in reduced-motion una sola serie
-  const list = reduce ? platforms : [...platforms, ...platforms];
+  const innerRef = useRef(null);
+  const [marquee, setMarquee] = useState(false);
 
+  // duplico la serie solo in modalità marquee (mobile / quando sfora)
+  const list = !reduce && marquee ? [...platforms, ...platforms] : platforms;
+
+  // marquee solo se UNA serie sfora il contenitore; altrimenti centrata e ferma
   useEffect(() => {
-    if (reduce) return;
+    if (reduce) { setMarquee(false); return; }
+    const measure = () => {
+      const nav = scroller.current;
+      const inner = innerRef.current;
+      if (!nav || !inner) return;
+      const single = inner.scrollWidth / (marquee ? 2 : 1);
+      setMarquee(single > nav.clientWidth + 4);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [reduce, marquee]);
+
+  // auto-scroll lento solo in modalità marquee; si ferma al tocco, riprende dopo 2s
+  useEffect(() => {
+    if (reduce || !marquee) return;
     const el = scroller.current;
     if (!el) return;
     let raf;
-    let pos = el.scrollLeft; // accumulatore float (scrollLeft può arrotondare a intero)
+    let pos = el.scrollLeft;
     let lastInteract = -Infinity;
-    const SPEED = 0.35; // px/frame ≈ 21px/s, molto lento
-    const IDLE = 2000; // riprende 2s dopo l'ultima interazione
-
+    const SPEED = 0.35;
+    const IDLE = 2000;
     function tick(t) {
       if (t - lastInteract < IDLE) {
-        pos = el.scrollLeft; // controllo manuale: l'utente comanda
+        pos = el.scrollLeft;
       } else {
         pos += SPEED;
         const half = el.scrollWidth / 2;
-        if (half > 0 && pos >= half) pos -= half; // loop senza salti (lista duplicata)
+        if (half > 0 && pos >= half) pos -= half;
         el.scrollLeft = pos;
       }
       raf = requestAnimationFrame(tick);
     }
     const bump = () => { lastInteract = performance.now(); };
-
-    // solo gesti utente (lo scroll programmatico NON rifà bump → riparte da solo)
     el.addEventListener('pointerdown', bump);
     el.addEventListener('pointermove', bump);
     el.addEventListener('touchstart', bump, { passive: true });
     el.addEventListener('touchmove', bump, { passive: true });
     el.addEventListener('wheel', bump, { passive: true });
     raf = requestAnimationFrame(tick);
-
     return () => {
       cancelAnimationFrame(raf);
       el.removeEventListener('pointerdown', bump);
@@ -46,12 +61,11 @@ export default function Tabs({ platforms, activeId, onChange, reduce }) {
       el.removeEventListener('touchmove', bump);
       el.removeEventListener('wheel', bump);
     };
-  }, [reduce]);
+  }, [reduce, marquee]);
 
   return (
-    // scroll nativo: sempre scorribile lateralmente, anche dopo un tap
     <nav className="lst-tabs" ref={scroller} aria-label="Naviga tra i servizi">
-      <div className="lst-tabs-inner" role="tablist">
+      <div className="lst-tabs-inner" ref={innerRef} role="tablist">
         {list.map((p, i) => {
           const clone = i >= platforms.length;
           return (
