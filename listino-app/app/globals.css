@@ -276,9 +276,18 @@ img {
     drop-shadow(0 0 9px rgba(0, 200, 255, 0.4))
     drop-shadow(0.8px 0 0 rgba(255, 40, 140, 0.3))
     drop-shadow(-0.8px 0 0 rgba(0, 255, 255, 0.38));
-  /* SCANLINE che scorrono ATTRAVERSO le linee del logo (mask sul logo stesso) */
-  -webkit-mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px);
-          mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px);
+  /* SCANLINE sulle linee del logo, sfumate ai bordi (intersezione con un'ellisse
+     morbida) così NON si vede il quadrato e il bagliore svanisce dolcemente */
+  -webkit-mask-image:
+    repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px),
+    radial-gradient(closest-side, #000 55%, transparent 100%);
+          mask-image:
+    repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px),
+    radial-gradient(closest-side, #000 55%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  -webkit-mask-repeat: repeat, no-repeat;
+          mask-repeat: repeat, no-repeat;
   animation:
     holoSpin 6s ease-in-out infinite,
     holoLive 5.3s linear infinite,
@@ -294,8 +303,8 @@ img {
 }
 /* scanline che scorrono verso il basso attraverso il logo */
 @keyframes holoScan {
-  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
-  to { -webkit-mask-position: 0 5px; mask-position: 0 5px; }
+  from { -webkit-mask-position: 0 0, 50% 50%; mask-position: 0 0, 50% 50%; }
+  to { -webkit-mask-position: 0 5px, 50% 50%; mask-position: 0 5px, 50% 50%; }
 }
 /* VITA dell'ologramma: flicker irregolare + glow pulsante + chromatic che spicca nei cali */
 @keyframes holoLive {
