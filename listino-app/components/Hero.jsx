@@ -24,7 +24,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       el.classList.remove('fire');
       void el.offsetWidth; // riavvia l'animazione one-shot
       el.classList.add('fire');
-      setTimeout(() => el.classList.remove('fire'), 430);
+      setTimeout(() => el.classList.remove('fire'), 560);
     };
     const schedule = (el) => {
       if (stopped) return;
