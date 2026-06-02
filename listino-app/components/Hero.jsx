@@ -1,14 +1,42 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { asset, EASE } from '@/lib/config';
 
 export default function Hero({ platforms, onPick, reduce }) {
   const logos = platforms.filter((p) => p.logo);
+  const orbitRef = useRef(null);
 
   function go(id) {
     onPick(id); // selectPlatform: cambia servizio + scroll con offset nav
   }
+
+  // burst di glitch a intervalli RANDOM su ogni icona (come l'hero della home)
+  useEffect(() => {
+    if (reduce) return;
+    const root = orbitRef.current;
+    if (!root) return;
+    const overlays = Array.from(root.querySelectorAll('.holo-glitch'));
+    if (!overlays.length) return;
+    let stopped = false;
+    const fire = (el) => {
+      el.classList.remove('fire');
+      void el.offsetWidth; // riavvia l'animazione one-shot
+      el.classList.add('fire');
+      setTimeout(() => el.classList.remove('fire'), 380);
+    };
+    const schedule = (el) => {
+      if (stopped) return;
+      setTimeout(() => {
+        if (stopped) return;
+        if (!document.hidden) fire(el);
+        schedule(el);
+      }, 2500 + Math.random() * 4000);
+    };
+    overlays.forEach((el, i) => setTimeout(() => { if (!stopped) schedule(el); }, 400 + i * 700));
+    return () => { stopped = true; };
+  }, [reduce]);
 
   return (
     <header className="lst-hero">
@@ -46,7 +74,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       </motion.p>
 
       {/* Loghi statici: scorciatoie alle piattaforme (nessuno scroll). */}
-      <nav className="lst-orbit" aria-label="Servizi">
+      <nav className="lst-orbit" aria-label="Servizi" ref={orbitRef}>
         <div className="lst-orbit-stage">
           {logos.map((p) => (
             <button
