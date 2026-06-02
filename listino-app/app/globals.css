@@ -255,86 +255,61 @@ img {
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
+  color: #4dd0e1; /* ciano: colore delle linee del wireframe (currentColor) */
   /* galleggiamento lento */
   animation: lstFloat 5s ease-in-out infinite;
 }
 .lst-logo3d:nth-child(2) { animation-delay: -1.25s; }
 .lst-logo3d:nth-child(3) { animation-delay: -2.5s; }
 .lst-logo3d:nth-child(4) { animation-delay: -3.75s; }
-/* PROIEZIONE OLOGRAFICA: i loghi diventano ciano semitrasparenti (mono),
-   con bagliore di proiezione + sfarfallio occasionale, restando riconoscibili. */
-.lst-logo3d img {
-  --holo: grayscale(1) sepia(1) hue-rotate(165deg) saturate(2.7) brightness(1.22) contrast(1.05);
-  /* chromatic aberration costante (sdoppiamento RGB) + bagliore proiezione */
-  --chroma: drop-shadow(1.4px 0 0 rgba(0, 255, 255, 0.5)) drop-shadow(-1.4px 0 0 rgba(255, 40, 140, 0.42)) drop-shadow(0 0 11px rgba(120, 220, 255, 0.6));
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: scale(1.5);
-  opacity: 0.8;
-  filter: var(--holo) var(--chroma);
-  animation: holoGlitch 7.5s ease-in-out infinite, holoFlicker 2.6s ease-in-out infinite;
+/* WIREFRAME OLOGRAFICO: loghi ridisegnati a linee di luce ciano (SVG), vuoti
+   dentro, con bloom; scanline + leggera aberrazione + lenta rotazione 3D. */
+.lst-logo3d .holo-svg {
+  width: 74%;
+  height: 74%;
+  display: block;
+  overflow: visible;
+  opacity: 0.92;
+  filter:
+    drop-shadow(0 0 4px rgba(0, 229, 255, 0.9))
+    drop-shadow(0 0 11px rgba(0, 200, 255, 0.45))
+    drop-shadow(1px 0 0 rgba(255, 40, 140, 0.3))
+    drop-shadow(-1px 0 0 rgba(0, 255, 255, 0.38));
+  animation: holoSpin 6s ease-in-out infinite, holoFlick 5s steps(1, end) infinite;
 }
-.lst-logo3d:nth-child(2) img { animation-delay: -1.9s, -0.7s; }
-.lst-logo3d:nth-child(3) img { animation-delay: -3.7s, -1.4s; }
-.lst-logo3d:nth-child(4) img { animation-delay: -5.6s, -2.1s; }
-/* scanline orizzontali che salgono (sopra l'icona) */
-.lst-logo3d::before {
+.lst-logo3d:nth-child(2) .holo-svg { animation-delay: -1.5s, -1.1s; }
+.lst-logo3d:nth-child(3) .holo-svg { animation-delay: -3s, -2.7s; }
+.lst-logo3d:nth-child(4) .holo-svg { animation-delay: -4.5s, -3.6s; }
+/* scanline orizzontali sottili che attraversano la figura (ovale mascherato, niente quadrato) */
+.lst-logo3d::after {
   content: '';
   position: absolute;
-  inset: 6%;
-  z-index: 2;
+  inset: 2%;
+  z-index: 1;
   pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(150, 225, 255, 0.18) 0, rgba(150, 225, 255, 0.18) 1px, transparent 1px, transparent 4px);
+  background: repeating-linear-gradient(0deg, rgba(120, 230, 255, 0.11) 0, rgba(120, 230, 255, 0.11) 1px, transparent 1px, transparent 5px);
+  -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 80%);
+          mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 80%);
   mix-blend-mode: screen;
-  opacity: 0.55;
-  animation: holoScan 2.6s linear infinite;
+  opacity: 0.5;
+  animation: holoScan 3.6s linear infinite;
+}
+/* lenta rotazione 3D sull'asse Y (l'ologramma ruota nell'aria) */
+@keyframes holoSpin {
+  0%, 100% { transform: perspective(620px) rotateY(-18deg); }
+  50% { transform: perspective(620px) rotateY(18deg); }
 }
 @keyframes holoScan {
   from { background-position: 0 0; }
-  to { background-position: 0 -16px; }
+  to { background-position: 0 -20px; }
 }
-/* sfarfallio continuo ma lieve (instabilità da ologramma) */
-@keyframes holoFlicker {
-  0%, 100% { opacity: 0.8; }
-  45% { opacity: 0.7; }
-  72% { opacity: 0.9; }
-}
-/* glitch breve e occasionale (~ultimo 5% del ciclo) */
-@keyframes holoGlitch {
-  0%, 90%, 100% {
-    transform: scale(1.5);
-    filter: var(--holo) var(--chroma);
-    clip-path: inset(0 0 0 0);
-  }
-  91% {
-    transform: scale(1.5) translateX(-3px);
-    filter: var(--holo) drop-shadow(3px 0 0 rgba(0, 255, 255, 0.7)) drop-shadow(-3px 0 0 rgba(255, 0, 180, 0.5));
-    clip-path: inset(12% 0 56% 0);
-  }
-  93% {
-    transform: scale(1.5) translateX(3px);
-    filter: var(--holo) drop-shadow(-3px 0 0 rgba(0, 255, 255, 0.7)) drop-shadow(3px 0 0 rgba(255, 0, 180, 0.5));
-    clip-path: inset(58% 0 10% 0);
-  }
-  95% {
-    transform: scale(1.5);
-    filter: var(--holo) var(--chroma);
-    clip-path: inset(0 0 0 0);
-  }
-}
-.lst-logo3d::after {
-  /* base luminosa della proiezione (ciano) */
-  content: '';
-  position: absolute;
-  inset: auto 6% -10% 6%;
-  height: 34%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(90, 200, 255, 0.6), transparent 72%);
-  opacity: 0.5;
-  filter: blur(16px);
-  z-index: -1;
+/* flicker molto occasionale e brevissimo */
+@keyframes holoFlick {
+  0%, 91%, 100% { opacity: 0.92; }
+  92% { opacity: 0.5; }
+  93% { opacity: 0.96; }
+  94% { opacity: 0.72; }
+  95% { opacity: 0.92; }
 }
 
 .lst-scrollcue {
@@ -1128,8 +1103,8 @@ img {
   .lst-carousel-logo { animation: none !important; }
   .lst-section-bg { animation: none !important; }
   .lst-logo3d { animation: none !important; }
-  .lst-logo3d img { animation: none !important; }
-  .lst-logo3d::before { animation: none !important; }
+  .lst-logo3d .holo-svg { animation: none !important; transform: perspective(620px) rotateY(-12deg); }
+  .lst-logo3d::after { animation: none !important; }
 }
 
 /* ---------- RESPONSIVE ---------- */
