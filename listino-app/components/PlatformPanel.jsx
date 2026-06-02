@@ -39,6 +39,7 @@ function Section({ s, reduce }) {
           style={{ backgroundImage: `url(${asset(s.bg)})` }}
         />
       )}
+      <div className="lst-section-inner">
       <Reveal reduce={reduce}>
         {s.kicker && <p className="lst-kicker">{s.kicker}</p>}
         <h2 className="lst-h2">
@@ -61,6 +62,7 @@ function Section({ s, reduce }) {
         </>
       )}
       {s.type === 'network' && <Network s={s} reduce={reduce} />}
+      </div>
     </section>
   );
 }

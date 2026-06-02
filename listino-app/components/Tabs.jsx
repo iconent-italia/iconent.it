@@ -1,23 +1,67 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function Tabs({ platforms, activeId, onChange, reduce }) {
-  const [paused, setPaused] = useState(false);
-  // raddoppio per il loop continuo; in reduced-motion una sola serie (scroll manuale)
+  const scroller = useRef(null);
+  // serie duplicata per il loop continuo; in reduced-motion una sola serie
   const list = reduce ? platforms : [...platforms, ...platforms];
 
+  useEffect(() => {
+    if (reduce) return;
+    const el = scroller.current;
+    if (!el) return;
+    let raf;
+    let paused = false;
+    let resumeT;
+    const SPEED = 0.35; // px/frame ≈ 21px/s, molto lento
+
+    function tick() {
+      if (!paused) {
+        el.scrollLeft += SPEED;
+        const half = el.scrollWidth / 2;
+        if (half > 0 && el.scrollLeft >= half) el.scrollLeft -= half; // loop senza salti (lista duplicata)
+      }
+      raf = requestAnimationFrame(tick);
+    }
+    const pause = () => {
+      paused = true;
+      clearTimeout(resumeT);
+    };
+    const resumeSoon = () => {
+      clearTimeout(resumeT);
+      resumeT = setTimeout(() => {
+        paused = false;
+      }, 2000);
+    };
+
+    el.addEventListener('pointerdown', pause);
+    el.addEventListener('pointerup', resumeSoon);
+    el.addEventListener('pointercancel', resumeSoon);
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resumeSoon);
+    el.addEventListener('touchstart', pause, { passive: true });
+    el.addEventListener('touchend', resumeSoon, { passive: true });
+    el.addEventListener('wheel', () => { pause(); resumeSoon(); }, { passive: true });
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(resumeT);
+      el.removeEventListener('pointerdown', pause);
+      el.removeEventListener('pointerup', resumeSoon);
+      el.removeEventListener('pointercancel', resumeSoon);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resumeSoon);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('touchend', resumeSoon);
+    };
+  }, [reduce]);
+
   return (
-    <nav
-      className={`lst-tabs${reduce ? ' static' : ''}`}
-      aria-label="Naviga tra i servizi"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onPointerDown={() => setPaused(true)}
-      onPointerUp={() => setPaused(false)}
-      onPointerCancel={() => setPaused(false)}
-    >
-      <div className={`lst-tabs-track${paused ? ' paused' : ''}`} role="tablist">
+    // scroll nativo: sempre scorribile lateralmente, anche dopo un tap
+    <nav className="lst-tabs" ref={scroller} aria-label="Naviga tra i servizi">
+      <div className="lst-tabs-inner" role="tablist">
         {list.map((p, i) => {
           const clone = i >= platforms.length;
           return (

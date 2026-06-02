@@ -12,6 +12,7 @@ export default function QuoteCalculator({ open, onClose, calculator, cta }) {
   const reduce = useReducedMotion();
   const [budget, setBudget] = useState(500);
   const [qty, setQty] = useState({});
+  const [budgetOpen, setBudgetOpen] = useState(true);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -27,8 +28,11 @@ export default function QuoteCalculator({ open, onClose, calculator, cta }) {
   const budgetNum = Number(budget) || 0;
   const over = budgetNum > 0 && total > budgetNum;
 
-  const step = (id, d) =>
+  const step = (id, d) => {
+    // al primo servizio aggiunto, collassa il budget per liberare spazio
+    if (d > 0 && budgetOpen && selected.length === 0) setBudgetOpen(false);
     setQty((q) => ({ ...q, [id]: Math.max(0, (q[id] || 0) + d) }));
+  };
 
   const pct = budgetNum > 0 ? Math.min(100, (total / budgetNum) * 100) : 0;
 
@@ -64,31 +68,46 @@ export default function QuoteCalculator({ open, onClose, calculator, cta }) {
               <button className="lst-calc-x" onClick={onClose} aria-label="Chiudi">×</button>
             </div>
 
-            <div className="lst-calc-budget">
-              <label htmlFor="calc-budget">Il tuo budget</label>
-              <div className="lst-calc-budget-row">
-                <input
-                  id="calc-budget"
-                  type="range"
-                  min="0"
-                  max="3000"
-                  step="10"
-                  value={budgetNum}
-                  onChange={(e) => setBudget(e.target.value)}
-                />
-                <div className="lst-calc-num">
+            {budgetOpen ? (
+              <div className="lst-calc-budget">
+                <div className="lst-calc-budget-top">
+                  <label htmlFor="calc-budget">Il tuo budget</label>
+                  <button type="button" className="lst-calc-budget-done" onClick={() => setBudgetOpen(false)}>
+                    Fatto
+                  </button>
+                </div>
+                <div className="lst-calc-budget-row">
                   <input
-                    type="number"
+                    id="calc-budget"
+                    type="range"
                     min="0"
-                    inputMode="numeric"
-                    value={budget}
+                    max="3000"
+                    step="10"
+                    value={budgetNum}
                     onChange={(e) => setBudget(e.target.value)}
-                    aria-label="Budget in euro"
                   />
-                  <span>€</span>
+                  <div className="lst-calc-num">
+                    <input
+                      type="number"
+                      min="0"
+                      inputMode="numeric"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      aria-label="Budget in euro"
+                    />
+                    <span>€</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <button type="button" className="lst-calc-budget-chip" onClick={() => setBudgetOpen(true)}>
+                Budget: <strong>{budgetNum}€</strong>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </button>
+            )}
 
             <div className="lst-calc-body">
               {groups.map((g) => (

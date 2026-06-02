@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="ICONENT">
+  <title>ICONENT</title>
+  <rect x="0" y="0" width="512" height="512" rx="113" ry="113" fill="#0A0A0A"/>
+  <text x="256" y="256" font-family="Inter, 'SF Pro Display', 'Helvetica Neue', 'Arial Black', Arial, sans-serif"
+    font-weight="900" font-size="396" letter-spacing="-15.3" fill="#00FF88"
+    text-anchor="middle" dominant-baseline="central">IC</text>
+</svg>
