@@ -24,7 +24,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       el.classList.remove('fire');
       void el.offsetWidth; // riavvia l'animazione one-shot
       el.classList.add('fire');
-      setTimeout(() => el.classList.remove('fire'), 520);
+      setTimeout(() => el.classList.remove('fire'), 430);
     };
     const schedule = (el) => {
       if (stopped) return;
@@ -32,7 +32,7 @@ export default function Hero({ platforms, onPick, reduce }) {
         if (stopped) return;
         if (!document.hidden) fire(el);
         schedule(el);
-      }, 1600 + Math.random() * 2600);
+      }, 900 + Math.random() * 1700);
     };
     overlays.forEach((el, i) => setTimeout(() => { if (!stopped) schedule(el); }, 400 + i * 700));
     return () => { stopped = true; };

@@ -287,8 +287,8 @@ img {
   height: 100%;
   display: block;
   overflow: visible;
-  opacity: 0.2;
-  /* bloom morbido e ampio (proiezione volumetrica) + bordo; pochissima aberrazione */
+  opacity: 0;
+  /* base 100% trasparente: il logo è invisibile a riposo, lo accende solo il glitch */
   filter:
     drop-shadow(0 0 3px rgba(0, 229, 255, 0.95))
     drop-shadow(0 0 14px rgba(0, 200, 255, 0.5))
@@ -331,7 +331,7 @@ img {
 }
 /* burst di disturbo, triggerato da JS a intervalli RANDOM (.fire) — come la home.
    Sequenza rapida: righe che slittano di lato + settore sovraesposto, poi torna. */
-.holo-glitch.fire { animation: holoBurst 0.46s steps(1, end) 1; }
+.holo-glitch.fire { animation: holoBurst 0.4s steps(1, end) 1; }
 /* il burst ILLUMINA e "disegna" il logo: lampi a piena opacità (reveal) alternati
    a righe che slittano di lato, poi torna invisibile (resta solo il ghost). */
 @keyframes holoBurst {
@@ -383,11 +383,8 @@ img {
 /* respiro calmo della luce (no blink uniforme): il bloom cresce e cala dolcemente,
    con un solo lievissimo cedimento di segnale, raro */
 @keyframes holoLive {
-  /* base QUASI TRASPARENTE: solo un ghost appena percettibile; è il glitch a illuminarlo */
-  0%, 100% { opacity: 0.2; filter: drop-shadow(0 0 3px rgba(0,229,255,0.8)) drop-shadow(0 0 12px rgba(0,200,255,0.35)) drop-shadow(0.5px 0 0 rgba(255,40,140,0.2)) drop-shadow(-0.5px 0 0 rgba(0,255,255,0.24)); }
-  45%  { opacity: 0.26; filter: drop-shadow(0 0 4px rgba(0,229,255,0.95)) drop-shadow(0 0 16px rgba(0,200,255,0.45)) drop-shadow(0.5px 0 0 rgba(255,40,140,0.2)) drop-shadow(-0.5px 0 0 rgba(0,255,255,0.24)); }
-  72%  { opacity: 0.08; filter: drop-shadow(0 0 3px rgba(0,229,255,0.7)) drop-shadow(0 0 10px rgba(0,200,255,0.3)) drop-shadow(1.6px 0 0 rgba(255,40,140,0.4)) drop-shadow(-1.6px 0 0 rgba(0,255,255,0.45)); }
-  74%  { opacity: 0.2;  filter: drop-shadow(0 0 3px rgba(0,229,255,0.8)) drop-shadow(0 0 12px rgba(0,200,255,0.35)) drop-shadow(0.5px 0 0 rgba(255,40,140,0.2)) drop-shadow(-0.5px 0 0 rgba(0,255,255,0.24)); }
+  /* base invisibile: ci pensa il burst a illuminare il logo */
+  0%, 100% { opacity: 0; }
 }
 
 .lst-scrollcue {
