@@ -1,0 +1,229 @@
+{
+  "cta": {
+    "whatsapp": "https://wa.me/message/32WMNGGU4HGTB1",
+    "call": "/form-prenotazione/",
+    "email": ["rap.prodmagazine@gmail.com", "info@iconent.it"],
+    "ig": [
+      { "handle": "@rap.prodmagazine", "url": "https://instagram.com/rap.prodmagazine" },
+      { "handle": "@iconentagency", "url": "https://instagram.com/iconentagency" }
+    ]
+  },
+  "platforms": [
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "tagline": "Servizi promo & Press Office",
+      "accent": "#00B2FF",
+      "accentRgb": "0,178,255",
+      "logo": "/img/logo-instagram.png",
+      "bg": "/img/bg-02.jpg",
+      "sections": [
+        {
+          "type": "priceGroups",
+          "kicker": "Instagram",
+          "title": "Servizi promozionali",
+          "titleAccent": "& Ufficio Stampa",
+          "lead": "Pubblicazioni su pagine di settore ad alta affinità con il pubblico rap/urban italiano.",
+          "bg": "/img/bg-02.jpg",
+          "groups": [
+            {
+              "handle": "@takedealer",
+              "reach": "+170 Mila",
+              "cards": [
+                { "price": 25, "desc": "1 Stories" },
+                { "price": 75, "desc": "1 Post" },
+                { "price": 85, "desc": "1 Post + 1 Stories" }
+              ]
+            },
+            {
+              "handle": "@rap.prodmagazine",
+              "reach": "+30 Mila",
+              "cards": [
+                { "price": 10, "desc": "1 Stories", "alt": "3 Stories — 20€" },
+                { "price": 30, "desc": "1 Post", "alt": "1 Post + Stories — 35€" },
+                { "price": 50, "desc": "1 Post + 3 Stories" }
+              ]
+            }
+          ],
+          "panel": [
+            "La <strong>stories</strong> include tag profilo e swipe up al link di destinazione.",
+            "Il <strong>post</strong> include un carosello con copertina esclusiva personalizzata (titolo + descrizione del progetto) e anteprima del brano."
+          ]
+        },
+        {
+          "type": "packs",
+          "kicker": "Instagram · Pack",
+          "title": "Scegli il tuo",
+          "titleAccent": "pack",
+          "bg": "/img/bg-03.jpg",
+          "cards": [
+            { "tier": "Pack 1", "price": 90, "desc": "Post su @rap.prodmagazine, @takedealer" },
+            { "tier": "Pack 2", "price": 180, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @cultotrap" },
+            { "tier": "Pack 3", "price": 290, "desc": "@rap.prodmagazine, @takedealer, @cultotrap, @ilmegliodelrap" },
+            { "tier": "Pack 4", "price": 430, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @tuttosulrapmagazine, @cultotrap, @ilmegliodelrap" },
+            { "tier": "Pack 5", "price": 690, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @trapitaly, @rapadvisor.it, @cultotrap", "featured": true, "badge": "Più richiesto" }
+          ],
+          "note": "Contattaci per creare il tuo pack personalizzato."
+        },
+        {
+          "type": "network",
+          "kicker": "Instagram · Network",
+          "title": "Componi il tuo",
+          "titleAccent": "pack",
+          "lead": "Scegli tra le pagine del nostro network per costruire una campagna su misura.",
+          "bg": "/img/bg-04.jpg",
+          "chips": [
+            { "handle": "@trapitaly", "n": "+390 Mila" },
+            { "handle": "@ilmegliodelrap", "n": "+260 Mila" },
+            { "handle": "@tuttosulrap_official", "n": "+150 Mila" },
+            { "handle": "@laparteoscuradelrap", "n": "+365 Mila" },
+            { "handle": "@hiphopst0ry", "n": "+150 Mila" },
+            { "handle": "@lemigliorifrasirap", "n": "+650 Mila" },
+            { "handle": "@cultotrap", "n": "+99 Mila" },
+            { "handle": "@ilrapchenonconoscevi", "n": "+250 Mila" },
+            { "handle": "@centralhoodstar", "n": "+70 Mila" },
+            { "handle": "@ilrapfrancese", "n": "+55 Mila" }
+          ],
+          "note": "Per dettagli su costi e pacchetti personalizzati, contattaci per un preventivo su misura.",
+          "extra": {
+            "title": "Campagne Instagram ADV",
+            "cards": [
+              { "from": "A partire da", "price": 150, "desc": "Sponsorizzazione profilo e Reels via Instagram Ads. Campagne monitorate e ottimizzate quotidianamente, strategia 100% personalizzata: area geografica, città, età, genere e interessi musicali." },
+              { "tier": "Incremento Follower", "price": 39, "unit": "1.000 follower", "desc": "Campagne giveaway con rete di pagine e premi ad alta attrattiva (sneakers, buoni, coupon). Crescita organica e misurabile." }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "tagline": "Playlist & Campagne",
+      "accent": "#1DB954",
+      "accentRgb": "29,185,84",
+      "logo": "/img/logo-spotify.png",
+      "bg": "/img/bg-05.jpg",
+      "sections": [
+        {
+          "type": "cards",
+          "kicker": "Spotify",
+          "title": "Inserimento in",
+          "titleAccent": "playlist",
+          "lead": "Inserimento in playlist affini al genere, ottimizzate per aumentare streaming, ascoltatori mensili e segnali algoritmici. Durata campagna: 30 giorni.",
+          "bg": "/img/bg-05.jpg",
+          "cards": [
+            { "price": 35, "tier": "TOP 15", "desc": "+3.000 stream raggiungibili" },
+            { "price": 60, "tier": "Combo · TOP 15", "desc": "+6.000 stream raggiungibili" },
+            { "price": 80, "tier": "Combo · TOP 15", "desc": "+8.000 stream raggiungibili" }
+          ],
+          "panel": {
+            "title": "Playlist disponibili",
+            "chips": ["Trap Italiana", "Top Hit", "Emotional T/Rap", "Rap Freestyle", "Chill Vibes", "Pop Hits Dance", "Zona Trap", "Rap God", "Top Italy Charts"]
+          }
+        },
+        {
+          "type": "packs",
+          "kicker": "Spotify · Campagne",
+          "title": "Campagne",
+          "titleAccent": "Spotify",
+          "lead": "Per la promozione di singoli o album. Network di playlist per genere per aumentare streaming, salvataggi e ascoltatori mensili. Durata promo: 30-60 giorni.",
+          "bg": "/img/bg-06.jpg",
+          "cards": [
+            { "tier": "Starter Pack", "price": 190, "desc": "15-25 Mila stream · Inserimento 8-10 playlist" },
+            { "tier": "Gold Pack", "price": 250, "desc": "25-35 Mila stream · Inserimento 12-15 playlist" },
+            { "tier": "Plus Pack", "price": 350, "desc": "35-50 Mila stream · Inserimento 15 playlist" },
+            { "tier": "VIP Pack", "price": 590, "desc": "80-99 Mila stream · Inserimento 15-20 playlist", "featured": true, "badge": "Più richiesto" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "tagline": "Ads & Creator",
+      "accent": "#FF3B30",
+      "accentRgb": "255,59,48",
+      "logo": "/img/logo-youtube.png",
+      "bg": "/img/bg-07.jpg",
+      "sections": [
+        {
+          "type": "cards",
+          "kicker": "YouTube",
+          "title": "YouTube Ads",
+          "titleAccent": "— Video Reach",
+          "lead": "Promozione del video via YouTube Ads, targetizzata per area, età, interessi e profilo. Il video viene mostrato su canali e contenuti affini.",
+          "bg": "/img/bg-07.jpg",
+          "cards": [
+            { "price": 145, "desc": "Obiettivo minimo garantito", "highlight": "10 Mila visualizzazioni" },
+            { "price": 230, "desc": "Visualizzazioni", "highlight": "20.000 - 33.000 views" },
+            { "price": 450, "desc": "Visualizzazioni", "highlight": "40.000 - 55.000 views" }
+          ],
+          "extra": {
+            "title": "Impact YouTube Creator",
+            "cards": [
+              { "from": "Preventivo a partire da", "price": 350, "desc": "Collaborazioni con YouTuber e Creator affermati: integrazione dei brani nei loro format. Selezione creator, format personalizzati e gestione dei rapporti.", "chips": ["Reaction", "Open Mic", "Podcast"] }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "tagline": "Virality & Ads",
+      "accent": "#00E6FF",
+      "accentRgb": "0,230,255",
+      "logo": "/img/logo-tiktok.png",
+      "bg": "/img/bg-08.jpg",
+      "sections": [
+        {
+          "type": "cards",
+          "kicker": "TikTok",
+          "title": "Servizi promozionali",
+          "titleAccent": "TikTok",
+          "bg": "/img/bg-08.jpg",
+          "cards": [
+            { "tier": "TikTok Virality · Influencer", "from": "Preventivo a partire da", "price": 390, "desc": "100+ influencer e creator per challenge e trend dedicati, per massimizzare reach, engagement e viralità." },
+            { "tier": "Campagne TikTok Ads", "from": "Preventivo a partire da", "price": 135, "desc": "TikTok Ads per interazioni, follower e ascolti, con targetizzazione per città, età, interessi e genere." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stampa",
+      "name": "Ufficio Stampa & Radio",
+      "tagline": "Press, Radio & SEO",
+      "accent": "#00FF88",
+      "accentRgb": "0,255,136",
+      "logo": null,
+      "bg": "/img/bg-09.jpg",
+      "sections": [
+        {
+          "type": "cards",
+          "kicker": "Ufficio Stampa & Radio",
+          "title": "Ufficio Stampa",
+          "titleAccent": "& Radio",
+          "bg": "/img/bg-09.jpg",
+          "cards": [
+            {
+              "from": "Preventivo a partire da",
+              "price": 350,
+              "list": [
+                "+200 passaggi in radio garantiti",
+                "+2.000 invii alla mailing list",
+                "Comunicati stampa e copertura su testate nazionali, blog e siti di settore",
+                "Segnalazione a oltre 1.000 contatti TV, giornali, media e radio"
+              ]
+            },
+            {
+              "tier": "SEO personalizzato per artisti",
+              "from": "Preventivo a partire da",
+              "price": 290,
+              "desc": "Strategia SEO per posizionare nome artista e progetto nei primi risultati, costruire autorevolezza digitale e supportare il badge di verifica sui social."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

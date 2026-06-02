@@ -283,6 +283,21 @@ html:has(body.listino-page) { scroll-padding-top: 78px; scroll-behavior: smooth;
   border-color: rgba(var(--plat-glow),0.45);
   background: linear-gradient(180deg, rgba(var(--plat-glow),0.08), rgba(255,255,255,0.012));
 }
+/* Badge "Più richiesto" sul card consigliato — eredita l'accento di piattaforma */
+.lst-card.featured { padding-top: 30px; } /* spazio per il badge */
+.lst-badge {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #07120c; white-space: nowrap;
+  background: var(--plat-accent);
+  box-shadow: 0 0 18px -2px rgba(var(--plat-glow),0.7);
+}
+.lst-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #07120c; opacity: 0.65;
+}
 .lst-card .tier {
   font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--ic-text); opacity: 0.85; margin: 0 0 12px;

@@ -19,7 +19,27 @@
       ]
     }
   ],
+  "rewrites": [
+    {
+      "source": "/servizi-marketing",
+      "destination": "https://iconent-servizi-marketing.vercel.app/servizi-marketing"
+    },
+    {
+      "source": "/servizi-marketing/:path*",
+      "destination": "https://iconent-servizi-marketing.vercel.app/servizi-marketing/:path*"
+    }
+  ],
   "redirects": [
+    {
+      "source": "/listino-marketing",
+      "destination": "/servizi-marketing/",
+      "permanent": true
+    },
+    {
+      "source": "/listino-marketing/:path*",
+      "destination": "/servizi-marketing/:path*",
+      "permanent": true
+    },
     {
       "source": "/servizio-spotify/",
       "destination": "/spotify/",
