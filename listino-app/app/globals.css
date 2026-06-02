@@ -270,46 +270,46 @@ img {
   display: block;
   overflow: visible;
   opacity: 0.92;
+  /* base statica (visibile anche in reduced-motion) */
   filter:
     drop-shadow(0 0 4px rgba(0, 229, 255, 0.9))
-    drop-shadow(0 0 11px rgba(0, 200, 255, 0.45))
-    drop-shadow(1px 0 0 rgba(255, 40, 140, 0.3))
-    drop-shadow(-1px 0 0 rgba(0, 255, 255, 0.38));
-  animation: holoSpin 6s ease-in-out infinite, holoFlick 5s steps(1, end) infinite;
+    drop-shadow(0 0 9px rgba(0, 200, 255, 0.4))
+    drop-shadow(0.8px 0 0 rgba(255, 40, 140, 0.3))
+    drop-shadow(-0.8px 0 0 rgba(0, 255, 255, 0.38));
+  /* SCANLINE che scorrono ATTRAVERSO le linee del logo (mask sul logo stesso) */
+  -webkit-mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px);
+          mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px);
+  animation:
+    holoSpin 6s ease-in-out infinite,
+    holoLive 5.3s linear infinite,
+    holoScan 2.2s linear infinite;
 }
-.lst-logo3d:nth-child(2) .holo-svg { animation-delay: -1.5s, -1.1s; }
-.lst-logo3d:nth-child(3) .holo-svg { animation-delay: -3s, -2.7s; }
-.lst-logo3d:nth-child(4) .holo-svg { animation-delay: -4.5s, -3.6s; }
-/* scanline orizzontali sottili che attraversano la figura (ovale mascherato, niente quadrato) */
-.lst-logo3d::after {
-  content: '';
-  position: absolute;
-  inset: 2%;
-  z-index: 1;
-  pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(120, 230, 255, 0.11) 0, rgba(120, 230, 255, 0.11) 1px, transparent 1px, transparent 5px);
-  -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 80%);
-          mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 80%);
-  mix-blend-mode: screen;
-  opacity: 0.5;
-  animation: holoScan 3.6s linear infinite;
-}
+.lst-logo3d:nth-child(2) .holo-svg { animation-delay: -1.5s, -1.1s, -0.6s; }
+.lst-logo3d:nth-child(3) .holo-svg { animation-delay: -3s, -2.7s, -1.3s; }
+.lst-logo3d:nth-child(4) .holo-svg { animation-delay: -4.5s, -3.6s, -1.9s; }
 /* lenta rotazione 3D sull'asse Y (l'ologramma ruota nell'aria) */
 @keyframes holoSpin {
   0%, 100% { transform: perspective(620px) rotateY(-18deg); }
   50% { transform: perspective(620px) rotateY(18deg); }
 }
+/* scanline che scorrono verso il basso attraverso il logo */
 @keyframes holoScan {
-  from { background-position: 0 0; }
-  to { background-position: 0 -20px; }
+  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
+  to { -webkit-mask-position: 0 5px; mask-position: 0 5px; }
 }
-/* flicker molto occasionale e brevissimo */
-@keyframes holoFlick {
-  0%, 91%, 100% { opacity: 0.92; }
-  92% { opacity: 0.5; }
-  93% { opacity: 0.96; }
-  94% { opacity: 0.72; }
-  95% { opacity: 0.92; }
+/* VITA dell'ologramma: flicker irregolare + glow pulsante + chromatic che spicca nei cali */
+@keyframes holoLive {
+  0%   { opacity: 0.92; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  17%  { opacity: 0.9;  filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  22%  { opacity: 0.5;  filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.6px 0 0 rgba(255,40,140,0.55)) drop-shadow(-2.6px 0 0 rgba(0,255,255,0.6)); }
+  23%  { opacity: 0.94; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  44%  { opacity: 0.92; filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  57%  { opacity: 0.64; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.4px 0 0 rgba(255,40,140,0.5)) drop-shadow(-2.4px 0 0 rgba(0,255,255,0.55)); }
+  59%  { opacity: 0.93; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  80%  { opacity: 0.9;  filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  86%  { opacity: 0.54; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.5px 0 0 rgba(255,40,140,0.55)) drop-shadow(-2.5px 0 0 rgba(0,255,255,0.6)); }
+  88%  { opacity: 0.95; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  100% { opacity: 0.92; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
 }
 
 .lst-scrollcue {
