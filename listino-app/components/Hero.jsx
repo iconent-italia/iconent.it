@@ -42,7 +42,9 @@ export default function Hero({ platforms, onPick, reduce }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
       >
-        Premi sul servizio che desideri visualizzare — oppure scorri il listino completo.
+        Premi sul servizio che desideri visualizzare
+        <br />
+        oppure scorri il listino completo.
       </motion.p>
 
       {/* Loghi statici: scorciatoie alle piattaforme (nessuno scroll). */}

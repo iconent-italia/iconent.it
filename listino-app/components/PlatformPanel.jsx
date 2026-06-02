@@ -117,6 +117,14 @@ function PriceCard({ c, reduce }) {
         </p>
       )}
 
+      {c.pages && (
+        <ul className="lst-pages">
+          {c.pages.map((pg, i) => (
+            <li key={i}>{pg}</li>
+          ))}
+        </ul>
+      )}
+
       {c.list && (
         <ul className="lst-ul">
           {c.list.map((li, i) => (

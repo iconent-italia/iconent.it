@@ -12,53 +12,39 @@ export default function Tabs({ platforms, activeId, onChange, reduce }) {
     const el = scroller.current;
     if (!el) return;
     let raf;
-    let paused = false;
-    let resumeT;
     let pos = el.scrollLeft; // accumulatore float (scrollLeft può arrotondare a intero)
+    let lastInteract = -Infinity;
     const SPEED = 0.35; // px/frame ≈ 21px/s, molto lento
+    const IDLE = 2000; // riprende 2s dopo l'ultima interazione
 
-    function tick() {
-      if (!paused) {
+    function tick(t) {
+      if (t - lastInteract < IDLE) {
+        pos = el.scrollLeft; // controllo manuale: l'utente comanda
+      } else {
         pos += SPEED;
         const half = el.scrollWidth / 2;
         if (half > 0 && pos >= half) pos -= half; // loop senza salti (lista duplicata)
         el.scrollLeft = pos;
-      } else {
-        pos = el.scrollLeft; // durante il controllo manuale resta sincronizzato
       }
       raf = requestAnimationFrame(tick);
     }
-    const pause = () => {
-      paused = true;
-      clearTimeout(resumeT);
-    };
-    const resumeSoon = () => {
-      clearTimeout(resumeT);
-      resumeT = setTimeout(() => {
-        paused = false;
-      }, 2000);
-    };
+    const bump = () => { lastInteract = performance.now(); };
 
-    el.addEventListener('pointerdown', pause);
-    el.addEventListener('pointerup', resumeSoon);
-    el.addEventListener('pointercancel', resumeSoon);
-    el.addEventListener('mouseenter', pause);
-    el.addEventListener('mouseleave', resumeSoon);
-    el.addEventListener('touchstart', pause, { passive: true });
-    el.addEventListener('touchend', resumeSoon, { passive: true });
-    el.addEventListener('wheel', () => { pause(); resumeSoon(); }, { passive: true });
+    // solo gesti utente (lo scroll programmatico NON rifà bump → riparte da solo)
+    el.addEventListener('pointerdown', bump);
+    el.addEventListener('pointermove', bump);
+    el.addEventListener('touchstart', bump, { passive: true });
+    el.addEventListener('touchmove', bump, { passive: true });
+    el.addEventListener('wheel', bump, { passive: true });
     raf = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(resumeT);
-      el.removeEventListener('pointerdown', pause);
-      el.removeEventListener('pointerup', resumeSoon);
-      el.removeEventListener('pointercancel', resumeSoon);
-      el.removeEventListener('mouseenter', pause);
-      el.removeEventListener('mouseleave', resumeSoon);
-      el.removeEventListener('touchstart', pause);
-      el.removeEventListener('touchend', resumeSoon);
+      el.removeEventListener('pointerdown', bump);
+      el.removeEventListener('pointermove', bump);
+      el.removeEventListener('touchstart', bump);
+      el.removeEventListener('touchmove', bump);
+      el.removeEventListener('wheel', bump);
     };
   }, [reduce]);
 

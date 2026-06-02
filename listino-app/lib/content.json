@@ -109,11 +109,11 @@
           "titleAccent": "pack",
           "bg": "/img/bg-03.webp",
           "cards": [
-            { "tier": "Pack 1", "price": 90, "desc": "Post su @rap.prodmagazine, @takedealer" },
-            { "tier": "Pack 2", "price": 180, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @cultotrap" },
-            { "tier": "Pack 3", "price": 290, "desc": "@rap.prodmagazine, @takedealer, @cultotrap, @ilmegliodelrap" },
-            { "tier": "Pack 4", "price": 430, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @tuttosulrapmagazine, @cultotrap, @ilmegliodelrap" },
-            { "tier": "Pack 5", "price": 690, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @trapitaly, @rapadvisor.it, @cultotrap", "featured": true, "badge": "Più richiesto" }
+            { "tier": "Pack 1", "price": 90, "pages": ["@rap.prodmagazine", "@takedealer"] },
+            { "tier": "Pack 2", "price": 180, "pages": ["@rap.prodmagazine + storia", "@takedealer + storia", "@cultotrap"] },
+            { "tier": "Pack 3", "price": 290, "pages": ["@rap.prodmagazine", "@takedealer", "@cultotrap", "@ilmegliodelrap"] },
+            { "tier": "Pack 4", "price": 430, "pages": ["@rap.prodmagazine + storia", "@takedealer + storia", "@tuttosulrapmagazine", "@cultotrap", "@ilmegliodelrap"] },
+            { "tier": "Pack 5", "price": 690, "pages": ["@rap.prodmagazine + storia", "@takedealer + storia", "@trapitaly", "@rapadvisor.it", "@cultotrap"], "featured": true, "badge": "Più richiesto" }
           ],
           "note": "Contattaci per creare il tuo pack personalizzato."
         },
@@ -202,7 +202,7 @@
           "type": "cards",
           "kicker": "YouTube",
           "title": "YouTube Ads",
-          "titleAccent": "— Video Reach",
+          "titleAccent": "Video Reach",
           "lead": "Promozione del video via YouTube Ads, targetizzata per area, età, interessi e profilo. Il video viene mostrato su canali e contenuti affini.",
           "bg": "/img/bg-07.webp",
           "cards": [
