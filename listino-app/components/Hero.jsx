@@ -7,8 +7,7 @@ export default function Hero({ platforms, onPick, reduce }) {
   const logos = platforms.filter((p) => p.logo);
 
   function go(id) {
-    onPick(id);
-    document.getElementById('listino')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    onPick(id); // selectPlatform: cambia servizio + scroll con offset nav
   }
 
   return (

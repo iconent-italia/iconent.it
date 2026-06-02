@@ -15,6 +15,19 @@ export default function Listino({ content }) {
 
   const active = platforms.find((p) => p.id === activeId) ?? platforms[0];
 
+  // cambia servizio + scroll smooth all'inizio della sezione, con offset per la nav sticky
+  const selectPlatform = (id) => {
+    setActiveId(id);
+    if (typeof window === 'undefined') return;
+    requestAnimationFrame(() => {
+      const main = document.getElementById('listino');
+      if (!main) return;
+      const navH = document.querySelector('.lst-tabs')?.offsetHeight || 72;
+      const y = main.getBoundingClientRect().top + window.scrollY - navH - 6;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+    });
+  };
+
   return (
     // --accent guida tutti i glow derivati (color-mix). @property lo fa "fluire".
     <div className="lst-root" style={{ '--accent': active.accent }}>
@@ -25,9 +38,9 @@ export default function Listino({ content }) {
 
       <a className="skip-link" href="#listino">Vai al listino</a>
 
-      <Hero platforms={platforms} onPick={setActiveId} reduce={reduce} />
+      <Hero platforms={platforms} onPick={selectPlatform} reduce={reduce} />
 
-      <Tabs platforms={platforms} activeId={activeId} onChange={setActiveId} reduce={reduce} />
+      <Tabs platforms={platforms} activeId={activeId} onChange={selectPlatform} reduce={reduce} />
 
       <main id="listino">
         {/* FLOOD: la nuova palette invade lo schermo dall'alto al cambio tab */}
