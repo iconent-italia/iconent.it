@@ -215,7 +215,7 @@ img {
 }
 .lst-hero h1 .accent {
   color: var(--accent);
-  text-shadow: 0 0 40px color-mix(in srgb, var(--accent) 38%, transparent);
+  /* nessun alone dietro il testo: sfondo pulito */
 }
 .lst-hero-sub {
   margin: 26px auto 0;
@@ -259,66 +259,62 @@ img {
 .lst-logo3d:nth-child(2) { animation-delay: -1.25s; }
 .lst-logo3d:nth-child(3) { animation-delay: -2.5s; }
 .lst-logo3d:nth-child(4) { animation-delay: -3.75s; }
+/* PROIEZIONE OLOGRAFICA: i loghi diventano ciano semitrasparenti (mono),
+   con bagliore di proiezione + sfarfallio occasionale, restando riconoscibili. */
 .lst-logo3d img {
+  --holo: grayscale(1) sepia(1) hue-rotate(165deg) saturate(2.6) brightness(1.18) contrast(1.05);
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* icone protagoniste: più grandi (il PNG ha padding trasparente) */
   transform: translateZ(40px) scale(1.5);
-  filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.55));
-  /* ologramma: semitrasparente + micro-glitch occasionale */
-  opacity: 0.9;
-  animation: holoGlitch 7s ease-in-out infinite;
+  opacity: 0.8;
+  filter: var(--holo) drop-shadow(0 0 10px rgba(120, 220, 255, 0.55));
+  animation: holoGlitch 7.5s ease-in-out infinite, holoFlicker 2.6s ease-in-out infinite;
 }
-.lst-logo3d:nth-child(2) img { animation-delay: -1.7s; }
-.lst-logo3d:nth-child(3) img { animation-delay: -3.9s; }
-.lst-logo3d:nth-child(4) img { animation-delay: -5.5s; }
-/* per ~90% del tempo è fermo e nitido; glitch breve e occasionale */
+.lst-logo3d:nth-child(2) img { animation-delay: -1.9s, -0.7s; }
+.lst-logo3d:nth-child(3) img { animation-delay: -3.7s, -1.4s; }
+.lst-logo3d:nth-child(4) img { animation-delay: -5.6s, -2.1s; }
+/* sfarfallio continuo ma lieve (instabilità da ologramma) */
+@keyframes holoFlicker {
+  0%, 100% { opacity: 0.8; }
+  45% { opacity: 0.72; }
+  72% { opacity: 0.88; }
+}
+/* glitch breve e occasionale (~ultimo 5% del ciclo) */
 @keyframes holoGlitch {
-  0%, 89%, 100% {
+  0%, 90%, 100% {
     transform: translateZ(40px) scale(1.5);
-    filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.55));
-    opacity: 0.9;
+    filter: var(--holo) drop-shadow(0 0 10px rgba(120, 220, 255, 0.55));
     clip-path: inset(0 0 0 0);
   }
-  90% {
+  91% {
     transform: translateZ(40px) scale(1.5) translateX(-2px);
-    filter: drop-shadow(2px 0 0 rgba(0, 255, 255, 0.55)) drop-shadow(-2px 0 0 rgba(255, 0, 128, 0.5));
+    filter: var(--holo) drop-shadow(2px 0 0 rgba(0, 255, 255, 0.6)) drop-shadow(-2px 0 0 rgba(255, 0, 180, 0.45));
     clip-path: inset(12% 0 56% 0);
-    opacity: 0.95;
   }
-  92% {
+  93% {
     transform: translateZ(40px) scale(1.5) translateX(2px);
-    filter: drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.55)) drop-shadow(2px 0 0 rgba(255, 0, 128, 0.5));
+    filter: var(--holo) drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.6));
     clip-path: inset(58% 0 10% 0);
-  }
-  94% {
-    transform: translateZ(40px) scale(1.5) translateX(-1px);
-    clip-path: inset(34% 0 40% 0);
   }
   95% {
     transform: translateZ(40px) scale(1.5);
-    filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.55));
+    filter: var(--holo) drop-shadow(0 0 10px rgba(120, 220, 255, 0.55));
     clip-path: inset(0 0 0 0);
-    opacity: 0.9;
   }
 }
 .lst-logo3d::after {
-  /* retroilluminazione dal basso */
+  /* base luminosa della proiezione (ciano) */
   content: '';
   position: absolute;
   inset: auto 6% -10% 6%;
   height: 34%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, var(--glow, rgba(0, 255, 136, 0.6)), transparent 72%);
-  opacity: 0.55;
+  background: radial-gradient(ellipse at center, rgba(90, 200, 255, 0.6), transparent 72%);
+  opacity: 0.5;
   filter: blur(16px);
   z-index: -1;
 }
-.lst-logo3d[data-plat='instagram'] { --glow: rgba(0, 178, 255, 0.65); }
-.lst-logo3d[data-plat='youtube']   { --glow: rgba(255, 59, 48, 0.65); }
-.lst-logo3d[data-plat='spotify']   { --glow: rgba(29, 185, 84, 0.65); }
-.lst-logo3d[data-plat='tiktok']    { --glow: rgba(0, 230, 255, 0.65); }
 
 .lst-scrollcue {
   margin-top: clamp(28px, 5vh, 48px);
@@ -422,6 +418,19 @@ img {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 clamp(20px, 5.5vw, 28px);
+}
+/* Reveal in CSS scroll-driven: il contenuto è visibile al primo render,
+   l'animazione (dove supportata) parte allo scroll. Nessun blocco da JS. */
+@media (prefers-reduced-motion: no-preference) {
+  .lst-reveal {
+    animation: lstReveal both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 16%;
+  }
+}
+@keyframes lstReveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
 }
 /* Sfondo ambient della sezione: la pagina-design del listino, sfocata + scurita,
    come texture/atmosfera (mai testo leggibile). Ken-burns lento. */

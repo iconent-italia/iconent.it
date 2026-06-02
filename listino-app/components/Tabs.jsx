@@ -14,13 +14,17 @@ export default function Tabs({ platforms, activeId, onChange, reduce }) {
     let raf;
     let paused = false;
     let resumeT;
+    let pos = el.scrollLeft; // accumulatore float (scrollLeft può arrotondare a intero)
     const SPEED = 0.35; // px/frame ≈ 21px/s, molto lento
 
     function tick() {
       if (!paused) {
-        el.scrollLeft += SPEED;
+        pos += SPEED;
         const half = el.scrollWidth / 2;
-        if (half > 0 && el.scrollLeft >= half) el.scrollLeft -= half; // loop senza salti (lista duplicata)
+        if (half > 0 && pos >= half) pos -= half; // loop senza salti (lista duplicata)
+        el.scrollLeft = pos;
+      } else {
+        pos = el.scrollLeft; // durante il controllo manuale resta sincronizzato
       }
       raf = requestAnimationFrame(tick);
     }

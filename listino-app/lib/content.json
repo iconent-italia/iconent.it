@@ -67,8 +67,8 @@
       "tagline": "Servizi promo & Press Office",
       "accent": "#00B2FF",
       "accentRgb": "0,178,255",
-      "logo": "/img/logo-instagram.png",
-      "bg": "/img/bg-02.jpg",
+      "logo": "/img/logo-instagram.webp",
+      "bg": "/img/bg-02.webp",
       "sections": [
         {
           "type": "priceGroups",
@@ -76,7 +76,7 @@
           "title": "Servizi promozionali",
           "titleAccent": "& Ufficio Stampa",
           "lead": "Pubblicazioni su pagine di settore ad alta affinità con il pubblico rap/urban italiano.",
-          "bg": "/img/bg-02.jpg",
+          "bg": "/img/bg-02.webp",
           "groups": [
             {
               "handle": "@takedealer",
@@ -107,7 +107,7 @@
           "kicker": "Instagram · Pack",
           "title": "Scegli il tuo",
           "titleAccent": "pack",
-          "bg": "/img/bg-03.jpg",
+          "bg": "/img/bg-03.webp",
           "cards": [
             { "tier": "Pack 1", "price": 90, "desc": "Post su @rap.prodmagazine, @takedealer" },
             { "tier": "Pack 2", "price": 180, "desc": "@rap.prodmagazine + storia, @takedealer + storia, @cultotrap" },
@@ -123,7 +123,7 @@
           "title": "Componi il tuo",
           "titleAccent": "pack",
           "lead": "Scegli tra le pagine del nostro network per costruire una campagna su misura.",
-          "bg": "/img/bg-04.jpg",
+          "bg": "/img/bg-04.webp",
           "chips": [
             { "handle": "@trapitaly", "n": "+390 Mila" },
             { "handle": "@ilmegliodelrap", "n": "+260 Mila" },
@@ -153,8 +153,8 @@
       "tagline": "Playlist & Campagne",
       "accent": "#1DB954",
       "accentRgb": "29,185,84",
-      "logo": "/img/logo-spotify.png",
-      "bg": "/img/bg-05.jpg",
+      "logo": "/img/logo-spotify.webp",
+      "bg": "/img/bg-05.webp",
       "sections": [
         {
           "type": "cards",
@@ -162,7 +162,7 @@
           "title": "Inserimento in",
           "titleAccent": "playlist",
           "lead": "Inserimento in playlist affini al genere, ottimizzate per aumentare streaming, ascoltatori mensili e segnali algoritmici. Durata campagna: 30 giorni.",
-          "bg": "/img/bg-05.jpg",
+          "bg": "/img/bg-05.webp",
           "cards": [
             { "price": 35, "tier": "TOP 15", "desc": "+3.000 stream raggiungibili" },
             { "price": 60, "tier": "Combo · TOP 15", "desc": "+6.000 stream raggiungibili" },
@@ -179,7 +179,7 @@
           "title": "Campagne",
           "titleAccent": "Spotify",
           "lead": "Per la promozione di singoli o album. Network di playlist per genere per aumentare streaming, salvataggi e ascoltatori mensili. Durata promo: 30-60 giorni.",
-          "bg": "/img/bg-06.jpg",
+          "bg": "/img/bg-06.webp",
           "cards": [
             { "tier": "Starter Pack", "price": 190, "desc": "15-25 Mila stream · Inserimento 8-10 playlist" },
             { "tier": "Gold Pack", "price": 250, "desc": "25-35 Mila stream · Inserimento 12-15 playlist" },
@@ -195,8 +195,8 @@
       "tagline": "Ads & Creator",
       "accent": "#FF3B30",
       "accentRgb": "255,59,48",
-      "logo": "/img/logo-youtube.png",
-      "bg": "/img/bg-07.jpg",
+      "logo": "/img/logo-youtube.webp",
+      "bg": "/img/bg-07.webp",
       "sections": [
         {
           "type": "cards",
@@ -204,7 +204,7 @@
           "title": "YouTube Ads",
           "titleAccent": "— Video Reach",
           "lead": "Promozione del video via YouTube Ads, targetizzata per area, età, interessi e profilo. Il video viene mostrato su canali e contenuti affini.",
-          "bg": "/img/bg-07.jpg",
+          "bg": "/img/bg-07.webp",
           "cards": [
             { "price": 145, "desc": "Obiettivo minimo garantito", "highlight": "10 Mila visualizzazioni" },
             { "price": 230, "desc": "Visualizzazioni", "highlight": "20.000 - 33.000 views" },
@@ -225,15 +225,15 @@
       "tagline": "Virality & Ads",
       "accent": "#00E6FF",
       "accentRgb": "0,230,255",
-      "logo": "/img/logo-tiktok.png",
-      "bg": "/img/bg-08.jpg",
+      "logo": "/img/logo-tiktok.webp",
+      "bg": "/img/bg-08.webp",
       "sections": [
         {
           "type": "cards",
           "kicker": "TikTok",
           "title": "Servizi promozionali",
           "titleAccent": "TikTok",
-          "bg": "/img/bg-08.jpg",
+          "bg": "/img/bg-08.webp",
           "cards": [
             { "tier": "TikTok Virality · Influencer", "from": "Preventivo a partire da", "price": 390, "desc": "100+ influencer e creator per challenge e trend dedicati, per massimizzare reach, engagement e viralità." },
             { "tier": "Campagne TikTok Ads", "from": "Preventivo a partire da", "price": 135, "desc": "TikTok Ads per interazioni, follower e ascolti, con targetizzazione per città, età, interessi e genere." }
@@ -248,14 +248,14 @@
       "accent": "#00FF88",
       "accentRgb": "0,255,136",
       "logo": null,
-      "bg": "/img/bg-09.jpg",
+      "bg": "/img/bg-09.webp",
       "sections": [
         {
           "type": "cards",
           "kicker": "Ufficio Stampa & Radio",
           "title": "Ufficio Stampa",
           "titleAccent": "& Radio",
-          "bg": "/img/bg-09.jpg",
+          "bg": "/img/bg-09.webp",
           "cards": [
             {
               "from": "Preventivo a partire da",

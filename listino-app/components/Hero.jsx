@@ -17,7 +17,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       <div
         className="lst-hero-bg"
         aria-hidden="true"
-        style={{ backgroundImage: `url(${asset('/img/bg-01.jpg')})` }}
+        style={{ backgroundImage: `url(${asset('/img/bg-01.webp')})` }}
       />
 
       <motion.p
