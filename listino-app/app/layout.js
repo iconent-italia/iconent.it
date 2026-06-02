@@ -1,29 +1,4 @@
-import { Anton, Sora, Space_Mono } from 'next/font/google';
 import './globals.css';
-
-// Display oversized uppercase (prezzi, titoli) — vibe poster/zine urban
-const anton = Anton({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-// Body tecnico/premium
-const sora = Sora({
-  weight: ['300', '400', '500', '600', '700', '800'],
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-// Label / numeri — feel holografico/terminale
-const spaceMono = Space_Mono({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 export const metadata = {
   title: 'Servizi di Marketing & Comunicazione — ICONENT AGENCY',
@@ -40,8 +15,9 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+  // Font: stesso stack di sistema del sito iconent.it (definito in globals.css)
   return (
-    <html lang="it" className={`${anton.variable} ${sora.variable} ${spaceMono.variable}`}>
+    <html lang="it">
       <body>{children}</body>
     </html>
   );
