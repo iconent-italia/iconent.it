@@ -10,7 +10,7 @@ import {
 } from 'framer-motion';
 import { gyroX, gyroY, startGyro } from '@/lib/gyro';
 
-export default function TiltCard({ children, className = '', reduce, max = 11, ...rest }) {
+export default function TiltCard({ children, className = '', reduce, max = 14, ...rest }) {
   const ref = useRef(null);
   const px = useMotionValue(0);
   const py = useMotionValue(0);

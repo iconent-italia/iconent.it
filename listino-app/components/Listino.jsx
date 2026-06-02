@@ -27,7 +27,7 @@ export default function Listino({ content }) {
 
       <Hero platforms={platforms} onPick={setActiveId} reduce={reduce} />
 
-      <Tabs platforms={platforms} activeId={activeId} onChange={setActiveId} />
+      <Tabs platforms={platforms} activeId={activeId} onChange={setActiveId} reduce={reduce} />
 
       <main id="listino">
         {/* FLOOD: la nuova palette invade lo schermo dall'alto al cambio tab */}
@@ -55,7 +55,7 @@ export default function Listino({ content }) {
         </AnimatePresence>
       </main>
 
-      <CTA cta={cta} />
+      <CTA cta={cta} calculator={content.calculator} />
     </div>
   );
 }

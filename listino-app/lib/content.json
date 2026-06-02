@@ -3,6 +3,63 @@
     "whatsapp": "https://wa.me/message/32WMNGGU4HGTB1",
     "call": "https://calendly.com/vittorio-iconent/analisiprogetto"
   },
+  "calculator": {
+    "groups": [
+      {
+        "platform": "instagram", "name": "Instagram", "accent": "#00B2FF",
+        "items": [
+          { "id": "ig-take-st", "label": "@takedealer · 1 Stories", "price": 25 },
+          { "id": "ig-take-post", "label": "@takedealer · 1 Post", "price": 75 },
+          { "id": "ig-take-ps", "label": "@takedealer · 1 Post + 1 Stories", "price": 85 },
+          { "id": "ig-rap-st", "label": "@rap.prodmagazine · 1 Stories", "price": 10 },
+          { "id": "ig-rap-post", "label": "@rap.prodmagazine · 1 Post", "price": 30 },
+          { "id": "ig-rap-p3s", "label": "@rap.prodmagazine · 1 Post + 3 Stories", "price": 50 },
+          { "id": "ig-pack1", "label": "Pack 1", "price": 90 },
+          { "id": "ig-pack2", "label": "Pack 2", "price": 180 },
+          { "id": "ig-pack3", "label": "Pack 3", "price": 290 },
+          { "id": "ig-pack4", "label": "Pack 4", "price": 430 },
+          { "id": "ig-pack5", "label": "Pack 5", "price": 690 },
+          { "id": "ig-adv", "label": "Campagna Instagram ADV", "price": 150, "from": true },
+          { "id": "ig-follower", "label": "Incremento Follower (1.000)", "price": 39 }
+        ]
+      },
+      {
+        "platform": "spotify", "name": "Spotify", "accent": "#1DB954",
+        "items": [
+          { "id": "sp-top15", "label": "Playlist · TOP 15", "price": 35 },
+          { "id": "sp-combo6", "label": "Playlist · Combo +6.000", "price": 60 },
+          { "id": "sp-combo8", "label": "Playlist · Combo +8.000", "price": 80 },
+          { "id": "sp-starter", "label": "Starter Pack", "price": 190 },
+          { "id": "sp-gold", "label": "Gold Pack", "price": 250 },
+          { "id": "sp-plus", "label": "Plus Pack", "price": 350 },
+          { "id": "sp-vip", "label": "VIP Pack", "price": 590 }
+        ]
+      },
+      {
+        "platform": "youtube", "name": "YouTube", "accent": "#FF3B30",
+        "items": [
+          { "id": "yt-10k", "label": "YouTube Ads · 10 Mila views", "price": 145 },
+          { "id": "yt-20k", "label": "YouTube Ads · 20-33 Mila views", "price": 230 },
+          { "id": "yt-40k", "label": "YouTube Ads · 40-55 Mila views", "price": 450 },
+          { "id": "yt-creator", "label": "Impact YouTube Creator", "price": 350, "from": true }
+        ]
+      },
+      {
+        "platform": "tiktok", "name": "TikTok", "accent": "#00E6FF",
+        "items": [
+          { "id": "tk-vir", "label": "TikTok Virality · Influencer", "price": 390, "from": true },
+          { "id": "tk-ads", "label": "Campagne TikTok Ads", "price": 135, "from": true }
+        ]
+      },
+      {
+        "platform": "stampa", "name": "Ufficio Stampa & Radio", "accent": "#00FF88",
+        "items": [
+          { "id": "pr-stampa", "label": "Ufficio Stampa & Radio", "price": 350, "from": true },
+          { "id": "pr-seo", "label": "SEO personalizzato per artisti", "price": 290, "from": true }
+        ]
+      }
+    ]
+  },
   "platforms": [
     {
       "id": "instagram",

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { asset } from '@/lib/config';
 import TiltCard from './TiltCard';
 import CountUpPrice from './CountUpPrice';
 import Marquee from './Marquee';
@@ -31,6 +32,13 @@ export default function PlatformPanel({ platform, reduce }) {
 function Section({ s, reduce }) {
   return (
     <section className="lst-section">
+      {s.bg && (
+        <div
+          className={`lst-section-bg${reduce ? '' : ' kb'}`}
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${asset(s.bg)})` }}
+        />
+      )}
       <Reveal reduce={reduce}>
         {s.kicker && <p className="lst-kicker">{s.kicker}</p>}
         <h2 className="lst-h2">
