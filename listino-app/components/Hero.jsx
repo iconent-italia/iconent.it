@@ -105,10 +105,12 @@ function WireLogo({ id }) {
     strokeLinejoin: 'round',
     'aria-hidden': true,
   };
+  // riempimento traslucido = superficie volumetrica su cui scorrono le scanline
+  const surf = 'rgba(77, 208, 225, 0.16)';
   if (id === 'instagram') {
     return (
       <svg {...c}>
-        <rect x="3.3" y="3.3" width="17.4" height="17.4" rx="5" />
+        <rect x="3.3" y="3.3" width="17.4" height="17.4" rx="5" fill={surf} />
         <circle cx="12" cy="12" r="4.2" />
         <circle cx="17" cy="7" r="0.9" fill="currentColor" stroke="none" />
       </svg>
@@ -117,7 +119,7 @@ function WireLogo({ id }) {
   if (id === 'spotify') {
     return (
       <svg {...c}>
-        <circle cx="12" cy="12" r="9.2" />
+        <circle cx="12" cy="12" r="9.2" fill={surf} />
         <path d="M7.1 9.7c3.5-1 7.7-0.6 10 1.1" />
         <path d="M7.7 12.7c2.8-0.8 6.1-0.5 8.2 0.9" />
         <path d="M8.4 15.5c2-0.6 4.4-0.3 6 0.7" />
@@ -127,8 +129,8 @@ function WireLogo({ id }) {
   if (id === 'youtube') {
     return (
       <svg {...c}>
-        <rect x="2.5" y="6" width="19" height="12" rx="3.6" />
-        <path d="M10.2 9.2v5.6l4.8-2.8z" />
+        <rect x="2.5" y="6" width="19" height="12" rx="3.6" fill={surf} />
+        <path d="M10.2 9.2v5.6l4.8-2.8z" fill="rgba(77, 208, 225, 0.55)" stroke="none" />
       </svg>
     );
   }
