@@ -45,10 +45,10 @@ export default function Listino({ content }) {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeId}
-            initial={reduce ? false : { opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
-            transition={{ duration: 0.45, ease: EASE }}
+            initial={reduce ? false : { opacity: 0, y: 44, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -28, scale: 0.98 }}
+            transition={{ duration: 0.5, ease: EASE }}
           >
             <PlatformPanel platform={active} reduce={reduce} />
           </motion.div>

@@ -1,12 +1,7 @@
 {
   "cta": {
     "whatsapp": "https://wa.me/message/32WMNGGU4HGTB1",
-    "call": "/form-prenotazione/",
-    "email": ["rap.prodmagazine@gmail.com", "info@iconent.it"],
-    "ig": [
-      { "handle": "@rap.prodmagazine", "url": "https://instagram.com/rap.prodmagazine" },
-      { "handle": "@iconentagency", "url": "https://instagram.com/iconentagency" }
-    ]
+    "call": "https://calendly.com/vittorio-iconent/analisiprogetto"
   },
   "platforms": [
     {

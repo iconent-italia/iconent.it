@@ -87,7 +87,7 @@ export default function Hero({ platforms, onPick, reduce }) {
                   ? { opacity: 1 }
                   : {
                       opacity: 1,
-                      y: [0, -10, 0],
+                      y: [0, -16, 0],
                       scale: 1,
                     }
               }
@@ -95,15 +95,15 @@ export default function Hero({ platforms, onPick, reduce }) {
                 reduce
                   ? undefined
                   : {
-                      opacity: { duration: 0.5, delay: 0.3 + i * 0.1 },
-                      scale: { type: 'spring', stiffness: 200, damping: 14, delay: 0.3 + i * 0.1 },
-                      y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: i * 1.4 },
+                      opacity: { duration: 0.5, delay: 0.3 + i * 0.12 },
+                      scale: { type: 'spring', stiffness: 220, damping: 12, delay: 0.3 + i * 0.12 },
+                      y: { duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: i * 1.1 },
                     }
               }
-              whileHover={reduce ? undefined : { scale: 1.08 }}
+              whileHover={reduce ? undefined : { scale: 1.12 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Image src={p.logo} alt={p.name} width={190} height={190} priority={i < 2} />
+              <Image src={asset(p.logo)} alt={p.name} width={190} height={190} priority={i < 2} />
             </motion.button>
           ))}
         </motion.div>

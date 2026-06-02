@@ -7,11 +7,11 @@ import Marquee from './Marquee';
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.05 } },
 };
 const cardVar = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 16 } },
+  hidden: { opacity: 0, y: 46, scale: 0.9 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 140, damping: 14 } },
 };
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
