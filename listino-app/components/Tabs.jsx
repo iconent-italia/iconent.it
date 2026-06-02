@@ -1,48 +1,32 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function Tabs({ platforms, activeId, onChange, reduce }) {
   const scroller = useRef(null);
-  const innerRef = useRef(null);
-  const [marquee, setMarquee] = useState(false);
 
-  // duplico la serie solo in modalità marquee (mobile / quando sfora)
-  const list = !reduce && marquee ? [...platforms, ...platforms] : platforms;
-
-  // marquee solo se UNA serie sfora il contenitore; altrimenti centrata e ferma
+  // auto-scroll orizzontale ping-pong (nessun clone → nessuna duplicazione).
+  // Si muove solo se i tab sforano (mobile); su desktop sta fermo e centrato.
   useEffect(() => {
-    if (reduce) { setMarquee(false); return; }
-    const measure = () => {
-      const nav = scroller.current;
-      const inner = innerRef.current;
-      if (!nav || !inner) return;
-      const single = inner.scrollWidth / (marquee ? 2 : 1);
-      setMarquee(single > nav.clientWidth + 4);
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [reduce, marquee]);
-
-  // auto-scroll lento solo in modalità marquee; si ferma al tocco, riprende dopo 2s
-  useEffect(() => {
-    if (reduce || !marquee) return;
+    if (reduce) return;
     const el = scroller.current;
     if (!el) return;
     let raf;
     let pos = el.scrollLeft;
+    let dir = 1;
     let lastInteract = -Infinity;
     const SPEED = 0.35;
     const IDLE = 2000;
+
     function tick(t) {
-      if (t - lastInteract < IDLE) {
-        pos = el.scrollLeft;
-      } else {
-        pos += SPEED;
-        const half = el.scrollWidth / 2;
-        if (half > 0 && pos >= half) pos -= half;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max > 1 && t - lastInteract >= IDLE) {
+        pos += SPEED * dir;
+        if (pos >= max) { pos = max; dir = -1; }
+        else if (pos <= 0) { pos = 0; dir = 1; }
         el.scrollLeft = pos;
+      } else {
+        pos = el.scrollLeft; // controllo manuale o nessun overflow
       }
       raf = requestAnimationFrame(tick);
     }
@@ -61,30 +45,25 @@ export default function Tabs({ platforms, activeId, onChange, reduce }) {
       el.removeEventListener('touchmove', bump);
       el.removeEventListener('wheel', bump);
     };
-  }, [reduce, marquee]);
+  }, [reduce]);
 
   return (
     <nav className="lst-tabs" ref={scroller} aria-label="Naviga tra i servizi">
-      <div className="lst-tabs-inner" ref={innerRef} role="tablist">
-        {list.map((p, i) => {
-          const clone = i >= platforms.length;
-          return (
-            <button
-              key={i}
-              type="button"
-              role={clone ? undefined : 'tab'}
-              aria-hidden={clone ? 'true' : undefined}
-              tabIndex={clone ? -1 : 0}
-              aria-selected={!clone && activeId === p.id}
-              className={`lst-tab${activeId === p.id ? ' active' : ''}`}
-              data-plat={p.id}
-              onClick={() => onChange(p.id)}
-            >
-              <span className="dot" aria-hidden="true" />
-              {p.name}
-            </button>
-          );
-        })}
+      <div className="lst-tabs-inner" role="tablist">
+        {platforms.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            role="tab"
+            aria-selected={activeId === p.id}
+            className={`lst-tab${activeId === p.id ? ' active' : ''}`}
+            data-plat={p.id}
+            onClick={() => onChange(p.id)}
+          >
+            <span className="dot" aria-hidden="true" />
+            {p.name}
+          </button>
+        ))}
       </div>
     </nav>
   );

@@ -58,7 +58,10 @@ export default function Hero({ platforms, onPick, reduce }) {
               aria-label={`Vai a ${p.name}`}
               onClick={() => go(p.id)}
             >
-              <WireLogo id={p.id} />
+              <span className="holo-wrap">
+                <WireLogo id={p.id} />
+                <WireLogo id={p.id} glitch />
+              </span>
             </button>
           ))}
         </div>
@@ -94,9 +97,9 @@ function GlitchWord({ text, reduce, delay = 0 }) {
 }
 
 /* Loghi ridisegnati a WIREFRAME (solo linee, vuoti dentro): proiezione olografica. */
-function WireLogo({ id }) {
+function WireLogo({ id, glitch }) {
   const c = {
-    className: 'holo-svg',
+    className: glitch ? 'holo-glitch' : 'holo-svg',
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
