@@ -279,10 +279,10 @@ img {
   /* SCANLINE sulle linee del logo, sfumate ai bordi (intersezione con un'ellisse
      morbida) così NON si vede il quadrato e il bagliore svanisce dolcemente */
   -webkit-mask-image:
-    repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px),
+    repeating-linear-gradient(0deg, #000 0, #000 5px, rgba(0,0,0,0.12) 6px, rgba(0,0,0,0.12) 7px, #000 8px, #000 12px, rgba(0,0,0,0.5) 13px, rgba(0,0,0,0.5) 14px, #000 15px, #000 18px, rgba(0,0,0,0) 19px, rgba(0,0,0,0) 21px, #000 22px),
     radial-gradient(closest-side, #000 55%, transparent 100%);
           mask-image:
-    repeating-linear-gradient(0deg, #000 0 2px, rgba(0, 0, 0, 0.5) 2px 3px, #000 3px 5px),
+    repeating-linear-gradient(0deg, #000 0, #000 5px, rgba(0,0,0,0.12) 6px, rgba(0,0,0,0.12) 7px, #000 8px, #000 12px, rgba(0,0,0,0.5) 13px, rgba(0,0,0,0.5) 14px, #000 15px, #000 18px, rgba(0,0,0,0) 19px, rgba(0,0,0,0) 21px, #000 22px),
     radial-gradient(closest-side, #000 55%, transparent 100%);
   -webkit-mask-composite: source-in;
           mask-composite: intersect;
@@ -291,7 +291,7 @@ img {
   animation:
     holoSpin 6s ease-in-out infinite,
     holoLive 2.8s linear infinite,
-    holoScan 2.2s linear infinite,
+    holoScan 1.6s linear infinite,
     holoDropout 3.3s steps(1, end) infinite;
 }
 .lst-logo3d:nth-child(2) .holo-svg { animation-delay: -1.5s, -1.1s, -0.6s, -0.9s; }
@@ -317,21 +317,20 @@ img {
 /* scanline che scorrono verso il basso attraverso il logo */
 @keyframes holoScan {
   from { -webkit-mask-position: 0 0, 50% 50%; mask-position: 0 0, 50% 50%; }
-  to { -webkit-mask-position: 0 5px, 50% 50%; mask-position: 0 5px, 50% 50%; }
+  to { -webkit-mask-position: 0 22px, 50% 50%; mask-position: 0 22px, 50% 50%; }
 }
 /* VITA dell'ologramma: flicker irregolare + glow pulsante + chromatic che spicca nei cali */
+/* niente lampeggio globale uniforme: opacità quasi ferma, solo glow che pulsa
+   + brevi spike di aberrazione cromatica (le accensioni/spegnimenti localizzati
+   li crea la mask "erase") */
 @keyframes holoLive {
-  0%   { opacity: 0.92; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  17%  { opacity: 0.9;  filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  22%  { opacity: 0.5;  filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.6px 0 0 rgba(255,40,140,0.55)) drop-shadow(-2.6px 0 0 rgba(0,255,255,0.6)); }
-  23%  { opacity: 0.94; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  44%  { opacity: 0.92; filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  57%  { opacity: 0.64; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.4px 0 0 rgba(255,40,140,0.5)) drop-shadow(-2.4px 0 0 rgba(0,255,255,0.55)); }
-  59%  { opacity: 0.93; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  80%  { opacity: 0.9;  filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  86%  { opacity: 0.54; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.5px 0 0 rgba(255,40,140,0.55)) drop-shadow(-2.5px 0 0 rgba(0,255,255,0.6)); }
-  88%  { opacity: 0.95; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
-  100% { opacity: 0.92; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  0%,100% { opacity: 0.92; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  35%  { opacity: 0.92; filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  47%  { opacity: 0.85; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.6px 0 0 rgba(255,40,140,0.6)) drop-shadow(-2.6px 0 0 rgba(0,255,255,0.62)); }
+  49%  { opacity: 0.94; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  78%  { opacity: 0.92; filter: drop-shadow(0 0 7px rgba(0,229,255,1)) drop-shadow(0 0 16px rgba(0,200,255,0.55)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
+  90%  { opacity: 0.86; filter: drop-shadow(0 0 5px rgba(0,229,255,0.95)) drop-shadow(0 0 11px rgba(0,200,255,0.45)) drop-shadow(2.5px 0 0 rgba(255,40,140,0.6)) drop-shadow(-2.5px 0 0 rgba(0,255,255,0.62)); }
+  92%  { opacity: 0.94; filter: drop-shadow(0 0 4px rgba(0,229,255,0.9)) drop-shadow(0 0 9px rgba(0,200,255,0.4)) drop-shadow(0.8px 0 0 rgba(255,40,140,0.3)) drop-shadow(-0.8px 0 0 rgba(0,255,255,0.38)); }
 }
 
 .lst-scrollcue {
