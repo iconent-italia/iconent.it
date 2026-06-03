@@ -20,21 +20,24 @@ export default function Hero({ platforms, onPick, reduce }) {
     const overlays = Array.from(root.querySelectorAll('.holo-glitch'));
     if (!overlays.length) return;
     let stopped = false;
-    const fire = (el) => {
-      el.classList.remove('fire');
-      void el.offsetWidth; // riavvia l'animazione one-shot
-      el.classList.add('fire');
-      setTimeout(() => el.classList.remove('fire'), 430);
+    // tutte e 4 nello STESSO istante; ognuna però ha la sua variante (CSS nth-child)
+    const fireAll = () => {
+      overlays.forEach((el) => {
+        el.classList.remove('fire');
+        void el.offsetWidth; // riavvia l'animazione one-shot
+        el.classList.add('fire');
+      });
+      setTimeout(() => overlays.forEach((el) => el.classList.remove('fire')), 620);
     };
-    const schedule = (el) => {
+    const loop = () => {
       if (stopped) return;
       setTimeout(() => {
         if (stopped) return;
-        if (!document.hidden) fire(el);
-        schedule(el);
-      }, 900 + Math.random() * 1700);
+        if (!document.hidden) fireAll();
+        loop();
+      }, 1500 + Math.random() * 1500);
     };
-    overlays.forEach((el, i) => setTimeout(() => { if (!stopped) schedule(el); }, 400 + i * 700));
+    setTimeout(() => { if (!stopped) loop(); }, 700);
     return () => { stopped = true; };
   }, [reduce]);
 
