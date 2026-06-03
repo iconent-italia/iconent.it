@@ -56,10 +56,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       </motion.p>
 
       <h1>
-        <GlitchWord text="Servizi di Marketing" reduce={reduce} delay={0.1} />{' '}
-        <span className="accent">
-          <GlitchWord text="e Comunicazione" reduce={reduce} delay={0.25} />
-        </span>
+        Servizi di Marketing <span className="accent">e Comunicazione</span>
       </h1>
 
       <motion.p
@@ -105,21 +102,6 @@ export default function Hero({ platforms, onPick, reduce }) {
         </motion.span>
       </div>
     </header>
-  );
-}
-
-/* Titolo con micro-glitch d'entrata (clip + offset), poi statico. */
-function GlitchWord({ text, reduce, delay = 0 }) {
-  if (reduce) return <>{text}</>;
-  return (
-    <motion.span
-      style={{ display: 'inline-block' }}
-      initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)', x: -6 }}
-      animate={{ opacity: 1, clipPath: 'inset(0 0% 0 0)', x: 0 }}
-      transition={{ duration: 0.55, delay, ease: EASE }}
-    >
-      {text}
-    </motion.span>
   );
 }
 

@@ -219,10 +219,23 @@ img {
   max-width: 18ch;
   overflow-wrap: break-word;
   hyphens: auto;
+  /* stessa animazione del titolo home (blur-zoom + flash cromatico), ma veloce e leggera */
+  animation: lstTitleIn 0.9s cubic-bezier(0.33, 1, 0.68, 1) both;
+  will-change: transform, filter, opacity;
 }
 .lst-hero h1 .accent {
   color: var(--accent);
   /* nessun alone dietro il testo: sfondo pulito */
+}
+@keyframes lstTitleIn {
+  0%   { opacity: 0; transform: scale(0.9); filter: blur(12px); text-shadow: none; }
+  55%  { opacity: 1; transform: scale(1); filter: blur(0); text-shadow: none; }
+  70%  { text-shadow: -4px 0 0 #00E6FF, 4px 0 0 var(--accent); }
+  82%  { text-shadow: 3px 0 0 #00E6FF, -3px 0 0 var(--accent); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lst-hero h1 { animation: none; }
 }
 .lst-hero-sub {
   margin: 26px auto 0;
