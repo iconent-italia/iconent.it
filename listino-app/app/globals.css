@@ -300,8 +300,8 @@ img {
   height: 100%;
   display: block;
   overflow: visible;
-  opacity: 0;
-  /* base 100% trasparente: il logo è invisibile a riposo, lo accende solo il glitch */
+  opacity: 0.8;
+  /* logo base sempre visibile e leggibile; il glitch ci scorre sopra in loop */
   filter:
     drop-shadow(0 0 3px rgba(0, 229, 255, 0.95))
     drop-shadow(0 0 14px rgba(0, 200, 255, 0.5))
@@ -346,10 +346,10 @@ img {
    Sequenza rapida: righe che slittano di lato + settore sovraesposto, poi torna. */
 /* Trigger SIMULTANEO (stesso istante via JS), ma ogni icona reagisce DIVERSA:
    variante di glitch, direzione slice, displacement, durata e hue del glow per-icona. */
-.lst-logo3d:nth-child(1) .holo-glitch.fire { animation: glitchA 0.44s steps(1, end) 1; }
-.lst-logo3d:nth-child(2) .holo-glitch.fire { animation: glitchB 0.54s steps(1, end) 1; }
-.lst-logo3d:nth-child(3) .holo-glitch.fire { animation: glitchC 0.36s steps(1, end) 1; }
-.lst-logo3d:nth-child(4) .holo-glitch.fire { animation: glitchD 0.48s steps(1, end) 1; }
+.lst-logo3d:nth-child(1) .holo-glitch { animation: glitchA 0.72s steps(1, end) infinite; }
+.lst-logo3d:nth-child(2) .holo-glitch { animation: glitchB 0.86s steps(1, end) infinite; }
+.lst-logo3d:nth-child(3) .holo-glitch { animation: glitchC 0.6s steps(1, end) infinite; }
+.lst-logo3d:nth-child(4) .holo-glitch { animation: glitchD 0.78s steps(1, end) infinite; }
 /* colori delle icone uniformi come prima (ciano): usano la base .holo-glitch.
    Cambiano solo il TIPO di glitch per icona (varianti sotto), non il colore. */
 
@@ -431,8 +431,9 @@ img {
 /* respiro calmo della luce (no blink uniforme): il bloom cresce e cala dolcemente,
    con un solo lievissimo cedimento di segnale, raro */
 @keyframes holoLive {
-  /* base invisibile: ci pensa il burst a illuminare il logo */
-  0%, 100% { opacity: 0; }
+  /* base SEMPRE visibile (logo leggibile in modo costante), con respiro tenue */
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.9; }
 }
 
 .lst-scrollcue {

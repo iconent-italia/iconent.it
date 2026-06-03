@@ -1,52 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { asset, EASE } from '@/lib/config';
 
 export default function Hero({ platforms, onPick, reduce }) {
   const logos = platforms.filter((p) => p.logo);
-  const orbitRef = useRef(null);
 
   function go(id) {
     onPick(id); // selectPlatform: cambia servizio + scroll con offset nav
   }
-
-  // burst di glitch a intervalli RANDOM su ogni icona (come l'hero della home)
-  useEffect(() => {
-    if (reduce) return;
-    const root = orbitRef.current;
-    if (!root) return;
-    const overlays = Array.from(root.querySelectorAll('.holo-glitch'));
-    if (!overlays.length) return;
-    let stopped = false;
-    // tutte e 4 nello STESSO istante; ognuna però ha la sua variante (CSS nth-child)
-    const fireAll = () => {
-      overlays.forEach((el) => {
-        el.classList.remove('fire');
-        void el.offsetWidth; // riavvia l'animazione one-shot
-        el.classList.add('fire');
-      });
-      // reset di .fire PRIMA del prossimo fire (410ms < intervallo minimo 450ms):
-      // così ogni accensione riparte da capo in modo affidabile, senza race
-      setTimeout(() => overlays.forEach((el) => el.classList.remove('fire')), 410);
-    };
-    const loop = () => {
-      if (stopped) return;
-      setTimeout(() => {
-        if (stopped) return;
-        if (!document.hidden) fireAll();
-        loop();
-      }, 450 + Math.random() * 450);
-    };
-    // si illuminano SUBITO al caricamento, poi parte il loop
-    requestAnimationFrame(() => {
-      if (stopped) return;
-      fireAll();
-      loop();
-    });
-    return () => { stopped = true; };
-  }, [reduce]);
 
   return (
     <header className="lst-hero">
@@ -81,7 +43,7 @@ export default function Hero({ platforms, onPick, reduce }) {
       </motion.p>
 
       {/* Loghi statici: scorciatoie alle piattaforme (nessuno scroll). */}
-      <nav className="lst-orbit" aria-label="Servizi" ref={orbitRef}>
+      <nav className="lst-orbit" aria-label="Servizi">
         <div className="lst-orbit-stage">
           {logos.map((p) => (
             <button
