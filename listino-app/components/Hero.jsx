@@ -37,7 +37,12 @@ export default function Hero({ platforms, onPick, reduce }) {
         loop();
       }, 1500 + Math.random() * 1500);
     };
-    setTimeout(() => { if (!stopped) loop(); }, 700);
+    // si illuminano SUBITO al caricamento, poi parte il loop
+    requestAnimationFrame(() => {
+      if (stopped) return;
+      fireAll();
+      loop();
+    });
     return () => { stopped = true; };
   }, [reduce]);
 
