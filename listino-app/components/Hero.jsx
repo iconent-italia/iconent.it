@@ -119,8 +119,9 @@ function WireLogo({ id, glitch }) {
     );
   }
   if (id === 'tiktok') {
+    // stroke più spesso solo per TikTok (note sottili → più presenza)
     return (
-      <svg {...c}>
+      <svg {...c} strokeWidth={1.9}>
         <path d="M13.7 3.6v10.7a3.7 3.7 0 1 1-3.7-3.7" />
         <path d="M13.7 3.6c0.5 2.6 2.4 4.2 4.7 4.4" />
       </svg>
