@@ -27,7 +27,9 @@ export default function Hero({ platforms, onPick, reduce }) {
         void el.offsetWidth; // riavvia l'animazione one-shot
         el.classList.add('fire');
       });
-      // niente timeout di reset: l'animazione finisce a opacità 0 e il prossimo fire la riavvia
+      // reset di .fire PRIMA del prossimo fire (410ms < intervallo minimo 450ms):
+      // così ogni accensione riparte da capo in modo affidabile, senza race
+      setTimeout(() => overlays.forEach((el) => el.classList.remove('fire')), 410);
     };
     const loop = () => {
       if (stopped) return;
