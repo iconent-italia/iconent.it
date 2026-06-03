@@ -27,7 +27,7 @@ export default function Hero({ platforms, onPick, reduce }) {
         void el.offsetWidth; // riavvia l'animazione one-shot
         el.classList.add('fire');
       });
-      setTimeout(() => overlays.forEach((el) => el.classList.remove('fire')), 620);
+      // niente timeout di reset: l'animazione finisce a opacità 0 e il prossimo fire la riavvia
     };
     const loop = () => {
       if (stopped) return;
@@ -35,7 +35,7 @@ export default function Hero({ platforms, onPick, reduce }) {
         if (stopped) return;
         if (!document.hidden) fireAll();
         loop();
-      }, 1500 + Math.random() * 1500);
+      }, 450 + Math.random() * 450);
     };
     // si illuminano SUBITO al caricamento, poi parte il loop
     requestAnimationFrame(() => {
