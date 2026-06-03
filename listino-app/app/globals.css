@@ -346,10 +346,11 @@ img {
    Sequenza rapida: righe che slittano di lato + settore sovraesposto, poi torna. */
 /* Trigger SIMULTANEO (stesso istante via JS), ma ogni icona reagisce DIVERSA:
    variante di glitch, direzione slice, displacement, durata e hue del glow per-icona. */
-.lst-logo3d:nth-child(1) .holo-glitch { animation: glitchA 0.72s steps(1, end) infinite; }
-.lst-logo3d:nth-child(2) .holo-glitch { animation: glitchB 0.86s steps(1, end) infinite; }
-.lst-logo3d:nth-child(3) .holo-glitch { animation: glitchC 0.6s steps(1, end) infinite; }
-.lst-logo3d:nth-child(4) .holo-glitch { animation: glitchD 0.78s steps(1, end) infinite; }
+/* 2-3 glitch all'avvio poi STOP: resta solo il logo base illuminato (no loop epilettico) */
+.lst-logo3d:nth-child(1) .holo-glitch { animation: glitchA 0.62s steps(1, end) 3; }
+.lst-logo3d:nth-child(2) .holo-glitch { animation: glitchB 0.72s steps(1, end) 2; }
+.lst-logo3d:nth-child(3) .holo-glitch { animation: glitchC 0.55s steps(1, end) 3; }
+.lst-logo3d:nth-child(4) .holo-glitch { animation: glitchD 0.68s steps(1, end) 2; }
 /* colori delle icone uniformi come prima (ciano): usano la base .holo-glitch.
    Cambiano solo il TIPO di glitch per icona (varianti sotto), non il colore. */
 
