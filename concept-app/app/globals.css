@@ -12,6 +12,26 @@ body { overflow-x: hidden; }
 .kicker { font-size: .7rem; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
 .accent { color: var(--accent); }
 .invert { background: var(--panel-light); color: var(--panel-light-fg); }
+
+/* Sipario transizione: copre il pannello e si ritrae (vedi PanelShell/CURTAINS). */
+.tx-curtain {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(120% 100% at 50% 0%,
+      color-mix(in srgb, var(--accent) 24%, #000) 0%, #050505 62%);
+}
+/* Merch (pannello chiaro) = lastra di cemento beige che cita la cover ICON. */
+.invert .tx-curtain {
+  background:
+    radial-gradient(120% 100% at 50% 100%, #d8d2c4 0%, var(--panel-light) 60%);
+}
+
+/* Manifesto split: ritratto + testo affiancati, impilati su mobile. */
+.split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+@media (max-width: 768px) {
+  .split { grid-template-columns: 1fr; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
