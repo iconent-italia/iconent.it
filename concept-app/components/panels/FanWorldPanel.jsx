@@ -6,7 +6,7 @@ export default function FanWorldPanel() {
   const a = useArtist();
   if (!a.fanWorld?.newsletter && !a.fanWorld?.discord) return null;
   return (
-    <PanelShell id="fanworld" kicker="06 · FAN WORLD">
+    <PanelShell id="fanworld" kicker="06 · FAN WORLD" tx="iris">
       <h2 className="display" style={{ fontSize: 'clamp(2rem,7vw,5rem)', maxWidth: '16ch' }}>
         ENTRA NEL MONDO
       </h2>

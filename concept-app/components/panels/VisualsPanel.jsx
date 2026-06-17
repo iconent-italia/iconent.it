@@ -6,7 +6,7 @@ export default function VisualsPanel() {
   const a = useArtist();
   if (!a.visuals.length) return null;
   return (
-    <PanelShell id="visuals" kicker="05 · VISUALS">
+    <PanelShell id="visuals" kicker="05 · VISUALS" tx="diagonal">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 12 }}>
         {a.visuals.map((v, i) => (
           <a key={i} href={v.video || '#'} style={{ position: 'relative', display: 'block' }}>

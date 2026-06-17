@@ -6,7 +6,7 @@ export default function MusicPanel() {
   const a = useArtist();
   const m = a.music;
   return (
-    <PanelShell id="music" kicker="02 · ULTIMO DROP">
+    <PanelShell id="music" kicker="02 · ULTIMO DROP" tx="iris">
       <div style={{ display: 'flex', gap: 28, alignItems: 'center', flexWrap: 'wrap' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={m.cover} alt={m.title} style={{ width: 220, height: 220, objectFit: 'cover', borderRadius: 6 }} />

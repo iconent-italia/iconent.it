@@ -4,7 +4,7 @@ const tonyEffe = {
   accent: '#c9a44a',
   theme: 'dark',
   fonts: { display: 'Anton', body: 'Inter' },
-  object3D: 'diamond',
+  object3D: 'pendant17',
   manifesto: 'UNCOMPROMISING. RARE. ETERNO.',
   hero: {
     image: '/concept/artists/tony-effe/hero.jpg',

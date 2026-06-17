@@ -1,8 +1,9 @@
-import DiamondObject from './DiamondObject';
+import IconPendant from './IconPendant';
 
 // object3D key (from artist config) -> R3F component.
-const OBJECTS = { diamond: DiamondObject };
+// Tony Effe: ciondolo "17" + Colosseo + 777. `diamond` resta alias per retro-compat.
+const OBJECTS = { pendant17: IconPendant, diamond: IconPendant };
 
 export function getObject3D(key) {
-  return OBJECTS[key] || DiamondObject;
+  return OBJECTS[key] || IconPendant;
 }

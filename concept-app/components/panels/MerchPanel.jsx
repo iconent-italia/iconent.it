@@ -6,7 +6,7 @@ import { useArtist } from '@/components/ArtistContext';
 export default function MerchPanel() {
   const a = useArtist();
   return (
-    <PanelShell id="merch" kicker="04 · MERCH" invert>
+    <PanelShell id="merch" kicker="04 · MERCH" invert tx="slab">
       <h2 className="display" style={{ fontSize: 'clamp(2rem,8vw,6rem)', marginBottom: 24 }}>SHOP THE DROP</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 16 }}>
         {a.merch.map((p) => (

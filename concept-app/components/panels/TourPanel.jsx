@@ -5,7 +5,7 @@ import { useArtist } from '@/components/ArtistContext';
 export default function TourPanel() {
   const a = useArtist();
   return (
-    <PanelShell id="tour" kicker="03 · LIVE / BIGLIETTI">
+    <PanelShell id="tour" kicker="03 · LIVE / BIGLIETTI" tx="barn">
       <h2 className="display" style={{ fontSize: 'clamp(2rem,8vw,6rem)', marginBottom: 24 }}>TOUR 2026</h2>
       <ul style={{ listStyle: 'none' }}>
         {a.tour.map((t) => (

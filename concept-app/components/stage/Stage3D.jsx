@@ -21,10 +21,12 @@ export default function Stage3D({ objectKey, accent }) {
   }
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[3, 4, 5]} intensity={1.2} />
-        <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
+      <Canvas camera={{ position: [0, 0, 6], fov: 45 }} dpr={[1, 2]}>
+        <ambientLight intensity={0.25} />
+        <directionalLight position={[3, 4, 5]} intensity={1.1} />
+        {/* key light caldo = oro che brilla nel void */}
+        <pointLight position={[-3, 1, 3]} intensity={1.4} color={accent} />
+        <Float speed={1.2} rotationIntensity={0.35} floatIntensity={0.5}>
           <Obj accent={accent} progress={progress} />
         </Float>
         <Environment preset="city" />
