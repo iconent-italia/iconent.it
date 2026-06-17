@@ -12,6 +12,8 @@ export function validateArtistConfig(c) {
   req(c.hero && typeof c.hero.image === 'string', 'hero.image is required');
   req(typeof c.portrait === 'string', 'portrait is required');
   req(c.music && typeof c.music.title === 'string', 'music.title is required');
+  req(c.music.audioLoop === undefined || typeof c.music.audioLoop === 'string',
+    'music.audioLoop must be a string when present');
   req(Array.isArray(c.tour), 'tour must be an array');
   c.tour.forEach((t, i) => {
     req(typeof t.city === 'string' && t.city.length, `tour[${i}].city is required`);

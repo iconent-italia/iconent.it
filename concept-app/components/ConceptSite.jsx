@@ -1,5 +1,7 @@
 'use client';
 import { ArtistProvider } from '@/components/ArtistContext';
+import { AudioController } from '@/components/AudioController';
+import SoundToggle from '@/components/SoundToggle';
 import Stage3D from '@/components/stage/Stage3D';
 import ScrollController from '@/components/ScrollController';
 import PanelIndex from '@/components/PanelIndex';
@@ -17,19 +19,22 @@ const LABELS = ['INTRO', 'MANIFESTO', 'MUSIC', 'TOUR', 'MERCH', 'VISUALS', 'FAN'
 export default function ConceptSite({ artist }) {
   return (
     <ArtistProvider value={artist}>
-      <main style={{ '--accent': artist.accent }}>
-        <Stage3D objectKey={artist.object3D} accent={artist.accent} />
-        <ScrollController panelCount={LABELS.length} />
-        <PanelIndex labels={LABELS} />
-        <IntroPanel />
-        <ManifestoPanel />
-        <MusicPanel />
-        <TourPanel />
-        <MerchPanel />
-        <VisualsPanel />
-        <FanWorldPanel />
-        <CtaPanel />
-      </main>
+      <AudioController src={artist.music.audioLoop}>
+        <main style={{ '--accent': artist.accent }}>
+          <Stage3D objectKey={artist.object3D} accent={artist.accent} />
+          <ScrollController panelCount={LABELS.length} />
+          <PanelIndex labels={LABELS} />
+          <SoundToggle />
+          <IntroPanel />
+          <ManifestoPanel />
+          <MusicPanel />
+          <TourPanel />
+          <MerchPanel />
+          <VisualsPanel />
+          <FanWorldPanel />
+          <CtaPanel />
+        </main>
+      </AudioController>
     </ArtistProvider>
   );
 }

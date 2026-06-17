@@ -1,6 +1,7 @@
 'use client';
 import PanelShell from '@/components/PanelShell';
 import { useArtist } from '@/components/ArtistContext';
+import EqBars from '@/components/EqBars';
 
 export default function MusicPanel() {
   const a = useArtist();
@@ -18,6 +19,7 @@ export default function MusicPanel() {
             {m.links.youtube && <a className="accent" href={m.links.youtube}>YOUTUBE →</a>}
             {m.presave && <a className="accent" href={m.presave}>PRE-SAVE →</a>}
           </div>
+          {m.audioLoop && <EqBars />}
         </div>
       </div>
     </PanelShell>

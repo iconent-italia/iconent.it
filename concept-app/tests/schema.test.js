@@ -30,6 +30,14 @@ describe('validateArtistConfig', () => {
   it('throws when a tour item lacks a city', () => {
     expect(() => validateArtistConfig({ ...base, tour: [{ date: '2026-09-12' }] })).toThrow(/city/);
   });
+  it('accepts an optional music.audioLoop string', () => {
+    const c = { ...base, music: { ...base.music, audioLoop: '/x/loop.mp3' } };
+    expect(() => validateArtistConfig(c)).not.toThrow();
+  });
+  it('throws when music.audioLoop is present but not a string', () => {
+    const c = { ...base, music: { ...base.music, audioLoop: 42 } };
+    expect(() => validateArtistConfig(c)).toThrow(/audioLoop/);
+  });
 });
 
 describe('artist registry', () => {

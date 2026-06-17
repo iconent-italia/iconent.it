@@ -14,6 +14,7 @@ const tonyEffe = {
   music: {
     title: 'ICON',
     cover: '/concept/artists/tony-effe/music-cover.jpg',
+    audioLoop: '/concept/artists/tony-effe/audio/icon-loop.mp3',
     links: { spotify: '#', apple: '#', youtube: '#' },
     presave: '#',
   },
