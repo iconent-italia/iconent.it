@@ -21,7 +21,7 @@ export default function ConceptSite({ artist }) {
   return (
     <ArtistProvider value={artist}>
       <AudioController src={artist.music.audioLoop}>
-        <ColosseumIntro accent={artist.accent} />
+        <ColosseumIntro src={artist.hero?.video} poster={artist.hero?.poster} accent={artist.accent} />
         <main style={{ '--accent': artist.accent }}>
           <Stage3D objectKey={artist.object3D} accent={artist.accent} />
           <ScrollController panelCount={LABELS.length} />
