@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { validateArtistConfig } from '@/config/schema';
+import { getArtist, allArtistSlugs } from '@/config/artists';
 
 const base = {
   slug: 'tony-effe', name: 'Tony Effe', accent: '#c9a44a', theme: 'dark',
@@ -28,5 +29,19 @@ describe('validateArtistConfig', () => {
   });
   it('throws when a tour item lacks a city', () => {
     expect(() => validateArtistConfig({ ...base, tour: [{ date: '2026-09-12' }] })).toThrow(/city/);
+  });
+});
+
+describe('artist registry', () => {
+  it('returns a valid Tony Effe config', () => {
+    const c = getArtist('tony-effe');
+    expect(c).not.toBeNull();
+    expect(c.name).toBe('Tony Effe');
+  });
+  it('returns null for unknown slug', () => {
+    expect(getArtist('nobody')).toBeNull();
+  });
+  it('lists slugs', () => {
+    expect(allArtistSlugs()).toContain('tony-effe');
   });
 });
