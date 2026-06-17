@@ -70,6 +70,32 @@ body { overflow-x: hidden; }
   .split { grid-template-columns: 1fr; }
 }
 
+/* ============ Portale Colosseo (intro) ============ */
+.portal-scan {
+  position: fixed; inset: 0; z-index: 81; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.22) 3px, rgba(0,0,0,0) 4px);
+  mix-blend-mode: multiply; opacity: .6;
+}
+.portal-vig {
+  position: fixed; inset: 0; z-index: 81; pointer-events: none;
+  background: radial-gradient(120% 120% at 50% 50%, transparent 45%, rgba(0,0,0,.85) 100%);
+}
+.portal-name-wrap {
+  position: fixed; inset: 0; z-index: 82; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.portal-name {
+  color: var(--fg); text-align: center;
+  text-shadow: 0 0 40px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.portal-skip {
+  position: fixed; bottom: 28px; right: 28px; z-index: 83; cursor: pointer;
+  background: transparent; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent); padding: 9px 16px; font-size: .68rem; letter-spacing: .22em;
+  text-transform: uppercase; transition: background .25s ease, color .25s ease;
+}
+.portal-skip:hover { background: var(--accent); color: #0a0a0a; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

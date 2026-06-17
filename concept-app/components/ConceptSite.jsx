@@ -2,6 +2,7 @@
 import { ArtistProvider } from '@/components/ArtistContext';
 import { AudioController } from '@/components/AudioController';
 import SoundToggle from '@/components/SoundToggle';
+import ColosseumIntro from '@/components/ColosseumIntro';
 import Stage3D from '@/components/stage/Stage3D';
 import ScrollController from '@/components/ScrollController';
 import PanelIndex from '@/components/PanelIndex';
@@ -20,6 +21,7 @@ export default function ConceptSite({ artist }) {
   return (
     <ArtistProvider value={artist}>
       <AudioController src={artist.music.audioLoop}>
+        <ColosseumIntro accent={artist.accent} />
         <main style={{ '--accent': artist.accent }}>
           <Stage3D objectKey={artist.object3D} accent={artist.accent} />
           <ScrollController panelCount={LABELS.length} />
