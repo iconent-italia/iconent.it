@@ -1,88 +1,77 @@
 'use client';
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Edges, Sparkles, Text, Billboard, Instances, Instance } from '@react-three/drei';
+import { Edges, Sparkles, Text, Billboard } from '@react-three/drei';
 
-// === Tony Effe centerpiece =================================================
-// Il ciondolo "17" (gem oro faccettato) come oggetto persistente, l'anello del
-// Colosseo che gli ruota attorno, e il "777" (simbolo storico DPG) in orbita.
-// `progress` 0..1 (scroll globale) fa "morphare" tutto il rig tra i pannelli.
+// === Tony Effe centerpiece (raffinato) =====================================
+// Il ciondolo "17": gem oro faccettato + due anelli olografici sottili (halo)
+// + 777 discreto. NIENTE travi/box (sembravano legna). Fondale premium che
+// resta DIETRO ai contenuti: piccolo, sobrio, con nebbia/vignette nello Stage.
+// `progress` 0..1 = scroll globale: morph leggero, mai invadente.
 // ===========================================================================
 
 function Gem({ accent }) {
   const ref = useRef();
   useFrame((_, dt) => {
-    if (ref.current) ref.current.rotation.y += dt * 0.35;
+    if (ref.current) ref.current.rotation.y += dt * 0.3;
   });
   return (
     <mesh ref={ref}>
-      <octahedronGeometry args={[1.05, 0]} />
+      <octahedronGeometry args={[0.8, 0]} />
       <meshStandardMaterial
         color={accent}
         metalness={1}
-        roughness={0.12}
-        envMapIntensity={1.5}
+        roughness={0.05}
+        envMapIntensity={1.6}
         flatShading
       />
-      {/* spigoli netti = look diamante inciso */}
-      <Edges threshold={12} color="#fff3d0" />
+      {/* spigoli oro discreti (non bianco sparato) */}
+      <Edges threshold={15} color="#e8c87a" />
     </mesh>
   );
 }
 
-// Anello di archi che evoca l'ovale del Colosseo (Roma), ruota lentissimo.
-function ColosseumRing({ accent, count = 28, radius = 2.7 }) {
-  const items = useMemo(
-    () =>
-      Array.from({ length: count }, (_, i) => {
-        const a = (i / count) * Math.PI * 2;
-        return { position: [Math.cos(a) * radius, 0, Math.sin(a) * radius], rotation: [0, -a, 0] };
-      }),
-    [count, radius]
-  );
-  const grp = useRef();
+// Due anelli sottili = halo olografico (evoca l'arena senza travi).
+function HoloRings({ accent }) {
+  const a = useRef();
+  const b = useRef();
   useFrame((_, dt) => {
-    if (grp.current) grp.current.rotation.y += dt * 0.04;
+    if (a.current) a.current.rotation.z += dt * 0.06;
+    if (b.current) b.current.rotation.z -= dt * 0.045;
   });
   return (
-    <group ref={grp} rotation={[Math.PI / 2.6, 0, 0]}>
-      <Instances limit={count}>
-        <boxGeometry args={[0.07, 0.85, 0.16]} />
-        <meshStandardMaterial
-          color={accent}
-          metalness={0.9}
-          roughness={0.4}
-          emissive={accent}
-          emissiveIntensity={0.04}
-        />
-        {items.map((it, i) => (
-          <Instance key={i} position={it.position} rotation={it.rotation} />
-        ))}
-      </Instances>
+    <group>
+      <mesh ref={a} rotation={[1.2, 0, 0]}>
+        <torusGeometry args={[1.9, 0.01, 8, 120]} />
+        <meshBasicMaterial color={accent} transparent opacity={0.5} />
+      </mesh>
+      <mesh ref={b} rotation={[-0.6, 0.5, 0]}>
+        <torusGeometry args={[2.25, 0.008, 8, 120]} />
+        <meshBasicMaterial color={accent} transparent opacity={0.32} />
+      </mesh>
     </group>
   );
 }
 
-// 777 — tre "7" in orbita sul piano frontale (firma dark/DPG).
-function TripleSeven({ accent, radius = 1.8 }) {
+// 777 — tre "7" molto discreti in orbita (firma DPG), dietro il gem.
+function TripleSeven({ accent, radius = 1.35 }) {
   const grp = useRef();
   useFrame((_, dt) => {
-    if (grp.current) grp.current.rotation.z += dt * 0.12;
+    if (grp.current) grp.current.rotation.z += dt * 0.08;
   });
   const angles = [0, (Math.PI * 2) / 3, (Math.PI * 4) / 3];
   return (
-    <group ref={grp}>
+    <group ref={grp} position={[0, 0, -0.8]}>
       {angles.map((a, i) => (
         <Text
           key={i}
-          position={[Math.cos(a) * radius, Math.sin(a) * radius, -0.5]}
+          position={[Math.cos(a) * radius, Math.sin(a) * radius, 0]}
           rotation={[0, 0, -a]}
-          fontSize={0.46}
+          fontSize={0.3}
           color={accent}
+          fillOpacity={0.35}
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.004}
-          outlineColor="#000000"
         >
           7
         </Text>
@@ -95,31 +84,34 @@ export default function IconPendant({ accent = '#c9a44a', progress = 0 }) {
   const rig = useRef();
   useFrame(() => {
     if (!rig.current) return;
-    const s = 1 + progress * 0.35; // cresce scrollando
+    // morph leggerissimo: respira appena scrollando, niente scatti
+    const s = 0.68 + progress * 0.1;
     rig.current.scale.setScalar(s);
-    rig.current.rotation.x = progress * 0.6; // si inclina lungo la pagina
+    rig.current.rotation.x = progress * 0.35;
   });
+  // gioiello spostato in ALTO a DESTRA: lo spazio dei contenuti (sinistra/centro)
+  // resta libero, il 3D fa da accento e non litiga col testo.
   return (
-    <group ref={rig}>
-      <ColosseumRing accent={accent} />
+    <group ref={rig} position={[2.35, 1.45, -0.4]}>
+      <HoloRings accent={accent} />
       <TripleSeven accent={accent} />
       <Gem accent={accent} />
-      {/* "17" sempre rivolto alla camera, davanti al gem */}
+      {/* "17" discreto, davanti al gem */}
       <Billboard>
         <Text
-          position={[0, 0, 1.25]}
-          fontSize={0.82}
+          position={[0, 0, 1.0]}
+          fontSize={0.46}
           color={accent}
+          fillOpacity={0.9}
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.012}
+          outlineWidth={0.008}
           outlineColor="#1a1407"
         >
           17
         </Text>
       </Billboard>
-      {/* polvere di diamante */}
-      <Sparkles count={40} scale={[6, 6, 6]} size={2} speed={0.3} color={accent} opacity={0.7} />
+      <Sparkles count={22} scale={[4, 4, 4]} size={1.2} speed={0.25} color={accent} opacity={0.4} />
     </group>
   );
 }

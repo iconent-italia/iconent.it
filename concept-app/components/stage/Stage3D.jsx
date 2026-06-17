@@ -21,16 +21,21 @@ export default function Stage3D({ objectKey, accent }) {
   }
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-      <Canvas camera={{ position: [0, 0, 6], fov: 45 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.25} />
-        <directionalLight position={[3, 4, 5]} intensity={1.1} />
+      <Canvas camera={{ position: [0, 0, 6.5], fov: 42 }} dpr={[1, 2]}>
+        {/* nebbia = profondità, il void respira invece di essere piatto */}
+        <fog attach="fog" args={['#070707', 5, 16]} />
+        <ambientLight intensity={0.2} />
+        <directionalLight position={[3, 4, 5]} intensity={1.0} />
         {/* key light caldo = oro che brilla nel void */}
-        <pointLight position={[-3, 1, 3]} intensity={1.4} color={accent} />
-        <Float speed={1.2} rotationIntensity={0.35} floatIntensity={0.5}>
+        <pointLight position={[-3, 1, 3]} intensity={1.3} color={accent} />
+        <Float speed={1.1} rotationIntensity={0.3} floatIntensity={0.45}>
           <Obj accent={accent} progress={progress} />
         </Float>
         <Environment preset="city" />
       </Canvas>
+      {/* vignette: scurisce i bordi -> i contenuti restano leggibili, il centro brilla */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'radial-gradient(125% 125% at 50% 42%, transparent 52%, rgba(5,5,5,0.85) 100%)' }} />
     </div>
   );
 }
