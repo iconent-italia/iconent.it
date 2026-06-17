@@ -1,0 +1,17 @@
+:root {
+  --bg: #070707; --fg: #f4efe3; --muted: #8a8a8a; --accent: #c9a44a;
+  --panel-light: #e7e4dd; --panel-light-fg: #111;
+  --font-display: 'Anton', Impact, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); font-family: var(--font-body); }
+body { overflow-x: hidden; }
+.panel { width: 100vw; min-height: 100svh; position: relative; }
+.display { font-family: var(--font-display); text-transform: uppercase; line-height: .85; letter-spacing: -.02em; }
+.kicker { font-size: .7rem; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
+.accent { color: var(--accent); }
+.invert { background: var(--panel-light); color: var(--panel-light-fg); }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
