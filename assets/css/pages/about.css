@@ -313,3 +313,72 @@
   .case-exxia-mini .case-exxia-metrics { grid-template-columns: 1fr; }
   .pillars-note { padding: 20px; font-size: 14px; }
 }
+
+/* ============================================================
+   GRID PROGETTI CURATI (album covers) — riuso dalla homepage
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.project-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  border: 1px solid var(--ic-rule);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,255,136,0.4);
+}
+.project-card-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.875rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+.project-card-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  color: transparent;
+  font-size: 0;
+}
+.project-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+.project-card-artist {
+  font-size: 0.85rem;
+  color: var(--ic-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+  .project-card { padding: 0.625rem; }
+  .project-card-title { font-size: 0.9rem; }
+  .project-card-artist { font-size: 0.75rem; }
+}
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .projects-grid > .project-card:nth-child(9) { grid-column: 2 / 3; }
+  .projects-grid > .project-card:nth-child(10) { grid-column: 3 / 4; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .projects-grid { grid-template-columns: repeat(3, 1fr); }
+  .projects-grid > .project-card:nth-child(10) { grid-column: 2 / 3; }
+}

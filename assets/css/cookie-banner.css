@@ -247,17 +247,35 @@
     padding: 0.75rem;
   }
   #ic-cookie-banner .ccb-card {
-    padding: 1.2rem;
+    padding: 1rem 1.1rem;
   }
+  #ic-cookie-banner h2 {
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+  }
+  #ic-cookie-banner p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-bottom: 0.85rem;
+  }
+  /* Accetta + Rifiuta affiancati e di pari peso (conforme Garante 2021);
+     Personalizza come link full-width sotto. Riduce l'altezza del banner
+     sul primo schermo mobile senza coprire la CTA dell'hero. */
   #ic-cookie-banner .ccb-actions {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
   }
-  #ic-cookie-banner .ccb-actions button {
-    width: 100%;
+  #ic-cookie-banner .ccb-btn-accept,
+  #ic-cookie-banner .ccb-btn-reject {
+    flex: 1 1 0;
+    width: auto;
   }
   #ic-cookie-banner .ccb-btn-customize {
     order: 3;
+    flex: 1 0 100%;
+    width: 100%;
+    padding-top: 0.15rem;
+    padding-bottom: 0;
   }
   #ic-cookie-modal .ccm-card {
     padding: 1.5rem 1.2rem;
