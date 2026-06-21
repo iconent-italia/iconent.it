@@ -474,6 +474,7 @@
   <script src="/assets/js/shared.js" defer></script>
   <script src="/assets/js/calendly.js" defer></script>
   <script src="/assets/js/home.js" defer></script>
+  <script src="/assets/js/hero-scan.js" defer></script>
 
   <!-- Hero entry/exit animation — H1 zoom-in + glitch + scroll-driven dematerialize -->
   <script>
@@ -512,6 +513,8 @@
       if (e.animationName === 'home-hero-h1-in') {
         h1.classList.add('is-loaded');
         attachScroll();
+        /* glitch finished -> one-shot 3D depth-scan up the wordmark */
+        if (window.runHeroScan) window.runHeroScan(h1);
       }
     }, { once: true });
   })();
