@@ -37,6 +37,11 @@
     .legal-page th, .legal-page td { text-align: left; padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
     .legal-page th { color: #fff; font-weight: 600; background: rgba(255,255,255,0.025); }
     .legal-page td { color: #cfcfcf; }
+    /* Mobile: la tabella scorre DENTRO il suo box (non la pagina) e le colonne
+       restano leggibili invece di schiacciarsi/tagliarsi. */
+    .legal-page .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0 2rem; }
+    .legal-page .table-scroll table { margin: 0; }
+    @media (max-width: 600px) { .legal-page .table-scroll table { min-width: 560px; } }
     .legal-page code { background: rgba(255,255,255,0.06); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
   </style>
 </head>
@@ -63,6 +68,7 @@
 
     <h3>2.1 Cookie tecnici (esenti da consenso)</h3>
     <p>Necessari al corretto funzionamento del sito. La loro disattivazione potrebbe compromettere la navigazione. Ai sensi dell'art. 122 del Codice Privacy non richiedono il consenso preventivo dell'utente.</p>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Nome</th><th>Fornitore</th><th>Finalità</th><th>Durata</th></tr>
@@ -72,10 +78,12 @@
         <tr><td><code>session_id</code></td><td>iconent.it</td><td>Sessione di navigazione</td><td>Sessione</td></tr>
       </tbody>
     </table>
+    </div>
 
     <h3>2.2 Cookie e strumenti di terze parti</h3>
     <p>Il sito integra strumenti di terze parti che si attivano all'apertura delle pagine, indipendentemente dalle preferenze espresse nel banner, e possono installare cookie propri. Di seguito quelli attivi:</p>
 
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Servizio</th><th>Finalità</th><th>Durata</th><th>Informativa</th></tr>
@@ -119,6 +127,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <h2>3. Gestione delle preferenze</h2>
     <p>Al primo accesso il sito mostra un <strong>banner informativo</strong> che ti consente di prendere visione dell'uso dei cookie e di salvare le tue preferenze. I <strong>cookie tecnici</strong> sono sempre attivi in quanto esenti da consenso (art. 122 Codice Privacy).</p>

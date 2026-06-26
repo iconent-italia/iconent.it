@@ -37,6 +37,11 @@
     .legal-page th, .legal-page td { text-align: left; padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
     .legal-page th { color: #fff; font-weight: 600; background: rgba(255,255,255,0.025); }
     .legal-page td { color: #cfcfcf; }
+    /* Mobile: la tabella scorre DENTRO il suo box (non la pagina) e le colonne
+       restano leggibili invece di schiacciarsi/tagliarsi. */
+    .legal-page .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0 2rem; }
+    .legal-page .table-scroll table { margin: 0; }
+    @media (max-width: 600px) { .legal-page .table-scroll table { min-width: 540px; } }
   </style>
 </head>
 <body>
@@ -74,6 +79,7 @@
     </ul>
 
     <h2>3. Finalità e base giuridica del trattamento</h2>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Finalità</th><th>Base giuridica (art. 6 GDPR)</th><th>Conservazione</th></tr>
@@ -111,6 +117,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <h2>4. Modalità di trattamento</h2>
     <p>Il trattamento è effettuato con strumenti elettronici, server e infrastrutture cloud che adottano misure tecniche e organizzative adeguate per garantire un livello di sicurezza appropriato al rischio (art. 32 GDPR), tra cui crittografia in transito (HTTPS/TLS), controllo accessi, backup periodici e logging.</p>
