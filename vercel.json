@@ -43,6 +43,18 @@
   ],
   "rewrites": [
     {
+      "source": "/concept/:path*",
+      "destination": "https://iconent-concept.vercel.app/concept/:path*"
+    },
+    {
+      "source": "/tonyeffeconceptwebsite",
+      "destination": "https://iconent-concept.vercel.app/concept/tonyeffeconceptwebsite/"
+    },
+    {
+      "source": "/tonyeffeconceptwebsite/",
+      "destination": "https://iconent-concept.vercel.app/concept/tonyeffeconceptwebsite/"
+    },
+    {
       "source": "/servizi-marketing",
       "destination": "https://iconent-servizi-marketing.vercel.app/servizi-marketing"
     },
