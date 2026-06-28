@@ -43,20 +43,16 @@
   ],
   "rewrites": [
     {
-      "source": "/concept/:slug/",
-      "destination": "https://iconent-concept.vercel.app/concept/:slug/"
+      "source": "/conceptwebsite/tonyeffe",
+      "destination": "https://iconent-concept.vercel.app/concept/tony-effe/"
+    },
+    {
+      "source": "/conceptwebsite/tonyeffe/",
+      "destination": "https://iconent-concept.vercel.app/concept/tony-effe/"
     },
     {
       "source": "/concept/:path*",
       "destination": "https://iconent-concept.vercel.app/concept/:path*"
-    },
-    {
-      "source": "/tonyeffeconceptwebsite",
-      "destination": "https://iconent-concept.vercel.app/concept/tonyeffeconceptwebsite/"
-    },
-    {
-      "source": "/tonyeffeconceptwebsite/",
-      "destination": "https://iconent-concept.vercel.app/concept/tonyeffeconceptwebsite/"
     },
     {
       "source": "/servizi-marketing",
@@ -72,6 +68,26 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/concept/tony-effe/",
+      "destination": "/conceptwebsite/tonyeffe/",
+      "permanent": true
+    },
+    {
+      "source": "/concept/tonyeffeconceptwebsite/",
+      "destination": "/conceptwebsite/tonyeffe/",
+      "permanent": true
+    },
+    {
+      "source": "/tonyeffeconceptwebsite/",
+      "destination": "/conceptwebsite/tonyeffe/",
+      "permanent": true
+    },
+    {
+      "source": "/tonyeffeconceptwebsite",
+      "destination": "/conceptwebsite/tonyeffe/",
+      "permanent": true
+    },
     {
       "source": "/listino-marketing",
       "destination": "/servizi-marketing/",
