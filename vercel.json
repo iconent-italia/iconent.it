@@ -43,6 +43,10 @@
   ],
   "rewrites": [
     {
+      "source": "/concept/:slug/",
+      "destination": "https://iconent-concept.vercel.app/concept/:slug/"
+    },
+    {
       "source": "/concept/:path*",
       "destination": "https://iconent-concept.vercel.app/concept/:path*"
     },
