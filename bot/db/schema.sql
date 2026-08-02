@@ -10,6 +10,23 @@
 
 create extension if not exists pgcrypto;
 
+-- ────────────────────────────────────────────────────────────── config
+
+create table if not exists config (
+  chiave        text primary key,
+  valore        text        not null,
+  aggiornato_at timestamptz not null default now()
+);
+
+-- I posti NON sono una leva di marketing: ogni posto impegnato vale un
+-- rimborso da pagare, quindi il numero è il tetto di esposizione.
+-- 20 posti × 100 € = 2.000 € di impegno massimo.
+insert into config (chiave, valore) values
+  ('slot_totali',    '20'),
+  ('deposito',       '100'),
+  ('tetto_rimborso', '150')
+on conflict (chiave) do nothing;
+
 -- ─────────────────────────────────────────────────────────────── leads
 
 create table if not exists leads (
@@ -43,6 +60,9 @@ create table if not exists leads (
   bonus_at          timestamptz,
   bonus_da          bigint,
   ko_motivo         text,
+
+  -- slot: scadenza della prenotazione per chi arriva dalla lista d'attesa
+  slot_scade_at     timestamptz,
 
   -- ponte admin
   topic_id          integer,                     -- message_thread_id nel gruppo admin
@@ -195,6 +215,28 @@ select
 from leads
 group by 1
 order by lead desc;
+
+-- Stato dei posti, calcolato dagli stati reali dei lead: il numero che il
+-- bot mostra non può divergere da quello che c'è davvero nel database.
+-- Un posto si impegna alla consegna del link (da lì il lead può depositare
+-- in qualsiasi momento) e si libera solo se esce senza aver depositato.
+create or replace view slot_stato as
+select
+  (select valore::int from config where chiave = 'slot_totali')          as totali,
+  count(*)                                                               as impegnati,
+  greatest((select valore::int from config where chiave = 'slot_totali')
+           - count(*), 0)                                                as liberi
+from leads
+where stato_ord(stato) >= 3;
+
+-- Lista d'attesa in ordine di arrivo: è la coda da promuovere quando un
+-- posto si libera.
+create or replace view coda_attesa as
+select id, tg_user_id, tg_username, nome, source, created_at,
+       row_number() over (order by created_at) as posizione
+from leads
+where stato = 'X_LISTA_ATTESA'
+order by created_at;
 
 -- Coda di lavoro: cosa aspetta un tuo tap, dal più vecchio.
 create or replace view coda_admin as

@@ -3,11 +3,18 @@
  * Modifica qui: non c'è copy sparso negli handler.
  *
  * I segnaposto {{...}} sono in config.js e vanno riempiti prima del go-live:
- *   BONUS_LEAD           quanto riceve il lead OLTRE al rimborso
- *   TETTO_RIMBORSO       massimo rimborsabile — senza questo sei esposto a qualsiasi cifra
- *   DEPOSITO_CONSIGLIATO 120 € (non 100: serve margine sul cambio EUR→USD)
- *   LINK_REFERRAL        il link etoro.tw
- *   GIORNI_PAGAMENTO     entro quanto paghi dopo la conferma
+ *   DEPOSITO         100 € — quanto chiediamo di depositare
+ *   TETTO_RIMBORSO   150 € — massimo rimborsabile. Senza tetto, chi deposita
+ *                    2.000 € può pretenderne 2.000.
+ *   LINK_REFERRAL    il link etoro.tw
+ *   GIORNI_PAGAMENTO entro quanto paghiamo dopo la conferma del broker
+ *   SLOT_TOTALI      20 — posti disponibili. Non è una leva di marketing:
+ *                    ogni posto vale un rimborso da pagare, quindi è il tetto
+ *                    di esposizione. Il bot lo fa rispettare da solo.
+ *
+ * Nota sul rimborso: promettiamo SOLO quello che dipende da noi, cioè la
+ * restituzione del deposito. Nulla di ciò che il broker accredita al lead
+ * viene promesso qui — non lo controlliamo e non possiamo garantirlo.
  */
 
 const R = (s) => s.trim()
@@ -15,20 +22,24 @@ const R = (s) => s.trim()
 export const copy = {
   // ─────────────────────────────────────────── S1 · ingresso e disclaimer
 
-  benvenuto: () => R(`
+  benvenuto: ({ slotLiberi }) => R(`
 Ciao 👋
 
-Ti seguo io passo passo nell'apertura del conto eToro tramite il programma referral, fino all'accredito del bonus.
+Questo è il programma referral ufficiale di eToro. Ti seguo io passo passo, dall'apertura del conto fino al rimborso.
 
-Prima di iniziare devi sapere **come funziona davvero**, senza giri di parole:
+**Come funziona, senza giri di parole:**
 
 1️⃣ Apri il conto dal nostro link e completi la verifica dei documenti
-2️⃣ Depositi almeno {{DEPOSITO_CONSIGLIATO}} sul **tuo** conto — restano soldi tuoi, sul tuo conto, non li tocca nessuno
-3️⃣ Apri una posizione da almeno 100 $
+2️⃣ Depositi {{DEPOSITO}} sul **tuo** conto eToro
+3️⃣ Apri una posizione da oltre 100 $
 4️⃣ eToro ci conferma il referral (di norma entro 5 giorni lavorativi)
-5️⃣ **Solo a quel punto** ti rimborsiamo il deposito e ti versiamo {{BONUS_LEAD}} sul tuo PayPal o IBAN
+5️⃣ **A quel punto ti restituiamo i {{DEPOSITO}}** sul tuo PayPal o IBAN
 
-⚠️ **Il punto 5 dipende dal punto 4.** Se eToro non conferma il referral, non possiamo rimborsarti. I casi in cui succede sono elencati nella prossima schermata: leggili, perché se rientri in uno di quelli è inutile che tu inizi.
+Il risultato: hai un conto eToro attivo con {{DEPOSITO}} investiti, che restano tuoi e puoi ritirare quando vuoi, senza averli messi di tasca tua.
+
+⚠️ **Il punto 5 dipende dal punto 4.** Il rimborso lo sblocchiamo quando eToro conferma, non prima. Se il referral non viene riconosciuto non possiamo restituirti nulla: nella prossima schermata trovi i casi in cui succede, leggili prima di iniziare.
+
+📊 Posti disponibili: **${slotLiberi} su {{SLOT_TOTALI}}**
 
 Investire comporta rischi, incluso perdere il capitale. Non è consulenza finanziaria e non è un guadagno garantito.
 `),
@@ -42,11 +53,13 @@ Il rimborso e il bonus **non scattano** se:
 • il deposito o l'operazione non rispettano i minimi richiesti
 • eToro non riconosce il referral per qualunque motivo legato ai suoi termini
 
-Cosa rimborsiamo: **il deposito effettuato, fino a un massimo di {{TETTO_RIMBORSO}}**, più {{BONUS_LEAD}} di bonus.
+Cosa rimborsiamo: **il deposito che hai effettuato, fino a un massimo di {{TETTO_RIMBORSO}}**.
 Quando: entro {{GIORNI_PAGAMENTO}} dalla conferma di eToro.
 Come: PayPal o bonifico, sul conto intestato **alla stessa persona** del conto eToro.
 
 Depositare più di {{TETTO_RIMBORSO}} è una tua scelta e la parte eccedente non rientra nel rimborso.
+
+Quello che eToro accredita sul tuo conto è una cosa loro, decisa da loro: noi non la promettiamo e non la controlliamo. Da noi ti arriva il rimborso del deposito, punto.
 
 Procedendo dichiari di avere almeno 18 anni, di aver capito che il rimborso è condizionato alla conferma di eToro, e di sapere che il trading comporta il rischio di perdere denaro.
 `),
@@ -91,7 +104,7 @@ Quattro domande veloci. Servono a capire **subito** se il bonus ti spetta: se ri
       },
       {
         key: 'liquidita',
-        testo: 'Puoi depositare {{DEPOSITO_CONSIGLIATO}} nei prossimi giorni, con una carta o un conto **intestati a te**?',
+        testo: 'Puoi depositare {{DEPOSITO}} nei prossimi giorni, con una carta o un conto **intestati a te**?',
         risposte: [
           { label: 'Sì', ok: true },
           { label: 'Ora no', ok: false },
@@ -99,8 +112,8 @@ Quattro domande veloci. Servono a capire **subito** se il bonus ti spetta: se ri
         motivoKo: 'Nessun problema. Il deposito è la condizione del programma, quindi ti aspettiamo: scrivi /start quando sei pronto.',
       },
     ],
-    superata: () => R(`
-✅ Perfetto, rientri nei requisiti.
+    superata: ({ slotLiberi }) => R(`
+✅ Perfetto, rientri nei requisiti. **Ti ho riservato uno dei ${slotLiberi} posti rimasti.**
 
 Ti mando il link e la guida. Da qui in poi ti seguo io: a ogni passo mi dici quando hai finito e ti spiego il successivo.
 `),
@@ -165,11 +178,11 @@ Appena vedi la verifica approvata dentro l'app, premi il bottone: passiamo al de
   deposito: () => R(`
 💳 **Passo 3 di 4 — Deposito**
 
-Deposita **{{DEPOSITO_CONSIGLIATO}}**.
+Deposita **{{DEPOSITO}}**.
 
-Perché {{DEPOSITO_CONSIGLIATO}} e non 100 €: il conto eToro è in **dollari**, e sulla conversione da euro c'è una commissione. Depositando 100 € esatti ti ritrovi con circa 102-104 $, e al passo successivo devi aprire una posizione da **oltre** 100 $ — resti senza margine e rischi che il requisito non venga considerato valido. Con {{DEPOSITO_CONSIGLIATO}} stai tranquillo.
+Sono **soldi tuoi sul tuo conto**: dopo la conferma di eToro te li rimborsiamo, e a prescindere puoi prelevarli quando vuoi.
 
-Sono comunque **soldi tuoi sul tuo conto**: dopo la conferma te li rimborsiamo, e a prescindere puoi prelevarli quando vuoi.
+⚠️ **Una verifica da fare appena il deposito è accreditato.** Il conto eToro è in dollari e sulla conversione da euro c'è una commissione, quindi {{DEPOSITO}} diventano circa 102-105 $. Controlla il saldo disponibile: **deve risultare sopra i 100 $**, perché al passo successivo l'operazione deve superare quella soglia. Se per effetto del cambio ti ritrovi sotto, aggiungi un piccolo deposito per superarla — rimborsiamo comunque quanto hai versato in totale, fino a {{TETTO_RIMBORSO}}.
 
 Metodo di pagamento:
 • carta di debito o credito intestata a te (evita le prepagate, danno più problemi in verifica)
@@ -191,10 +204,12 @@ Prima di inviarlo **oscura** numero di carta, IBAN e saldo complessivo: mi serve
   trade: () => R(`
 📈 **Passo 4 di 4 — Prima operazione**
 
-Apri una posizione da **almeno 100 $**. Puoi scegliere quello che vuoi: azioni, ETF, crypto.
+Apri una posizione usando **tutto il saldo disponibile**. Puoi scegliere quello che vuoi: azioni, ETF, crypto.
+
+Usare l'intero saldo invece di 100 $ tondi è voluto: così l'operazione supera la soglia con margine e il requisito non rischia di saltare per qualche centesimo di differenza sul cambio.
 
 Due cose da controllare:
-• l'importo dell'operazione deve superare i 100 $, non essere esattamente 100
+• l'importo dell'operazione deve **superare** i 100 $, non essere esattamente 100
 • la posizione deve risultare **eseguita**, non in attesa
 
 Ricorda che è un investimento reale: il valore può salire o scendere, e la scelta di cosa comprare è tua.
@@ -222,14 +237,12 @@ Adesso si aspetta l'accredito da parte di eToro: di norma entro 5 giorni lavorat
 
   // ─────────────────────────────────────────── S10-S11 · payout
 
-  bonusArrivato: () => R(`
-💰 **Confermato: l'accredito è arrivato.**
+  bonusArrivato: ({ importo }) => R(`
+💰 **Confermato: eToro ha accreditato.**
 
-Come da accordo ti spettano:
-• il rimborso del deposito che hai effettuato (fino a {{TETTO_RIMBORSO}})
-• {{BONUS_LEAD}} di bonus
+Sblocco il tuo rimborso: **${importo}**, pari al deposito che hai effettuato.
 
-Dimmi come preferisci ricevere il pagamento.
+Dimmi come preferisci riceverlo.
 `),
   bonusBottoni: ['PayPal', 'Bonifico (IBAN)'],
 
@@ -262,6 +275,26 @@ Se entro 3 giorni lavorativi non lo vedi arrivare, scrivimi qui e controllo.
 
 Grazie di aver completato tutto senza intoppi 🤝
 Se hai qualcuno a cui può interessare, mandagli pure questo bot.
+`),
+
+  // ─────────────────────────────────────────── slot esauriti
+
+  listaAttesa: () => R(`
+⏸️ **I posti sono esauriti al momento.**
+
+Rientri in tutti i requisiti, ma i {{SLOT_TOTALI}} posti sono già impegnati da persone che hanno iniziato la procedura.
+
+Non ti mando avanti a vuoto: se aprissi il conto adesso non avrei un posto da darti e il rimborso non sarebbe coperto. Preferisco dirtelo prima che tu depositi.
+
+**Ti ho messo in lista d'attesa.** I posti si liberano quando qualcuno abbandona: succede più spesso di quanto pensi. Ti scrivo io appena se ne libera uno — non devi fare nulla e non serve che ricontrolli.
+`),
+
+  slotLiberato: () => R(`
+🎉 **Si è liberato un posto ed è tuo.**
+
+Eri in lista d'attesa e tocca a te. Il posto resta riservato per **48 ore**, poi passa al prossimo in coda.
+
+Ti mando subito il link per iniziare 👇
 `),
 
   // ─────────────────────────────────────────── uscite

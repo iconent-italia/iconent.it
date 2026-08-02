@@ -22,11 +22,26 @@ export const S = {
   PAYOUT: 'S11_PAYOUT',
   CHIUSO: 'S12_CHIUSO',
   // uscite
+  ATTESA: 'X_LISTA_ATTESA',
   NON_IDONEO: 'X_NON_IDONEO',
   KO: 'X_KO',
   FREDDO: 'X_FREDDO',
   BLOCCATO: 'X_BLOCCATO',
 }
+
+/**
+ * Slot: il numero di posti è un tetto di esposizione, non una leva di
+ * marketing. Ogni posto impegnato vale un rimborso da pagare, quindi il
+ * bot non manda a depositare più lead di quanti se ne possano onorare.
+ *
+ * Un posto si considera impegnato da quando il lead riceve il link
+ * (da lì in poi può depositare in qualsiasi momento) e si libera solo
+ * se esce dall'imbuto senza aver depositato.
+ */
+export const OCCUPA_SLOT = new Set([
+  S.LINK, S.REGISTRATO, S.KYC, S.DEPOSITO, S.TRADE,
+  S.VERIFICA, S.VERIFICATO, S.BONUS, S.PAYOUT, S.CHIUSO,
+])
 
 /** Stati oltre i quali il lead non si muove senza un admin. */
 export const GATE_ADMIN = new Set([S.VERIFICA, S.VERIFICATO])
@@ -44,7 +59,7 @@ export const TERMINALI = new Set([
 export const TRANSIZIONI = {
   [S.START]:      [S.DISCLAIMER, S.NON_IDONEO],
   [S.DISCLAIMER]: [S.PREQUAL, S.NON_IDONEO],
-  [S.PREQUAL]:    [S.LINK, S.NON_IDONEO],
+  [S.PREQUAL]:    [S.LINK, S.ATTESA, S.NON_IDONEO],
   [S.LINK]:       [S.REGISTRATO, S.FREDDO, S.NON_IDONEO],
   [S.REGISTRATO]: [S.KYC, S.FREDDO, S.KO],
   [S.KYC]:        [S.DEPOSITO, S.FREDDO, S.KO],
@@ -55,6 +70,7 @@ export const TRANSIZIONI = {
   [S.BONUS]:      [S.PAYOUT],
   [S.PAYOUT]:     [S.CHIUSO],
   [S.CHIUSO]:     [],
+  [S.ATTESA]:     [S.LINK, S.NON_IDONEO],        // si libera un posto
   [S.NON_IDONEO]: [],
   [S.KO]:         [S.VERIFICA],                  // riapertura manuale
   [S.FREDDO]:     [S.REGISTRATO, S.KYC, S.DEPOSITO, S.TRADE],
