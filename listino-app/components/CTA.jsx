@@ -23,7 +23,7 @@ export default function CTA({ cta, calculator }) {
         </p>
         <p className="lst-budget-d">
           Qualunque sia il tuo budget, progettiamo una strategia personalizzata per
-          ottenere il massimo risultato dal tuo progetto — senza pacchetti imposti e
+          ottenere il massimo risultato dal tuo progetto, senza pacchetti imposti e
           senza alcun obbligo.
         </p>
       </motion.div>

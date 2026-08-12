@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Servizi di Marketing & Comunicazione — ICONENT AGENCY',
+  title: 'Servizi di Marketing & Comunicazione | ICONENT AGENCY',
   description: 'Listino servizi di marketing musicale ICONENT: Instagram, Spotify, YouTube, TikTok, Ufficio Stampa & Radio.',
   // Pagina privata: fuori dagli indici
   robots: { index: false, follow: false, nocache: true },
