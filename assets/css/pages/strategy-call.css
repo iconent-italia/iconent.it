@@ -31,36 +31,23 @@ body.strategy-call-page main { overflow-x: clip; max-width: 100vw; }
   overflow: hidden;
   isolation: isolate;
 }
-/* Three soft glows behind the cover image — left edge cyan,
-   right edge magenta, top center warm. Sits below the cover (z:0). */
-.sc-vsl-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 700px 580px at 0% 10%,
-      rgba(0, 200, 255, 0.65) 0%, rgba(0, 200, 255, 0.25) 35%, transparent 68%),
-    radial-gradient(ellipse 700px 580px at 100% 10%,
-      rgba(255, 0, 120, 0.65) 0%, rgba(255, 0, 120, 0.25) 35%, transparent 68%),
-    radial-gradient(ellipse 900px 460px at 50% -10%,
-      rgba(255, 235, 200, 0.55) 0%, rgba(255, 235, 200, 0.20) 40%, transparent 70%);
-  filter: blur(14px);
-}
+/* Niente glow ciano/magenta qui, a differenza del sito USA. Li' l'hero e alto
+   ~900px perche' contiene il player del VSL, e le tre ellissi (700x580) hanno
+   lo spazio per sfumare. Qui l'hero e alto ~325px: le stesse ellissi vengono
+   schiacciate in una fascia colorata che taglia netto sotto al titolo e legge
+   come un banner, non come un fondale. Meglio niente che una versione
+   compressa. Se un giorno questa pagina prende il player e l'hero cresce,
+   si puo' rimettere il blocco che sta in strategy-call.css del sito USA. */
+/* Hero senza immagine di sfondo. Stessa ragione dei glow qui sopra: su un hero
+   alto 325px il fotogramma finisce ritagliato in una striscia e, sfumato al 35%,
+   legge come una macchia fuori fuoco dietro al titolo invece che come fondale.
+   Il div .sc-vsl-hero-bg resta nell'HTML: per rimettere l'immagine basta
+   riattivare le tre righe qui sotto. */
 .sc-vsl-hero-bg {
-  position: absolute;
-  inset: 0;
-  /* Fotogramma pulito e scuro del video, come sul sito USA. Prima c'era la
-     copertina del VSL: vinili olografici ciano a piena luminosità, che sotto
-     i tre glow dell'hero sparavano un blu fortissimo dietro ICONENT AGENCY. */
-  background-image: url('/assets/img/vsl-hero-bg.webp');
-  background-size: cover;
-  background-position: center -10%;
-  background-repeat: no-repeat;
-  opacity: 0.35;
-  z-index: 1;
-  pointer-events: none;
+  display: none;
+  /* background-image: url('/assets/img/vsl-hero-bg.webp');
+     background-size: cover;
+     background-position: center -10%; */
 }
 .sc-vsl-hero-bg::after {
   content: '';
