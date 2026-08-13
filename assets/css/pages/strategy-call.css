@@ -525,8 +525,11 @@ body.strategy-call-page main { overflow-x: clip; max-width: 100vw; }
 }
 .sc-btn-primary {
   background: var(--ic-green);
-  color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  /* Nero su verde = 11.95:1 (WCAG AAA). Il bianco stava a 1.74:1, sotto
+     soglia, e serviva un text-shadow per renderlo leggibile: quello faceva
+     anche sembrare il verde piu' acido di quello che e'. Stessa scelta gia'
+     fatta sul sito USA, dove il token verde e' identico (#00FF88). */
+  color: #000000;
   box-shadow:
     0 0 0 1px rgba(0, 255, 136, 0.3),
     0 0 40px -10px rgba(0, 255, 136, 0.5);
