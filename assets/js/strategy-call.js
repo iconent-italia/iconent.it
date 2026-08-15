@@ -83,10 +83,62 @@
     });
   }
 
+  /* Facciata del player, come sul sito USA. Il video sta su Vercel, non su
+     Vimeo: niente player di terzi, niente cookie. Finché non si clicca Play
+     non parte nessun download — l'mp4 pesa 29 MB e scaricarlo a chi apre la
+     pagina e non guarda affosserebbe il caricamento su mobile. Il file e'
+     faststart, quindi la riproduzione parte mentre il resto sta ancora
+     arrivando. */
+  function setupVideoFacade() {
+    document.querySelectorAll('[data-video-facade]').forEach((wrap) => {
+      const playBtn = wrap.querySelector('.sc-video-play');
+      const src = wrap.getAttribute('data-video-src');
+      if (!playBtn || !src) return;
+
+      const swap = () => {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;   // iOS: riproduce nella pagina, non a schermo intero
+        video.preload = 'auto';
+        video.setAttribute('title', 'ICONENT AGENCY — Come si arriva in major');
+        tracciaAvanzamento(video);
+        wrap.replaceChildren(video);
+      };
+
+      playBtn.addEventListener('click', swap);
+      // anche il poster: su touch, toccare l'immagine vuol dire "parti"
+      const poster = wrap.querySelector('.sc-video-poster');
+      if (poster) poster.addEventListener('click', swap);
+    });
+  }
+
+  /* I quarti di visione: e' l'unica cosa che un player ospitato darebbe
+     gratis. Ogni soglia scatta una volta sola, cosi' sappiamo dove la gente
+     smette di guardare. */
+  function tracciaAvanzamento(video) {
+    const soglie = [25, 50, 75, 100];
+    const fatte = new Set();
+    video.addEventListener('timeupdate', () => {
+      if (!video.duration) return;
+      const pct = (video.currentTime / video.duration) * 100;
+      soglie.forEach((s) => {
+        if (pct >= s && !fatte.has(s)) {
+          fatte.add(s);
+          if (typeof window.fbq === 'function') {
+            window.fbq('trackCustom', 'VideoProgress', { percent: s, video: 'vsl-ita' });
+          }
+        }
+      });
+    });
+  }
+
   function init() {
     setupLock();
     setupCountUps();
     setupSmoothScroll();
+    setupVideoFacade();
   }
 
   if (document.readyState === 'loading') {

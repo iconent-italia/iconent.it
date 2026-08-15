@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/assets/css/tokens.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/base.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/components.css?v=20260813a" />
-  <link rel="stylesheet" href="/assets/css/pages/strategy-call.css?v=20260813e" />
+  <link rel="stylesheet" href="/assets/css/pages/strategy-call.css?v=20260814a" />
   <link rel="stylesheet" href="/assets/css/pages/service-platform.css?v=20260813a" />
 
   <!-- Calendly CSS caricato da calendly.js solo dopo consenso marketing -->
@@ -42,7 +42,24 @@
       <div class="section">
         <p class="section-label sc-hero-label">Iconent Agency</p>
         <h1>Scopri come arrivare in <span class="accent">major</span></h1>
-        <p class="lead">Leggi questa pagina prima di prenotare la call. Ti aiuterà a capire se siamo il team giusto per il tuo progetto.</p>
+        <p class="lead">Guarda il video prima di prenotare la call. Ti aiuterà a capire se siamo il team giusto per il tuo progetto.</p>
+
+        <!-- Facciata del player: poster + tasto play. Al clic il JS mette il
+             video vero con autoplay. L'mp4 sta su Vercel, non su Vimeo:
+             nessun player di terzi, nessun cookie, e niente scaricato finché
+             non si preme Play. -->
+        <div class="sc-video-wrapper" data-video-facade data-video-src="/assets/video/vsl-ita-1.mp4">
+          <picture>
+            <source type="image/webp" srcset="/assets/img/copertina-vsl-ita-400.webp 400w, /assets/img/copertina-vsl-ita-800.webp 800w, /assets/img/copertina-vsl-ita-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 960px">
+            <img class="sc-video-poster" src="/assets/img/copertina-vsl-ita.jpg" width="1280" height="720" alt="ICONENT Agency — come si arriva in major, anteprima video" />
+          </picture>
+          <button class="sc-video-play" type="button" aria-label="Riproduci il video">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" />
+              <polygon points="26,20 26,44 46,32" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -442,6 +459,6 @@
 
   <script src="/assets/js/components.js?v=20260813a" defer></script>
   <script src="/assets/js/calendly.js?v=20260813a" defer></script>
-  <script src="/assets/js/strategy-call.js?v=20260813a" defer></script>
+  <script src="/assets/js/strategy-call.js?v=20260814a" defer></script>
 </body>
 </html>
