@@ -28,6 +28,10 @@
   <meta name="geo.placename" content="Milano" />
   <meta name="geo.position" content="45.4642;9.1900" />
   <meta name="ICBM" content="45.4642, 9.1900" />
+  <!-- Il Meta Pixel lo carica il JS, quindi il browser scopre
+       connect.facebook.net tardi e apre DNS+TLS solo quando gli serve.
+       Lighthouse: 315 ms mobile, 345 ms desktop. -->
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
   <link rel="stylesheet" href="/assets/css/tokens.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/base.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/components.css?v=20260813a" />
@@ -397,6 +401,7 @@
         "name": "ICONENT AGENCY",
         "alternateName": "Iconent Agency",
         "legalName": "ICONENT AGENCY",
+        "foundingDate": "2021",
         "url": "https://iconent.it/",
         "logo": "https://iconent.it/assets/img/logo-iconent-white.jpg",
         "image": "https://iconent.it/assets/img/og-iconent-it.jpg",
@@ -461,8 +466,6 @@
           { "@type": "Question", "name": "Come funziona il programma?", "acceptedAnswer": { "@type": "Answer", "text": "Il primo passo è una consulenza gratuita con il Project Manager. È una chiamata in cui analizziamo i tuoi numeri, le tue uscite, i contenuti e la struttura attuale, e identifichiamo i gap specifici. Da lì, se c'è fit, costruiamo un piano custom." } },
           { "@type": "Question", "name": "Garantite risultati?", "acceptedAnswer": { "@type": "Answer", "text": "No. Il lavoro A&R serio non viene con hit virali garantite o stream count promessi. Quello che garantiamo è struttura, esecuzione professionale e un'analisi concreta per capire cosa sta effettivamente bloccando il progetto." } },
           { "@type": "Question", "name": "E se al momento non posso permettermelo?", "acceptedAnswer": { "@type": "Answer", "text": "La consulenza è gratuita, e il budget lo fissiamo dopo aver capito il progetto, non prima. I programmi sono strutturati per fasi diverse della carriera, inclusi artisti che hanno meno di 1.000 stream al mese." } },
-          { "@type": "Question", "name": "Quanto costa?", "acceptedAnswer": { "@type": "Answer", "text": "Il pricing è custom per progetto, fissato dopo la consulenza gratuita una volta capito lo scope. Programma strutturato e rinnovabile. Servizi promo singoli a partire da 35€ (Spotify), 135€ (TikTok Ads), 145€ (YouTube Ads), 15€ (Instagram)." } },
-          { "@type": "Question", "name": "Dove ha sede ICONENT AGENCY?", "acceptedAnswer": { "@type": "Answer", "text": "Operiamo su tutto il territorio italiano. Italy-based, focus mercato italiano." } },
           { "@type": "Question", "name": "Come parto?", "acceptedAnswer": { "@type": "Answer", "text": "Scrivici su WhatsApp per una consulenza gratuita. Nessun impegno, nessun obbligo, solo una conversazione concreta su dove sta il tuo progetto e dove potrebbe arrivare." } }
         ]
       }
