@@ -31,13 +31,28 @@ body.strategy-call-page main { overflow-x: clip; max-width: 100vw; }
   overflow: hidden;
   isolation: isolate;
 }
-/* Niente glow ciano/magenta qui, a differenza del sito USA. Li' l'hero e alto
-   ~900px perche' contiene il player del VSL, e le tre ellissi (700x580) hanno
-   lo spazio per sfumare. Qui l'hero e alto ~325px: le stesse ellissi vengono
-   schiacciate in una fascia colorata che taglia netto sotto al titolo e legge
-   come un banner, non come un fondale. Meglio niente che una versione
-   compressa. Se un giorno questa pagina prende il player e l'hero cresce,
-   si puo' rimettere il blocco che sta in strategy-call.css del sito USA. */
+/* Tre glow morbidi dietro la copertina: ciano a sinistra, magenta a destra,
+   caldo in alto al centro. Sta sotto la copertina (z:0). Identico al sito USA.
+   ⚠️ Funziona solo perche' l'hero e' alto ~865px, cioe' contiene il player.
+   Erano stati tolti quando questa pagina non aveva il video e l'hero stava a
+   325px: le ellissi da 700x580 ci venivano schiacciate dentro e leggevano come
+   una fascia colorata col taglio netto, non come un fondale. Se un domani il
+   player sparisce da qui, vanno tolti di nuovo. */
+.sc-vsl-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 580px at 0% 10%,
+      rgba(0, 200, 255, 0.65) 0%, rgba(0, 200, 255, 0.25) 35%, transparent 68%),
+    radial-gradient(ellipse 700px 580px at 100% 10%,
+      rgba(255, 0, 120, 0.65) 0%, rgba(255, 0, 120, 0.25) 35%, transparent 68%),
+    radial-gradient(ellipse 900px 460px at 50% -10%,
+      rgba(255, 235, 200, 0.55) 0%, rgba(255, 235, 200, 0.20) 40%, transparent 70%);
+  filter: blur(14px);
+}
 .sc-vsl-hero-bg {
   position: absolute;
   inset: 0;
