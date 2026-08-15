@@ -19,6 +19,10 @@
   <meta property="og:url" content="https://iconent.it/cookie/" />
   <meta property="og:image" content="https://iconent.it/assets/img/og-iconent-it.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <!-- Il Meta Pixel lo carica il JS, quindi il browser scopre
+       connect.facebook.net tardi e apre DNS+TLS solo quando gli serve.
+       Lighthouse: 315 ms mobile, 345 ms desktop. -->
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
   <link rel="stylesheet" href="/assets/css/tokens.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/base.css?v=20260813a" />
   <link rel="stylesheet" href="/assets/css/components.css?v=20260813a" />
